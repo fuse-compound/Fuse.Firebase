@@ -54,3 +54,6 @@ obj/
 # Sublime files
 *.sublime-project
 *.sublime-workspace
+
+# Misc
+AuthExample/FirebaseAuthenticationExample.unoproj
