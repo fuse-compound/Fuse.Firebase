@@ -8,7 +8,7 @@ I would love to flesh this out to cover the full gammut of features provided by 
 
 ## Docs
 
-See the [wiki]() for [API Docs]() and the [guide for getting the authentication example running]().
+See the [wiki]() for [API Docs](https://github.com/cbaggers/Fuse.Firebase/wiki/Javascript-API) and the [guide for getting the authentication example running](https://github.com/cbaggers/Fuse.Firebase/wiki/Getting-up-and-running-with-the-Example-Project).
 
 ## Requirements
 
