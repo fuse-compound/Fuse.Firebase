@@ -1,0 +1,33 @@
+<Extensions Backend="CPlusPlus" Condition="iOS">
+
+    <Require Entity="Firebase.Authentication.Facebook.iOSFacebookButton.OnFBAuth(Uno.IntPtr)" />
+
+    <Require Xcode.Plist.Element><![CDATA[
+<key>FacebookAppID</key>
+<string>@(Project.Facebook.AppID)</string>
+<key>FacebookDisplayName</key>
+<string>@(Project.Facebook.DisplayName || BundleIdentifier)</string>
+<key>LSApplicationQueriesSchemes</key>
+<array>
+  <string>fbapi</string>
+  <string>fb-messenger-api</string>
+  <string>fbauth2</string>
+  <string>fbshareextension</string>
+</array>
+]]></Require>
+
+
+    <Require AppDelegate.SourceFile.DidFinishLaunchingWithOptions><![CDATA[
+[[FBSDKApplicationDelegate sharedInstance] application:application didFinishLaunchingWithOptions:launchOptions];
+]]></Require>
+
+
+        <Require AppDelegate.SourceFile.OpenURL><![CDATA[
+[[FBSDKApplicationDelegate sharedInstance]
+  application:application
+  openURL:url
+  sourceApplication:sourceApplication
+  annotation:annotation];
+  ]]></Require>
+
+</Extensions>

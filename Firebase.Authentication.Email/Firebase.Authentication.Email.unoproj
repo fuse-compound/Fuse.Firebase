@@ -1,0 +1,14 @@
+{
+    "Projects": [
+        "../Firebase.Authentication/Firebase.Authentication.unoproj"
+    ],
+    "Packages": [
+        "Fuse",
+        "FuseJS",
+        "FuseCore",
+        "Fuse.Scripting"
+    ],
+    "Includes": [
+        "*"
+    ]
+}

@@ -1,0 +1,21 @@
+{
+    "Projects": [
+        "../Firebase/Firebase.unoproj"
+    ],
+    "Packages": [
+        "Fuse",
+        "FuseJS",
+        "FuseCore",
+        "Fuse.Scripting"
+    ],
+    "InternalsVisibleTo": [
+        "Firebase.Authentication.Email",
+        "Firebase.Authentication.Google",
+        "Firebase.Authentication.Facebook",
+        "Firebase.Authentication.Twitter",
+        "Firebase.Authentication.Github"
+    ],
+    "Includes": [
+        "*"
+    ]
+}

@@ -1,0 +1,18 @@
+{
+    "Projects": [
+        "../Firebase/Firebase.unoproj",
+        "../Firebase.Authentication/Firebase.Authentication.unoproj"
+    ],
+    "Packages": [
+        "Fuse",
+        "FuseJS",
+        "FuseCore",
+        "Fuse.Scripting",
+        "Android.ActivityUtils"
+    ],
+    "Includes": [
+        "*",
+        "iOSCallbacks.h:ObjCHeader:iOS",
+        "iOSCallbacks.mm:ObjCSource:iOS"
+    ]
+}

@@ -1,0 +1,34 @@
+{
+    "Packages": [
+        "Fuse",
+        "FuseJS"
+    ],
+    "Projects": [
+        "../Firebase/Firebase.unoproj",
+        "../Firebase.Authentication/Firebase.Authentication.unoproj",
+        "../Firebase.Authentication.Email/Firebase.Authentication.Email.unoproj",
+        "../Firebase.Authentication.Google/Firebase.Authentication.Google.unoproj",
+        "../Firebase.Authentication.Facebook/Firebase.Authentication.Facebook.unoproj",
+    ],
+    "Google": {
+        "RequestID": "SOMENUMBERS-LALALA.apps.googleusercontent.com"
+    },
+    "Facebook": {
+        "AppID": "SUPER_LEGIT_APPID",
+        "DisplayName": "authexample"
+    },
+    "iOS": {
+        "PList": {
+            "UriSchemes": [
+                "com.googleusercontent.apps.SOMENUMBERS-LALALA"
+            ]
+        }
+    },
+    "Mobile": {
+        "UriScheme": "fb@(Project.Facebook.AppID)"
+    },
+    "Includes": [
+        "*",
+        "GoogleService-Info.plist:ObjCSource:iOS"
+    ]
+}

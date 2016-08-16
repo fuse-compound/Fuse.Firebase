@@ -1,0 +1,61 @@
+<App Background="#eee">
+	<DockPanel>
+		<JavaScript File="MainView.js"/>
+		<StackPanel Dock="Top" Background="#3CB5D0">
+			<StatusBarBackground/>
+			<Fuse.iOS.StatusBarConfig Style="Light"/>
+			<Panel Dock="Top" Height="50">
+				<Text Value="{currentPageTitle}" Alignment="Center"
+					  FontSize="25" TextColor="#FFF"/>
+			</Panel>
+		</StackPanel>
+		<BottomBarBackground Dock="Bottom" />
+
+		<DirectNavigation Active="{currentPageHandle}"/>
+
+		<Page Name="lobbyPage">
+			<ScrollView>
+				<StackPanel>
+                    <Text Value="{lobbyStatusText}" Alignment="Center"/>
+					<TextInput Value="{userEmailInput}" Alignment="Center"/>
+					<TextInput Value="{userPasswordInput}" IsPassword="true" Alignment="Center"/>
+					<Button Text="Create User With Email" Clicked="{createUser}" />
+					<Button Text="Sign In With Email" Clicked="{signInWithEmail}" />
+		            <NativeViewHost >
+        	            <Firebase.Authentication.Google.GoogleButton Margin="0,20,0,0"/>
+             	    </NativeViewHost>
+		            <NativeViewHost >
+	                    <Firebase.Authentication.Facebook.FacebookButton Margin="0,20,0,0"/>
+             	    </NativeViewHost>
+				</StackPanel>
+			</ScrollView>
+
+			<ExitingAnimation>
+				<Move X="-1" RelativeTo="Size"
+					  Duration="0.3" Easing="CircularInOut"/>
+			</ExitingAnimation>
+		</Page>
+
+		<Page Name="loggedInPage">
+			<ScrollView>
+				<StackPanel>
+ 					<Text Value="Signed In" Alignment="Center"
+						  FontSize="25" TextColor="#222"/>
+                    <Text Value="{userName}" />
+                    <Text Value="{userEmail}"/>
+                    <Text Value="{userPhotoUrl}"/>
+                    <Button Text="ReAuthenticate" Clicked="{reauthenticate}" />
+                    <Text Value="{signedInStatusText}" Alignment="Center"
+						  FontSize="10" TextColor="#222"/>
+                    <Button Text="Sign Out" Clicked="{signOutNow}" />
+				</StackPanel>
+			</ScrollView>
+
+			<ExitingAnimation>
+				<Move X="1" RelativeTo="Size"
+					  Duration="0.3" Easing="CircularInOut"/>
+			</ExitingAnimation>
+		</Page>
+
+	</DockPanel>
+</App>

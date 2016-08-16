@@ -57,3 +57,4 @@ obj/
 
 # Misc
 AuthExample/FirebaseAuthenticationExample.unoproj
+Test/*

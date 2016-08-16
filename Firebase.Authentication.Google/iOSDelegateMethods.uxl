@@ -1,0 +1,17 @@
+<Extensions Backend="CPlusPlus" Condition="iOS">
+    <Require Entity="Firebase.Authentication.Google.iOSGoogleButton.Callback(Uno.IntPtr,Uno.IntPtr)" />
+    <Require Entity="Firebase.Authentication.AuthService.SignedOut()" />
+
+    <Require AppDelegate.SourceFile.OpenURLLegacy><![CDATA[
+[[GIDSignIn sharedInstance] handleURL:url
+  sourceApplication:options[UIApplicationOpenURLOptionsSourceApplicationKey]
+  annotation:options[UIApplicationOpenURLOptionsAnnotationKey]];
+
+    ]]></Require>
+
+    <Require AppDelegate.SourceFile.OpenURL><![CDATA[
+[[GIDSignIn sharedInstance] handleURL:url
+  sourceApplication:sourceApplication
+  annotation:annotation];
+    ]]></Require>
+</Extensions>
