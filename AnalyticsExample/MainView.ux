@@ -1,0 +1,14 @@
+<App Background="#eee">
+	<DockPanel>
+		<JavaScript>
+            var FBAnalytics = require("Firebase/Analytics");
+
+            module.exports.doIt = function() {
+                FBAnalytics.logIt("Wooo!");
+            };
+        </JavaScript>
+		<StackPanel>
+            <Button Text="Do It!" Clicked="{doIt}" Height="100"/>
+		</StackPanel>
+	</DockPanel>
+</App>
