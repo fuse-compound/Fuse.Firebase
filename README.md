@@ -7,7 +7,7 @@ All are welcome to come hacking on this so we can flesh this out to cover the fu
 
 ## Docs
 
-See the [wiki]() for [API Docs](https://github.com/cbaggers/Fuse.Firebase/wiki/Javascript-API) and the [guide for getting the authentication example running](https://github.com/cbaggers/Fuse.Firebase/wiki/Getting-up-and-running-with-the-Example-Project).
+See the [wiki](https://github.com/cbaggers/Fuse.Firebase/wiki) for [API Docs](https://github.com/cbaggers/Fuse.Firebase/wiki/Javascript-API) and the [guide for getting the authentication example running](https://github.com/cbaggers/Fuse.Firebase/wiki/Getting-up-and-running-with-the-Example-Project).
 
 ## Requirements
 
