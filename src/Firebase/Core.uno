@@ -21,9 +21,11 @@ namespace Firebase
     extern(iOS)
     public class Core
     {
+        [Foreign(Language.ObjC)]
         static public void Init()
-        {
-        }
+        @{
+            [FIRApp configure];
+        @}
     }
 
     [ForeignInclude(Language.Java, "java.util.ArrayList", "java.util.List", "android.graphics.Color")]
