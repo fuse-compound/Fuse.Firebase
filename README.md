@@ -13,7 +13,7 @@ See the [wiki]() for [API Docs](https://github.com/cbaggers/Fuse.Firebase/wiki/J
 
 ## Requirements
 
-- Fuse version >= 25: This is needed as a bunch of changes shipped in that version to make this all possible including appcompat7 Activity as super class for the app's activity
+- Fuse version >= 0.25: This is needed as a bunch of changes shipped in that version to make this all possible including appcompat7 Activity as super class for the app's activity
 - Firebase account
 
 For authentication you also need a Facebook developer account
