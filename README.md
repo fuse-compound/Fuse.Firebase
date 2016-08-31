@@ -1,4 +1,5 @@
 # Fuse.Firebase
+[![license](https://img.shields.io/github/license/cbaggers/Fuse.Firebase.svg?maxAge=2592000)]()
 
 This project is to make full Firebase bindings for Fuse.
 
@@ -8,7 +9,7 @@ I would love to flesh this out to cover the full gammut of features provided by 
 
 ## Docs
 
-See the [wiki]() for [API Docs]() and the [guide for getting the authentication example running]().
+See the [wiki]() for [API Docs](https://github.com/cbaggers/Fuse.Firebase/wiki/Javascript-API) and the [guide for getting the authentication example running](https://github.com/cbaggers/Fuse.Firebase/wiki/Getting-up-and-running-with-the-Example-Project).
 
 ## Requirements
 
@@ -16,10 +17,6 @@ See the [wiki]() for [API Docs]() and the [guide for getting the authentication 
 - Firebase account
 
 For authentication you also need a Facebook developer account
-
-## License
-
-MIT
 
 ## Disclaimer
 
