@@ -9,7 +9,7 @@ using Fuse.Controls.Native;
 using Fuse.Controls.Native.Android;
 using Uno.Threading;
 
-namespace Firebase.Analytic
+namespace Firebase.Analytics
 {
 
     // Only need ios here as android is included in core
@@ -17,7 +17,9 @@ namespace Firebase.Analytic
     extern(mobile)
     internal static class AnalyticsService
     {
-        static public void Init()
+        static AnalyticsService Inst;
+
+        public static void Init()
         {
             if (Inst == null)
             {
@@ -27,14 +29,14 @@ namespace Firebase.Analytic
 
         [Foreign(Language.Java)]
         extern(android)
-        internal static void LogIt()
+        public static void LogIt(string message)
         @{
         @}
 
 
         [Foreign(Language.ObjC)]
         extern(iOS)
-        internal static void LogIt()
+        public static void LogIt(string message)
         @{
         @}
 	}

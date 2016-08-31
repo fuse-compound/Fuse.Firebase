@@ -28,7 +28,7 @@ namespace Firebase.Analytics.JS
             AddMember(new NativeFunction("logIt", LogIt));
 		}
 
-        object LogIt(object[] args)
+        static object LogIt(Context context, object[] args)
         {
             var message = (string)args[0];
             AnalyticsService.LogIt(message);
