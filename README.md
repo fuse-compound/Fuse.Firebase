@@ -13,6 +13,7 @@ See the [wiki](https://github.com/cbaggers/Fuse.Firebase/wiki) for [API Docs](ht
 
 - Fuse version >= 0.25: This is needed as a bunch of changes shipped in that version to make this all possible including appcompat7 Activity as super class for the app's activity
 - Firebase account
+- [Cocoapods](https://cocoapods.org/) (if working on OSX) It should be enough just to run `sudo gem install cocoapods`
 
 For authentication you also need a Facebook developer account
 
