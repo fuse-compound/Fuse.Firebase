@@ -1,7 +1,8 @@
 {
     "Packages": [
         "Fuse",
-        "FuseJS"
+        "FuseJS",
+        "Fuse.BasicTheme"
     ],
     "Projects": [
         "../src/Firebase/Firebase.unoproj",
