@@ -4,11 +4,11 @@
         "FuseJS"
     ],
     "Projects": [
-        "../Firebase/Firebase.unoproj",
-        "../Firebase.Authentication/Firebase.Authentication.unoproj",
-        "../Firebase.Authentication.Email/Firebase.Authentication.Email.unoproj",
-        "../Firebase.Authentication.Google/Firebase.Authentication.Google.unoproj",
-        "../Firebase.Authentication.Facebook/Firebase.Authentication.Facebook.unoproj",
+        "../src/Firebase/Firebase.unoproj",
+        "../src/Firebase.Authentication/Firebase.Authentication.unoproj",
+        "../src/Firebase.Authentication.Email/Firebase.Authentication.Email.unoproj",
+        "../src/Firebase.Authentication.Google/Firebase.Authentication.Google.unoproj",
+        "../src/Firebase.Authentication.Facebook/Firebase.Authentication.Facebook.unoproj",
     ],
     "Google": {
         "RequestID": "SOMENUMBERS-LALALA.apps.googleusercontent.com"
