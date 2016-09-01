@@ -4,8 +4,8 @@
         "FuseJS"
     ],
     "Projects": [
-        "../Firebase/Firebase.unoproj",
-        "../Firebase.Analytics/Firebase.Analytics.unoproj",
+        "../src/Firebase/Firebase.unoproj",
+        "../src/Firebase.Analytics/Firebase.Analytics.unoproj",
     ],
     "Includes": [
         "*"
