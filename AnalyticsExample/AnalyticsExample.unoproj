@@ -8,6 +8,7 @@
         "../src/Firebase.Analytics/Firebase.Analytics.unoproj",
     ],
     "Includes": [
-        "*"
+        "*",
+        "GoogleService-Info.plist:ObjCSource:iOS"
     ]
 }

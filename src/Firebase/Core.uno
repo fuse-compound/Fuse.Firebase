@@ -18,6 +18,7 @@ namespace Firebase
 
     [Require("Cocoapods.Podfile.Target", "pod 'Firebase/Core'")]
     [Require("Cocoapods.Podfile.Target", "pod 'FirebaseAnalytics'")]
+    [Require("Source.Include", "Firebase/Firebase.h")]
     extern(iOS)
     public class Core
     {

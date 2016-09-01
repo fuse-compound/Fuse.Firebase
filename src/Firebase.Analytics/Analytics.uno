@@ -34,10 +34,14 @@ namespace Firebase.Analytics
         @}
 
 
+        [Require("Source.Import","FirebaseAnalytics/FIRApp.h")]
+        [Require("Source.Import","FirebaseAnalytics/FirebaseAnalytics.h")]
         [Foreign(Language.ObjC)]
         extern(iOS)
         public static void LogIt(string message)
         @{
+            [FIRAnalytics logEventWithName:kFIREventSelectContent parameters:@{
+                kFIRParameterContentType:@"cont", kFIRParameterItemID:@"1"}];
         @}
 	}
 }
