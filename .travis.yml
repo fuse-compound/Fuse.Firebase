@@ -1,0 +1,9 @@
+os:
+  - osx
+
+before_script:
+  - wget https://www.fusetools.com/downloads/0.25.0.7511/osx -O fuse-installer.pkg &&
+    sudo installer -pkg fuse-installer.pkg -target /
+
+script:
+  - uno doctor
