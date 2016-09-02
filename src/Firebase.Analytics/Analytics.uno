@@ -12,7 +12,7 @@ using Uno.Threading;
 namespace Firebase.Analytics
 {
 
-    // Only need ios here as android is included in core
+    [ForeignInclude(Language.Java, "android.os.Bundle", "com.google.firebase.analytics.FirebaseAnalytics")]
     [Require("Cocoapods.Podfile.Target", "pod 'FirebaseAnalytics'")]
     extern(mobile)
     internal static class AnalyticsService
@@ -37,16 +37,17 @@ namespace Firebase.Analytics
             @{_handle:Set(FirebaseAnalytics.getInstance(com.fuse.Activity.getRootActivity()))};
         @}
 
-        [ForeignInclude(Language.Java, "android.os.Bundle", "com.google.firebase.analytics.FirebaseAnalytics")]
+
         [Foreign(Language.Java)]
         extern(android)
         public static void LogIt(string message)
         @{
             Bundle bundle = new Bundle();
+            String name = "wip";
             bundle.putString(FirebaseAnalytics.Param.ITEM_ID, "1");
             bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, name);
             bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "cont");
-            mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
+            ((FirebaseAnalytics)@{_handle}).logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
         @}
 
 
