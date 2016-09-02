@@ -61,4 +61,11 @@ namespace Firebase.Analytics
                 kFIRParameterContentType:@"cont", kFIRParameterItemID:@"1"}];
         @}
 	}
+
+    extern(!mobile)
+    internal static class AnalyticsService
+    {
+        public static void Init() {}
+        public static void LogIt(string message) {}
+    }
 }
