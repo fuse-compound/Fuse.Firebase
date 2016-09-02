@@ -17,20 +17,36 @@ namespace Firebase.Analytics
     extern(mobile)
     internal static class AnalyticsService
     {
-        static AnalyticsService Inst;
+        static bool _initialized;
+        extern(android) static Java.Object _handle;
 
         public static void Init()
         {
-            if (Inst == null)
+            if (!_initialized)
             {
                 Firebase.Core.Init();
+                if defined(android) AndroidInit();
+                _initialized = true;
             }
         }
 
         [Foreign(Language.Java)]
         extern(android)
+        public static void AndroidInit()
+        @{
+            @{_handle:Set(FirebaseAnalytics.getInstance(com.fuse.Activity.getRootActivity()))};
+        @}
+
+        [ForeignInclude(Language.Java, "android.os.Bundle", "com.google.firebase.analytics.FirebaseAnalytics")]
+        [Foreign(Language.Java)]
+        extern(android)
         public static void LogIt(string message)
         @{
+            Bundle bundle = new Bundle();
+            bundle.putString(FirebaseAnalytics.Param.ITEM_ID, "1");
+            bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, name);
+            bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "cont");
+            mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
         @}
 
 
