@@ -21,3 +21,7 @@ For authentication you also need a Facebook developer account
 ## Disclaimer
 
 I'm an employee at Fuse, however any views, opinions or swearing at apis found in this repo & wiki are my own and do not necessarily reflect the official views of Fuse or anyone else working there :)
+
+## Obligatory Pic!
+
+![wee](https://github.com/cbaggers/Fuse.Firebase/blob/master/docs/app.jpeg)
