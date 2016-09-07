@@ -5,7 +5,7 @@ var FAuth = require("Firebase/Authentication/Facebook");
 var GAuth = require("Firebase/Authentication/Google");
 //---
 
-var defaultStatusMessage = "- status ok -";
+var defaultStatusMessage = "Status OK";
 var signedInStatusText = Observable(defaultStatusMessage);
 var lobbyStatusText = Observable(defaultStatusMessage);
 
@@ -66,8 +66,8 @@ FirebaseUser.signedInStateChanged = function() {
 
 //---
 
-var userEmailInput = Observable("Email Address");
-var userPasswordInput = Observable("password");
+var userEmailInput = Observable("");
+var userPasswordInput = Observable("");
 
 var createUser = function() {
  	var email = userEmailInput.value;
