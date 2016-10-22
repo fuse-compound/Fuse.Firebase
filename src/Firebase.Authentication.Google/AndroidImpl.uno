@@ -61,6 +61,7 @@ namespace Firebase.Authentication.Google
             // kick off next step
             GoogleSignInAccount account = result.getSignInAccount();
             AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
+            @{Firebase.Authentication.Google.JS.GoogleModule.Auth(string,string):Call(account.getIdToken(),null)};
             FirebaseAuth.getInstance().signInWithCredential(credential)
                 .addOnCompleteListener(com.fuse.Activity.getRootActivity(), new OnCompleteListener<AuthResult>() {
                         public void onComplete(Task<AuthResult> task) {
@@ -139,6 +140,7 @@ namespace Firebase.Authentication.Google
             // kick off next step
             GoogleSignInAccount account = result.getSignInAccount();
             AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
+            @{Firebase.Authentication.Google.JS.GoogleModule.Auth(string,string):Call(account.getIdToken(),null)};
             FirebaseAuth.getInstance().signInWithCredential(credential)
                 .addOnCompleteListener(com.fuse.Activity.getRootActivity(), new OnCompleteListener<AuthResult>() {
                         public void onComplete(Task<AuthResult> task) {
