@@ -40,14 +40,14 @@ namespace Firebase.Analytics
 
         [Foreign(Language.Java)]
         extern(android)
-        public static void LogIt(string message)
+        public static void LogEvent(string name, string[] keys, string[] vals, int len)
         @{
             Bundle bundle = new Bundle();
-            String name = "wip";
-            bundle.putString(FirebaseAnalytics.Param.ITEM_ID, "1");
-            bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, name);
-            bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "cont");
-            ((FirebaseAnalytics)@{_handle}).logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
+
+            for (int = 0; i < len; i++) {
+                bundle.putString(keys[i], vals[i]);
+            }
+            ((FirebaseAnalytics)@{_handle}).logEvent(name, bundle);
         @}
 
 
@@ -55,10 +55,10 @@ namespace Firebase.Analytics
         [Require("Source.Import","FirebaseAnalytics/FirebaseAnalytics.h")]
         [Foreign(Language.ObjC)]
         extern(iOS)
-        public static void LogIt(string message)
+        public static void LogEvent(string name, string[] keys, string[] vals, int len)
         @{
-            [FIRAnalytics logEventWithName:kFIREventSelectContent parameters:@{
-                kFIRParameterContentType:@"cont", kFIRParameterItemID:@"1"}];
+            NSDictionary *param = [NSDictionary dictionaryWithObjects:[vals copyArray] forKeys:[keys copyArray]];
+            [FIRAnalytics logEventWithName:name parameters:param];
         @}
 	}
 
@@ -66,6 +66,8 @@ namespace Firebase.Analytics
     internal static class AnalyticsService
     {
         public static void Init() {}
-        public static void LogIt(string message) {}
+        public static void LogEvent(string name, string[] keys, string[] vals, int len) {
+            debug_log "LogEvent: " + name;
+        }
     }
 }

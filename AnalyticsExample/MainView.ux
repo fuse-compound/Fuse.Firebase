@@ -2,13 +2,23 @@
 	<DockPanel>
 		<JavaScript>
             var FBAnalytics = require("Firebase/Analytics");
+            var kFIREvent = require('kfirevent.js');
+            var kFIRParameter = require('kfirparameter.js');
+            var FirebaseAnalytics = require('android_const.js');
 
             module.exports.doIt = function() {
-                FBAnalytics.logIt("Wooo!");
+                console.log("clicking");
+                var p = {};
+                // p[kFIRParameter.ContentType] = "cont";
+                // p[kFIRParameter.ItemID] = 1;
+                // FBAnalytics.logEvent(kFIREvent.SelectContent, p);
+                p[FirebaseAnalytics.Param.CONTENT_TYPE] = "cont";
+                p[FirebaseAnalytics.Param.ITEM_ID] = 1;
+                FBAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, p);
             };
         </JavaScript>
 		<StackPanel>
-            <Button Text="Do It!" Clicked="{doIt}" Height="100"/>
+            <Button HitTestMode="LocalVisualAndChildren" Background="#442" Text="Do It!" Clicked="{doIt}" Height="100"/>
 		</StackPanel>
 	</DockPanel>
 </App>

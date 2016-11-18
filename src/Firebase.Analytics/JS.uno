@@ -25,13 +25,19 @@ namespace Firebase.Analytics.JS
 			Resource.SetGlobalKey(_instance = this, "Firebase/Analytics");
 
             AnalyticsService.Init();
-            AddMember(new NativeFunction("logIt", LogIt));
+            AddMember(new NativeFunction("logEvent", LogEvent));
 		}
 
-        static object LogIt(Context context, object[] args)
+        static object LogEvent(Context context, object[] args)
         {
-            var message = (string)args[0];
-            AnalyticsService.LogIt(message);
+            var n = (string)args[0];
+            var p = (Fuse.Scripting.Object)args[1];
+            var keys = p.Keys;
+            string[] objs = new string[keys.Length];
+            for (int i=0; i < keys.Length; i++) {
+            	objs[i] = p[keys[i]].ToString();
+            }
+            AnalyticsService.LogEvent(n, keys, objs, keys.Length);
             return null;
         }
 	}
