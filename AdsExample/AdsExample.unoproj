@@ -1,0 +1,14 @@
+{
+    "Packages": [
+        "Fuse",
+        "FuseJS"
+    ],
+    "Projects": [
+        "../src/Firebase/Firebase.unoproj",
+        "../src/Firebase.AdMob/Firebase.AdMob.unoproj",
+    ],
+    "Includes": [
+        "*",
+        "GoogleService-Info.plist:ObjCSource:iOS"
+    ]
+}
