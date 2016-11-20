@@ -185,7 +185,7 @@ FirebaseUser.updateProfile(newEmailAddress);
 ```
 
 
-### Function - updateEmail(newEmailAddressString)
+### Function - delete()
 
 This function attempts to delete the currently authenticated user from Firebase.
 
