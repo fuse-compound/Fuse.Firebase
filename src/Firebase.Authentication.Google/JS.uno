@@ -17,13 +17,21 @@ namespace Firebase.Authentication.Google.JS
 	public sealed class GoogleModule : NativeModule
 	{
 		static readonly GoogleModule _instance;
+		static NativeEvent _onAuth;
 
 		public GoogleModule()
 		{
 			if(_instance != null) return;
 			Resource.SetGlobalKey(_instance = this, "Firebase/Authentication/Google");
 
-            Firebase.Authentication.Google.GoogleService.Init();
+			_onAuth = new NativeEvent("onAuth");
+			AddMember(_onAuth);
+			Firebase.Authentication.Google.GoogleService.Init();
+		}
+
+		static void Auth(string idToken, string accessToken)
+		{
+			_onAuth.RaiseAsync(idToken, accessToken);
 		}
 	}
 }

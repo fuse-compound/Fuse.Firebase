@@ -1,5 +1,6 @@
 # Fuse.Firebase (WIP)
 [![license](https://img.shields.io/github/license/cbaggers/Fuse.Firebase.svg?maxAge=2592000)](https://github.com/cbaggers/Fuse.Firebase/blob/master/LICENSE)
+[![Build Status](https://travis-ci.org/cbaggers/Fuse.Firebase.svg?branch=master)](https://travis-ci.org/cbaggers/Fuse.Firebase)
 
 This project's goal to make full Firebase bindings for Fuse. Currently we have Authentication using the Email, Google & Facebook providers.
 
@@ -20,3 +21,7 @@ For authentication you also need a Facebook developer account
 ## Disclaimer
 
 I'm an employee at Fuse, however any views, opinions or swearing at apis found in this repo & wiki are my own and do not necessarily reflect the official views of Fuse or anyone else working there :)
+
+## Obligatory Pic!
+
+![wee](https://github.com/cbaggers/Fuse.Firebase/blob/master/docs/app.jpeg)

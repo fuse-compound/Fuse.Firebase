@@ -2,11 +2,18 @@
 #include <GoogleSignIn/GoogleSignIn.h>
 #include <@{Firebase.Authentication.Google.iOSGoogleButton:Include}>
 #include <@{Firebase.Authentication.AuthService:Include}>
+#include <@{Firebase.Authentication.Google.JS.GoogleModule:Include}>
+
+#include <uObjC.Foreign.h>
 
 @implementation FireGoogCallbacks : NSObject
 
 - (void)signIn:(GIDSignIn *)signIn
 didSignInForUser:(GIDGoogleUser *)user withError:(NSError *)error {
+	if (error == nil) {
+		GIDAuthentication* authentication = user.authentication;
+		@{Firebase.Authentication.Google.JS.GoogleModule.Auth(string,string):Call(authentication.idToken,authentication.accessToken)};
+	}
     @{Firebase.Authentication.Google.iOSGoogleButton.Callback(Uno.IntPtr,Uno.IntPtr):Call((@{Uno.IntPtr})user, (@{Uno.IntPtr})error)};
 }
 
