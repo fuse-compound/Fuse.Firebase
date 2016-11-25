@@ -181,7 +181,7 @@ It returns a promise of a `string`
 
 #### Example
 ```
-FirebaseUser.updateProfile(newEmailAddress);
+FirebaseUser.updateEmail(newEmailAddressString);
 ```
 
 
