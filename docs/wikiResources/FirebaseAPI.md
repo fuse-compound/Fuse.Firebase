@@ -181,11 +181,11 @@ It returns a promise of a `string`
 
 #### Example
 ```
-FirebaseUser.updateProfile(newEmailAddress);
+FirebaseUser.updateEmail(newEmailAddressString);
 ```
 
 
-### Function - updateEmail(newEmailAddressString)
+### Function - delete()
 
 This function attempts to delete the currently authenticated user from Firebase.
 

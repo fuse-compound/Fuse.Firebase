@@ -47,6 +47,7 @@ namespace Firebase.Authentication.Facebook
     [Require("Source.Include", "FirebaseAuth/FirebaseAuth.h")]
     [Require("Source.Include", "FBSDKCoreKit/FBSDKCoreKit.h")]
     [Require("Source.Include", "FBSDKLoginKit/FBSDKLoginKit.h")]
+    [Require("Source.Include", "@{Firebase.Authentication.Facebook.JS.FacebookModule:Include}")]
     [Require("Source.Include", "@{FacebookService:Include}")]
     [Require("Source.Include", "iOSFacebookCallbacks.h")]
 
@@ -100,6 +101,7 @@ namespace Firebase.Authentication.Facebook
                     return;
                 }
 
+                @{Firebase.Authentication.Facebook.JS.FacebookModule.Auth(string):Call(tokenStr)};
                 FIRAuthCredential* credential = [FIRFacebookAuthProvider credentialWithAccessToken:tokenStr];
 
                 // auth againsts firebase
