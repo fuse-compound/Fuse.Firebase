@@ -27,23 +27,26 @@ namespace Firebase.AdMob
         static AndroidGADBannerView()
         {
             AdMobService.Init();
+            // Initializing the Google Mobile Ads SDK at app launch allows the SDK to fetch app-level settings and perform configuration tasks as early as possible. This can help reduce latency for the initial ad request. Initialization requires an app ID. App IDs are unique identifiers given to mobile apps when they're registered in the AdMob console.
             // MobileAds.initialize(getApplicationContext(), "ca-app-pub-xxxxxxxxxxxxxxxx/xxxxxxxxxx");
         }
 
-		public AndroidGADBannerView() : base(Create())
+		public AndroidGADBannerView(string adunit) : base(Create(adunit))
         {
         }
 
 		[Foreign(Language.Java)]
-		static Java.Object Create()
+		static Java.Object Create(string adunit)
         @{
             // http://stackoverflow.com/questions/15953075/how-to-create-an-admob-banner-programatically
             AdView adView = new AdView(@(Activity.Package).@(Activity.Name).GetRootActivity());
             adView.setAdSize(AdSize.FLUID);
-            adView.setAdUnitId("ca-app-pub-xxxxxxxxxxxxxxxx/xxxxxxxxxx");
+            adView.setAdUnitId(adunit);
 
             // Initiate a generic request to load it with an ad
-            AdRequest adRequest = new AdRequest.Builder().addTestDevice("648F2582C7B37F0EBEB4DA80843A5583").build();
+            AdRequest adRequest = new AdRequest.Builder()
+                @(Project.AdMob.TestDevices:Join('\n                ', '.addTestDevice("','")'))
+                .build();
             adView.loadAd(adRequest);
 
             return adView;

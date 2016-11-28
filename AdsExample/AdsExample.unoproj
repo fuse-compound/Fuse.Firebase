@@ -7,6 +7,11 @@
         "../src/Firebase/Firebase.unoproj",
         "../src/Firebase.AdMob/Firebase.AdMob.unoproj",
     ],
+    "AdMob": {
+        "TestDevices": [
+            "648F2582C7B37F0EBEB4DA80843A5583"
+        ]
+    },
     "Includes": [
         "*",
         "GoogleService-Info.plist:ObjCSource:iOS"

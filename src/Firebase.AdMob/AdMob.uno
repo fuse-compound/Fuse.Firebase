@@ -37,15 +37,32 @@ namespace Firebase.AdMob
 
     public class GADBannerView : Panel
     {
+        extern(iOS) internal iOSGADBannerView _native;
+        extern(Android) internal AndroidGADBannerView _native;
+
+        public String AdUnitId {
+            get; set;
+        }
+
         protected override IView CreateNativeView()
         {
             if defined(Android)
             {
-                return new AndroidGADBannerView();
+                if (AdUnitId == null) {
+                    debug_log "No AdUnitId";
+                    throw new Uno.Exception("Not initialized.");
+                }
+                _native = new AndroidGADBannerView(AdUnitId);
+                return _native;
             }
             else if defined(iOS)
             {
-                return new iOSGADBannerView();
+                if (AdUnitId == null) {
+                    debug_log "No AdUnitId";
+                    throw new Uno.Exception("Not initialized.");
+                }
+                _native = new iOSGADBannerView(AdUnitId);
+                return _native;
             }
             else
             {
