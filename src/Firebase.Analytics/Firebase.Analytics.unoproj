@@ -9,6 +9,9 @@
         "Fuse.Scripting"
     ],
     "Includes": [
-        "*"
+        "*",
+        "android_const.js:Bundle",
+        "kfirevent.js:Bundle",
+        "kfirparameter.js:Bundle"
     ]
 }
