@@ -9,9 +9,6 @@
     ],
     "Includes": [
         "*",
-        "android_const.js:Bundle",
-        "kfirevent.js:Bundle",
-        "kfirparameter.js:Bundle",
         "GoogleService-Info.plist:ObjCSource:iOS"
     ]
 }
