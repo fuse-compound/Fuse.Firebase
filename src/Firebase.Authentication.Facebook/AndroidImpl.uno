@@ -58,7 +58,7 @@ namespace Firebase.Authentication.Facebook
         void Reject(string reason) { Reject(new Exception(reason)); }
     }
 
-    [Require("Gradle.Dependency.Compile", "com.facebook.android:facebook-android-sdk:4.+")]
+    [Require("Gradle.Dependency.Compile", "com.facebook.android:facebook-android-sdk:4.16.+")]
     [Require("Android.ResStrings.Declaration", "<string name=\"facebook_app_id\">@(Project.Facebook.AppID)</string>")]
     [Require("AndroidManifest.ApplicationElement", "<meta-data android:name=\"com.facebook.sdk.ApplicationId\" android:value=\"@string/facebook_app_id\"/>")]
     [ForeignInclude(Language.Java,
