@@ -18,12 +18,15 @@ namespace Firebase
 
     [Require("Cocoapods.Podfile.Target", "pod 'Firebase/Core'")]
     [Require("Cocoapods.Podfile.Target", "pod 'FirebaseAnalytics'")]
+    [Require("Source.Include", "Firebase/Firebase.h")]
     extern(iOS)
     public class Core
     {
+        [Foreign(Language.ObjC)]
         static public void Init()
-        {
-        }
+        @{
+            [FIRApp configure];
+        @}
     }
 
     [ForeignInclude(Language.Java, "java.util.ArrayList", "java.util.List", "android.graphics.Color")]

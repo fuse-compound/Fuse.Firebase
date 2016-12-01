@@ -21,13 +21,20 @@
 [[FBSDKApplicationDelegate sharedInstance] application:application didFinishLaunchingWithOptions:launchOptions];
 ]]></Require>
 
-
         <Require AppDelegate.SourceFile.OpenURL><![CDATA[
 [[FBSDKApplicationDelegate sharedInstance]
   application:application
   openURL:url
   sourceApplication:sourceApplication
   annotation:annotation];
+  ]]></Require>
+
+        <Require AppDelegate.SourceFile.OpenURLLegacy><![CDATA[
+[[FBSDKApplicationDelegate sharedInstance]
+  application:app
+  openURL:url
+  sourceApplication:options[UIApplicationOpenURLOptionsSourceApplicationKey]
+  annotation:options[UIApplicationOpenURLOptionsAnnotationKey]];
   ]]></Require>
 
 </Extensions>
