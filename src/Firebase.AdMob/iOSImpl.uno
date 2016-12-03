@@ -48,7 +48,9 @@ namespace Firebase.AdMob
         @{
             GADRequest *request = [GADRequest request];
             request.testDevices = [NSArray arrayWithObjects:kGADSimulatorID,
+#if @(Project.AdMob.TestDevices:IsSet)
                 @(Project.AdMob.TestDevices:Join('\n                ', '@"','",'))
+#endif
                 nil
             ];
 

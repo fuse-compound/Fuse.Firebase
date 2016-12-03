@@ -45,7 +45,9 @@ namespace Firebase.AdMob
 
             // Initiate a generic request to load it with an ad
             AdRequest adRequest = new AdRequest.Builder()
+#if @(Project.AdMob.TestDevices:IsSet)
                 @(Project.AdMob.TestDevices:Join('\n                ', '.addTestDevice("','")'))
+#endif
                 .build();
             adView.loadAd(adRequest);
 
