@@ -64,7 +64,6 @@ namespace Firebase.Authentication
         extern(iOS)
 		static ObjC.Object ForeignInit()
 		@{
-            [FIRApp configure];
             return [FIRAuth auth];
 		@}
 

@@ -1,0 +1,14 @@
+{
+    "Projects": [
+        "../Firebase/Firebase.unoproj"
+    ],
+    "Packages": [
+        "Fuse",
+        "FuseJS",
+        "FuseCore",
+        "Fuse.Scripting"
+    ],
+    "Includes": [
+        "*"
+    ]
+}

@@ -44,6 +44,7 @@ namespace Firebase.Authentication.Facebook
             AccessToken token = AccessToken.getCurrentAccessToken();
 
             AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
+            @{Firebase.Authentication.Facebook.JS.FacebookModule.Auth(string):Call(token.getToken())};
             FirebaseAuth.getInstance().signInWithCredential(credential)
                 .addOnCompleteListener(com.fuse.Activity.getRootActivity(), new OnCompleteListener<AuthResult>() {
                         public void onComplete(Task<AuthResult> task) {
@@ -138,6 +139,7 @@ namespace Firebase.Authentication.Facebook
         @{
             final AccessToken token = (AccessToken)loginToken;
             AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
+            @{Firebase.Authentication.Facebook.JS.FacebookModule.Auth(string):Call(token.getToken())};
             FirebaseAuth.getInstance().signInWithCredential(credential)
                 .addOnCompleteListener(com.fuse.Activity.getRootActivity(), new OnCompleteListener<AuthResult>() {
                         public void onComplete(Task<AuthResult> task) {
