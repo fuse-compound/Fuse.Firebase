@@ -82,8 +82,7 @@ namespace Firebase.Authentication.Facebook
         extern(iOS)
         public void SignOutInner()
         @{
-            id lm = @{LoginManager:Get()};
-            [lm logOut];
+            [@{LoginManager:Get()} logOut];
         @}
 
         public override Promise<string> ReAuthenticate(string ignored0, string ignored1)
