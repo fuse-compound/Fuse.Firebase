@@ -82,13 +82,13 @@ namespace Firebase.Authentication.Facebook
             loginButton.readPermissions = @[@"public_profile", @"email", @"user_friends"];
 
             if ([FBSDKAccessToken currentAccessToken].tokenString != nil)
-                @{OnFBAuth(IntPtr):Call((@{IntPtr})0)};
+                @{OnFBAuth(ObjC.Object):Call(nil)};
 
             return loginButton;
 		@}
 
         [Foreign(Language.ObjC)]
-        static void OnFBAuth(IntPtr err)
+        static void OnFBAuth(ObjC.Object err)
         @{
             NSError* error = (NSError*)err;
 
