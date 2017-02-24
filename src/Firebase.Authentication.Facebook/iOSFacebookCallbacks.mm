@@ -1,6 +1,7 @@
 #import <iOSFacebookCallbacks.h>
 #include <FBSDKLoginKit/FBSDKLoginKit.h>
 #include <@{Firebase.Authentication.Facebook.iOSFacebookButton:Include}>
+#include <@{ObjC.Object:Include}>
 
 @implementation FireFacebookCallbacks : NSObject
 
