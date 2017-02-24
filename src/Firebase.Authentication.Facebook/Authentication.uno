@@ -60,7 +60,7 @@ namespace Firebase.Authentication.Facebook
         public override void Start()
         @{
             FBSDKLoginManager* lm = [[FBSDKLoginManager alloc] init];
-            @{LoginManager:Set((__bridge void *)lm)};
+            @{LoginManager:Set(lm)};
         @}
 
         public override void SignOut()
