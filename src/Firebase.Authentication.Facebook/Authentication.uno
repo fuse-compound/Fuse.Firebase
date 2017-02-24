@@ -25,7 +25,7 @@ namespace Firebase.Authentication.Facebook
     {
         static bool _initd = false;
         extern(android) internal static Java.Object CallbackManager;
-        extern(iOS) internal static IntPtr LoginManager;
+        extern(iOS) internal static ObjC.Object LoginManager;
 
         public override AuthProviderName Name { get { return AuthProviderName.Facebook; } }
 
