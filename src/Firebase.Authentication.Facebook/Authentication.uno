@@ -60,7 +60,7 @@ namespace Firebase.Authentication.Facebook
         public override void Start()
         @{
             FBSDKLoginManager* lm = [[FBSDKLoginManager alloc] init];
-            @{LoginManager:Set(lm)};
+            @{LoginManager:Set((__bridge void *)lm)};
         @}
 
         public override void SignOut()
@@ -82,7 +82,8 @@ namespace Firebase.Authentication.Facebook
         extern(iOS)
         public void SignOutInner()
         @{
-            [@{LoginManager:Get()} logOut];
+            id lm = @{LoginManager:Get()};
+            [lm logOut];
         @}
 
         public override Promise<string> ReAuthenticate(string ignored0, string ignored1)
