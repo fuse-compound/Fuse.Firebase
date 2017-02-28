@@ -11,25 +11,25 @@ using Fuse.Reactive;
 
 namespace Firebase.Authentication.Email.JS
 {
-	/**
-	*/
-	[UXGlobalModule]
-	public sealed class EmailModule : NativeModule
-	{
-		// static NativeEvent _onReceivedMessage;
-		static readonly EmailModule _instance;
+    /**
+    */
+    [UXGlobalModule]
+    public sealed class EmailModule : NativeModule
+    {
+        // static NativeEvent _onReceivedMessage;
+        static readonly EmailModule _instance;
 
-		public EmailModule()
-		{
-			if(_instance != null) return;
-			Resource.SetGlobalKey(_instance = this, "Firebase/Authentication/Email");
+        public EmailModule()
+        {
+            if(_instance != null) return;
+            Uno.UX.Resource.SetGlobalKey(_instance = this, "Firebase/Authentication/Email");
 
             Firebase.Authentication.Email.EmailService.Init();
 
             AddMember(new NativePromise<string, string>("createWithEmailAndPassword", CreateWithEmailAndPassword));
             AddMember(new NativePromise<string, string>("signInWithEmailAndPassword", SignInWithEmailAndPassword));
             // AddMember(new NativePromise<string, string>("updatePassword", UpdatePassword));
-		}
+        }
 
         Future<string> CreateWithEmailAndPassword(object[] args)
         {
@@ -50,5 +50,5 @@ namespace Firebase.Authentication.Email.JS
         //     var password = (string)args[0];
         //     return new Firebase.Authentication.Email.UpdatePassword(password);
         // }
-	}
+    }
 }

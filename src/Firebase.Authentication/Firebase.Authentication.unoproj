@@ -5,7 +5,6 @@
     "Packages": [
         "Fuse",
         "FuseJS",
-        "FuseCore",
         "Fuse.Scripting"
     ],
     "InternalsVisibleTo": [

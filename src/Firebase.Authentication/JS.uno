@@ -12,20 +12,20 @@ using Firebase.Authentication;
 
 namespace Firebase.Authentication.JS
 {
-	/**
-	*/
-	[UXGlobalModule]
-	public sealed class AuthModule : NativeModule
-	{
-		static readonly AuthModule _instance;
+    /**
+    */
+    [UXGlobalModule]
+    public sealed class AuthModule : NativeModule
+    {
+        static readonly AuthModule _instance;
         static NativeEvent _onSignInChanged;
         static NativeEvent _onError;
 
-		public AuthModule()
-		{
-			if(_instance != null) return;
+        public AuthModule()
+        {
+            if(_instance != null) return;
 
-			Resource.SetGlobalKey(_instance = this, "Firebase/Authentication/User");
+            Uno.UX.Resource.SetGlobalKey(_instance = this, "Firebase/Authentication/User");
 
             AuthService.Init();
 
@@ -52,7 +52,7 @@ namespace Firebase.Authentication.JS
 
             AuthService.UserChanged += OnUser;
             AuthService.OnError += OnError;
-		}
+        }
 
         // properties
         static bool GetSignedIn()
@@ -61,39 +61,39 @@ namespace Firebase.Authentication.JS
         }
 
         static string GetName()
-		{
+        {
             if (GetSignedIn())
                 return User.GetName(User.GetCurrent());
             else
                 return "";
-		}
+        }
 
         static string GetEmail()
-		{
+        {
             if (GetSignedIn())
                 return User.GetEmail(User.GetCurrent());
             else
                 return "";
-		}
+        }
 
         static string GetPhotoUrl()
-		{
+        {
             if (GetSignedIn())
                 return User.GetPhotoUrl(User.GetCurrent());
             else
                 return "";
-		}
+        }
 
         // events
         static void OnUser()
-		{
-		    _onSignInChanged.RaiseAsync(GetSignedIn());
-		}
+        {
+            _onSignInChanged.RaiseAsync(GetSignedIn());
+        }
 
         static void OnError(int errorCode, string message)
-		{
-		    _onError.RaiseAsync(message, errorCode);
-		}
+        {
+            _onError.RaiseAsync(message, errorCode);
+        }
 
 
 
@@ -105,7 +105,7 @@ namespace Firebase.Authentication.JS
             return new UpdateProfile(displayName, photoUri);
         }
 
-		// static object UpdateUser(Context context, object[] args)
+        // static object UpdateUser(Context context, object[] args)
         // {
         //     return null;
         // }
@@ -121,7 +121,7 @@ namespace Firebase.Authentication.JS
             return new DeleteUser();
         }
 
-		static object SignOut(Context context, object[] args)
+        static object SignOut(Context context, object[] args)
         {
             AuthService.SignOut();
             return null;
@@ -133,5 +133,5 @@ namespace Firebase.Authentication.JS
             var password = (args.Length>1) ? (string)args[1] : null;
             return AuthService.ReAuthenticate(email, password);
         }
-	}
+    }
 }

@@ -11,28 +11,28 @@ using Fuse.Reactive;
 
 namespace Firebase.Authentication.Facebook.JS
 {
-	/**
-	*/
-	[UXGlobalModule]
-	public sealed class FacebookModule : NativeModule
-	{
-		static readonly FacebookModule _instance;
-		static NativeEvent _onAuth;
+    /**
+    */
+    [UXGlobalModule]
+    public sealed class FacebookModule : NativeModule
+    {
+        static readonly FacebookModule _instance;
+        static NativeEvent _onAuth;
 
-		public FacebookModule()
-		{
-			if(_instance != null) return;
-			Resource.SetGlobalKey(_instance = this, "Firebase/Authentication/Facebook");
+        public FacebookModule()
+        {
+            if(_instance != null) return;
+            Uno.UX.Resource.SetGlobalKey(_instance = this, "Firebase/Authentication/Facebook");
 
-			_onAuth = new NativeEvent("onAuth");
-			AddMember(_onAuth);
-			Firebase.Authentication.Facebook.FacebookService.Init();
-		}
+            _onAuth = new NativeEvent("onAuth");
+            AddMember(_onAuth);
+            Firebase.Authentication.Facebook.FacebookService.Init();
+        }
 
-		static void Auth(string token)
-		{
-		    _onAuth.RaiseAsync(token);
-		}
-	}
+        static void Auth(string token)
+        {
+            _onAuth.RaiseAsync(token);
+        }
+    }
 
 }
