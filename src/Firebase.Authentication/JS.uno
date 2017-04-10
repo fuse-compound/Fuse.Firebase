@@ -25,7 +25,7 @@ namespace Firebase.Authentication.JS
 		{
 			if(_instance != null) return;
 
-			Resource.SetGlobalKey(_instance = this, "Firebase/Authentication/User");
+			Uno.UX.Resource.SetGlobalKey(_instance = this, "Firebase/Authentication/User");
 
             AuthService.Init();
 

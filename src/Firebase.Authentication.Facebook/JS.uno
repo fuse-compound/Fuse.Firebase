@@ -22,7 +22,7 @@ namespace Firebase.Authentication.Facebook.JS
 		public FacebookModule()
 		{
 			if(_instance != null) return;
-			Resource.SetGlobalKey(_instance = this, "Firebase/Authentication/Facebook");
+			Uno.UX.Resource.SetGlobalKey(_instance = this, "Firebase/Authentication/Facebook");
 
 			_onAuth = new NativeEvent("onAuth");
 			AddMember(_onAuth);
