@@ -22,7 +22,7 @@ namespace Firebase.Authentication.Email.JS
 		public EmailModule()
 		{
 			if(_instance != null) return;
-			Resource.SetGlobalKey(_instance = this, "Firebase/Authentication/Email");
+			Uno.UX.Resource.SetGlobalKey(_instance = this, "Firebase/Authentication/Email");
 
             Firebase.Authentication.Email.EmailService.Init();
 

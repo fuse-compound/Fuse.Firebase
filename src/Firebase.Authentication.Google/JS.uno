@@ -22,7 +22,7 @@ namespace Firebase.Authentication.Google.JS
 		public GoogleModule()
 		{
 			if(_instance != null) return;
-			Resource.SetGlobalKey(_instance = this, "Firebase/Authentication/Google");
+			Uno.UX.Resource.SetGlobalKey(_instance = this, "Firebase/Authentication/Google");
 
 			_onAuth = new NativeEvent("onAuth");
 			AddMember(_onAuth);

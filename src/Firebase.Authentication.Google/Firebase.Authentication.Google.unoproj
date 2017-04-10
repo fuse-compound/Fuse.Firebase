@@ -6,7 +6,6 @@
     "Packages": [
         "Fuse",
         "FuseJS",
-        "FuseCore",
         "Fuse.Scripting",
         "Android.ActivityUtils"
     ],
