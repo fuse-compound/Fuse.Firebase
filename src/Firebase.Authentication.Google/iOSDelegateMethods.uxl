@@ -1,5 +1,5 @@
 <Extensions Backend="CPlusPlus" Condition="iOS">
-    <Require Entity="Firebase.Authentication.Google.iOSGoogleButton.Callback(Uno.IntPtr,Uno.IntPtr)" />
+    <Require Entity="Firebase.Authentication.Google.iOSGoogleButton.Callback(ObjC.Object,ObjC.Object)" />
     <Require Entity="Firebase.Authentication.AuthService.SignedOut()" />
 
     <Require AppDelegate.SourceFile.OpenURLLegacy><![CDATA[

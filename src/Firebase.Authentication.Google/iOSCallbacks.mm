@@ -1,3 +1,4 @@
+
 #import <iOSCallbacks.h>
 #include <GoogleSignIn/GoogleSignIn.h>
 #include <@{Firebase.Authentication.Google.iOSGoogleButton:Include}>
@@ -14,7 +15,7 @@ didSignInForUser:(GIDGoogleUser *)user withError:(NSError *)error {
 		GIDAuthentication* authentication = user.authentication;
 		@{Firebase.Authentication.Google.JS.GoogleModule.Auth(string,string):Call(authentication.idToken,authentication.accessToken)};
 	}
-    @{Firebase.Authentication.Google.iOSGoogleButton.Callback(Uno.IntPtr,Uno.IntPtr):Call((@{Uno.IntPtr})user, (@{Uno.IntPtr})error)};
+    @{Firebase.Authentication.Google.iOSGoogleButton.Callback(ObjC.Object,ObjC.Object):Call((@{ObjC.Object})user, (@{ObjC.Object})error)};
 }
 
 - (void)signIn:(GIDSignIn *)signIn

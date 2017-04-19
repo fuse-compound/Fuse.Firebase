@@ -68,7 +68,7 @@ namespace Firebase.Authentication.Google
 		@}
 
         [Foreign(Language.ObjC)]
-        static void Callback(IntPtr usr, IntPtr err)
+        static void Callback(ObjC.Object usr, ObjC.Object err)
         @{
             GIDGoogleUser* user = (GIDGoogleUser*)usr;
             NSError* error = (NSError*)err;
