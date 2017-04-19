@@ -1,0 +1,20 @@
+<App Background="#2586EC">
+    <DockPanel>
+        <JavaScript File="MainView.js"/>
+        <StackPanel Dock="Top" Background="#2586EC">
+            <StatusBarBackground/>
+            <Fuse.iOS.StatusBarConfig Style="Light"/>
+        </StackPanel>
+        <StackPanel Width="92%" Height="460" Padding="20">
+            <Rectangle Layer="Background" CornerRadius="10" Color="#fff"/>
+            <Text Value="Notifications Test" Alignment="Center" FontSize="35" TextColor="#2586EC"/>
+
+            <Text Value="Nothing"/>
+            <Text Value="{status}"/>
+            <Button Clicked="{clearBadgeNumber}" Text="clearBadgeNumber"/>
+            <Button Clicked="{clearAllNotifications}" Text="clearAllNotifications"/>
+            <Text Value="{message}"/>
+        </StackPanel>
+        <BottomBarBackground Dock="Bottom" />
+    </DockPanel>
+</App>
