@@ -1,4 +1,4 @@
-# Fuse.Firebase (WIP)
+# Fuse.Firebase
 [![license](https://img.shields.io/github/license/cbaggers/Fuse.Firebase.svg?maxAge=2592000)](https://github.com/cbaggers/Fuse.Firebase/blob/master/LICENSE)
 [![Build Status](https://travis-ci.org/cbaggers/Fuse.Firebase.svg?branch=master)](https://travis-ci.org/cbaggers/Fuse.Firebase)
 
