@@ -14,6 +14,8 @@ namespace Firebase.Notifications
 
        Handles push notification from Firebase
 
+       @include Docs/Guide.md
+
        ## Remarks
 
        This module is an @EventEmitter, so the methods from @EventEmitter can be used to listen to events.
