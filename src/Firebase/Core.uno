@@ -33,12 +33,12 @@ namespace Firebase
     [Require("Gradle.Dependency.ClassPath", "com.google.gms:google-services:3.0.0")]
     [Require("Gradle.Dependency.Compile", "com.google.firebase:firebase-core:9.2.0")]
     [Require("Gradle.BuildFile.End", "apply plugin: 'com.google.gms.google-services'")]
-	extern(Android)
+    extern(Android)
     public class Core
     {
-		[Foreign(Language.Java)]
-		static public void Init()
-		@{
-		@}
-	}
+        [Foreign(Language.Java)]
+        static public void Init()
+        @{
+        @}
+    }
 }

@@ -1,0 +1,27 @@
+{
+  "Packages": [
+    "Fuse",
+    "FuseJS",
+    "Fuse.BasicTheme"
+  ],
+  "Projects": [
+    "../src/Firebase/Firebase.unoproj",
+    "../src/Firebase.Notifications.Android/Firebase.Notifications.Android.unoproj",
+  ],
+  "Android": {
+    "NotificationIcon": {
+      "Color": "FF00FF"
+      "LDPI": "Foo.png",
+      "MDPI": "Foo.png",
+      "HDPI": "Foo.png",
+      "XHDPI": "Foo.png",
+      "XXHDPI": "Foo.png",
+      "XXXHDPI": "Foo.png"
+    },
+  },
+  "Includes": [
+    "*",
+    "GoogleService-Info.plist:ObjCSource:iOS"
+    "assets/thing.png:Bundle"
+  ]
+}

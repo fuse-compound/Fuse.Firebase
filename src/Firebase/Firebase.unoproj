@@ -1,10 +1,11 @@
 {
-    "Packages": [
-        "Fuse",
-        "FuseJS",
-    ],
-    "Includes": [
-        "Core.uno",
-        "iOSHelpers.m:ObjCSource:iOS"
-    ]
+  "Packages": [
+    "Fuse",
+    "FuseJS",
+  ],
+  "Includes": [
+    "Core.uno",
+    "iOSHelpers.m:ObjCSource:iOS",
+    "BundleFiles.java:Java:android"
+  ]
 }
