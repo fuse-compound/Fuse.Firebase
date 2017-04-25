@@ -11,7 +11,7 @@ All are welcome to come hacking on this so we can flesh this out to cover the fu
 
 ## Docs
 
-See here for our [documentation](docs/index.md)
+See [here for our documentation](docs/index.md)
 
 ## Requirements
 
