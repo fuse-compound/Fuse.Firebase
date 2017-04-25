@@ -4,7 +4,7 @@
 
 This project's goal to make full Firebase bindings for Fuse. Currently we have:
 
-- Authentication using the Email, Google & Facebook providers. 
+- Authentication using the Email, Google & Facebook providers.
 - Basic Ad & Analytics support.
 
 All are welcome to come hacking on this so we can flesh this out to cover the full gammut of features provided by Firebase! Whether it's as small as a typo fix or as large and a entire feature, please feel free to fork and summit pull requests.
@@ -12,6 +12,8 @@ All are welcome to come hacking on this so we can flesh this out to cover the fu
 ## Docs
 
 See the [wiki](https://github.com/cbaggers/Fuse.Firebase/wiki) for [API Docs](https://github.com/cbaggers/Fuse.Firebase/wiki/Javascript-API) and the [guide for getting the authentication example running](https://github.com/cbaggers/Fuse.Firebase/wiki/Getting-up-and-running-with-the-Example-Project).
+
+See [here](src/Firebase.Notifications.Android/Docs/Guide.md) for the Push Notification Docs
 
 ## Requirements
 
