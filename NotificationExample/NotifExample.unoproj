@@ -9,7 +9,7 @@
   ],
   "Android": {
     "NotificationIcon": {
-      "Color": "FF00FF"
+      "Color": "FF00FF",
       "LDPI": "Foo.png",
       "MDPI": "Foo.png",
       "HDPI": "Foo.png",
