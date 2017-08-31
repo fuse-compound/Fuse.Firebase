@@ -220,8 +220,8 @@ If it succeeds it will also sign-in that user.
 #### Example
 ```
 var createUser = function() {
- 	var email = userEmailInput.value;
- 	var password = userPasswordInput.value;
+    var email = userEmailInput.value;
+    var password = userPasswordInput.value;
     EmailAuth.createWithEmailAndPassword(email, password).then(function(user) {
         signedIn();
     }).catch(function(e) {
@@ -240,8 +240,8 @@ It returns a promise of a `string`
 #### Example
 ```
 var signInWithEmail = function() {
- 	var email = userEmailInput.value;
- 	var password = userPasswordInput.value;
+    var email = userEmailInput.value;
+    var password = userPasswordInput.value;
     EmailAuth.signInWithEmailAndPassword(email, password).then(function(user) {
         signedIn();
     }).catch(function(e) {

@@ -20,21 +20,21 @@ var mainPage = {title: "Lobby", handle: "lobbyPage"};
 var currentPage = Observable(mainPage);
 
 var currentPageHandle = currentPage.map(function(x) {
-	return x.handle;
+    return x.handle;
 });
 
 var currentPageTitle = currentPage.map(function(x) {
-	return x.title;
+    return x.title;
 });
 
 function signedIn() {
     signedInStatusText.value = defaultStatusMessage;
-	currentPage.value = {title: "Logged In Page", handle: "loggedInPage"};
+    currentPage.value = {title: "Logged In Page", handle: "loggedInPage"};
     updateUserDetailsUI();
 }
 
 function signedOut() {
-	currentPage.value = mainPage;
+    currentPage.value = mainPage;
     updateUserDetailsUI();
 }
 
@@ -70,8 +70,8 @@ var userEmailInput = Observable("");
 var userPasswordInput = Observable("");
 
 var createUser = function() {
- 	var email = userEmailInput.value;
- 	var password = userPasswordInput.value;
+    var email = userEmailInput.value;
+    var password = userPasswordInput.value;
     EAuth.createWithEmailAndPassword(email, password).then(function(user) {
         signedIn();
     }).catch(function(e) {
@@ -81,8 +81,8 @@ var createUser = function() {
 };
 
 var signInWithEmail = function() {
- 	var email = userEmailInput.value;
- 	var password = userPasswordInput.value;
+    var email = userEmailInput.value;
+    var password = userPasswordInput.value;
     EAuth.signInWithEmailAndPassword(email, password).then(function(user) {
         signedIn();
     }).catch(function(e) {
@@ -107,15 +107,15 @@ var signOutNow = function() {
 
 
 module.exports = {
-	currentPage: currentPage,
-	currentPageHandle: currentPageHandle,
-	currentPageTitle: currentPageTitle,
+    currentPage: currentPage,
+    currentPageHandle: currentPageHandle,
+    currentPageTitle: currentPageTitle,
     lobbyStatusText: lobbyStatusText,
 
-	userEmailInput: userEmailInput,
-	userPasswordInput: userPasswordInput,
-	createUser: createUser,
-	signInWithEmail: signInWithEmail,
+    userEmailInput: userEmailInput,
+    userPasswordInput: userPasswordInput,
+    createUser: createUser,
+    signInWithEmail: signInWithEmail,
 
     signedInStatusText: signedInStatusText,
     userName: userName,

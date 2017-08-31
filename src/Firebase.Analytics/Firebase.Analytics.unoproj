@@ -1,16 +1,16 @@
 {
-    "Projects": [
-        "../Firebase/Firebase.unoproj"
-    ],
-    "Packages": [
-        "Fuse",
-        "FuseJS",
-        "Fuse.Scripting"
-    ],
-    "Includes": [
-        "*",
-        "android_const.js:Bundle",
-        "kfirevent.js:Bundle",
-        "kfirparameter.js:Bundle"
-    ]
+  "Projects": [
+    "../Firebase/Firebase.unoproj"
+  ],
+  "Packages": [
+    "Fuse",
+    "FuseJS",
+    "Fuse.Scripting"
+  ],
+  "Includes": [
+    "*",
+    "android_const.js:Bundle",
+    "kfirevent.js:Bundle",
+    "kfirparameter.js:Bundle"
+  ]
 }

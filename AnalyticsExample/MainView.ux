@@ -1,6 +1,6 @@
 <App Background="#eee">
-	<DockPanel>
-		<JavaScript>
+    <DockPanel>
+        <JavaScript>
             var FBAnalytics = require("Firebase/Analytics");
             var kFIREvent = require('kfirevent.js');
             var kFIRParameter = require('kfirparameter.js');
@@ -17,8 +17,8 @@
                 FBAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, p);
             };
         </JavaScript>
-		<StackPanel>
+        <StackPanel>
             <Button HitTestMode="LocalVisualAndChildren" Background="#442" Text="Do It!" Clicked="{doIt}" Height="100"/>
-		</StackPanel>
-	</DockPanel>
+        </StackPanel>
+    </DockPanel>
 </App>

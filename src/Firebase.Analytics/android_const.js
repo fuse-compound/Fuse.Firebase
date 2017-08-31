@@ -70,8 +70,8 @@ Event.VIEW_SEARCH_RESULTS = "view_search_results";
 // 
 
 module.exports = {
-     Param: Param,
-     Event: Event
+    Param: Param,
+    Event: Event
 };
 
 // 

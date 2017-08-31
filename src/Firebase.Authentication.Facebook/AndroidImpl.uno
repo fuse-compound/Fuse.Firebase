@@ -80,13 +80,13 @@ namespace Firebase.Authentication.Facebook
                     "android.os.Handler")]
     extern(android)
     public class AndroidFacebookButton : LeafView
-	{
+    {
         static AndroidFacebookButton()
         {
             FacebookService.Init();
         }
 
-		public AndroidFacebookButton() : base(Create())
+        public AndroidFacebookButton() : base(Create())
         {
             EncueAutoSignIn();
         }
@@ -110,8 +110,8 @@ namespace Firebase.Authentication.Facebook
                 }}, 500);
         @}
 
-		[Foreign(Language.Java)]
-		static Java.Object Create()
+        [Foreign(Language.Java)]
+        static Java.Object Create()
         @{
             LoginButton loginButton = new LoginButton(com.fuse.Activity.getRootActivity());
             loginButton.setReadPermissions("email", "public_profile");
@@ -132,7 +132,7 @@ namespace Firebase.Authentication.Facebook
                     }
                 });
             return loginButton;
-		@}
+        @}
 
         [Foreign(Language.Java)]
         static void OnAuth(Java.Object loginToken)
@@ -159,5 +159,5 @@ namespace Firebase.Authentication.Facebook
         {
             AuthService.SignalError(-1, reason);
         }
-	}
+    }
 }

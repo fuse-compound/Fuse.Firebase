@@ -54,18 +54,18 @@ namespace Firebase.Authentication.Google
     [Require("Source.Include", "Firebase/Firebase.h")]
     [Require("Source.Include", "FirebaseAuth/FirebaseAuth.h")]
     extern(iOS) public class iOSGoogleButton : LeafView
-	{
-		public iOSGoogleButton() : base(Create()) { }
+    {
+        public iOSGoogleButton() : base(Create()) { }
 
 
-		[Foreign(Language.ObjC)]
-		[Require("Entity","Firebase.Authentication.Google.JS.GoogleModule.Auth(string,string)")]
+        [Foreign(Language.ObjC)]
+        [Require("Entity","Firebase.Authentication.Google.JS.GoogleModule.Auth(string,string)")]
 
-		static ObjC.Object Create()
-		@{
+        static ObjC.Object Create()
+        @{
             [[GIDSignIn sharedInstance] signInSilently];
-			return [[GIDSignInButton alloc] init];
-		@}
+            return [[GIDSignInButton alloc] init];
+        @}
 
         [Foreign(Language.ObjC)]
         static void Callback(ObjC.Object usr, ObjC.Object err)
@@ -110,5 +110,5 @@ namespace Firebase.Authentication.Google
             var message = Errors.SignInWithCredentialBaseErrorMessage(code);
             AuthService.SignalError(code, message);
         }
-	}
+    }
 }

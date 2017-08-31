@@ -93,19 +93,19 @@ namespace Firebase.Authentication.Google
                     "com.google.firebase.auth.GoogleAuthProvider",
                     "com.google.android.gms.common.SignInButton")]
     extern(android) public class AndroidGoogleButton : LeafView
-	{
+    {
 
         static AndroidGoogleButton()
         {
             GoogleService.Init();
         }
 
-		public AndroidGoogleButton() : base(Create()) { }
+        public AndroidGoogleButton() : base(Create()) { }
 
 
-		[Foreign(Language.Java)]
-		static Java.Object Create()
-		@{
+        [Foreign(Language.Java)]
+        static Java.Object Create()
+        @{
              SignInButton button = new SignInButton(com.fuse.Activity.getRootActivity());
              button.setOnClickListener(new android.view.View.OnClickListener() {
                  public void onClick(android.view.View v) {
@@ -113,7 +113,7 @@ namespace Firebase.Authentication.Google
                  }
              });
              return button;
-		@}
+        @}
 
         static void SignInUser()
         {
@@ -160,5 +160,5 @@ namespace Firebase.Authentication.Google
         {
             AuthService.SignalError(-1, reason);
         }
-	}
+    }
 }

@@ -53,19 +53,19 @@ namespace Firebase.Authentication
             }
         }
 
-		[Foreign(Language.Java)]
+        [Foreign(Language.Java)]
         extern(Android)
-		internal static Java.Object ForeignInit()
-		@{
+        internal static Java.Object ForeignInit()
+        @{
             return FirebaseAuth.getInstance();
-		@}
+        @}
 
-		[Foreign(Language.ObjC)]
+        [Foreign(Language.ObjC)]
         extern(iOS)
-		static ObjC.Object ForeignInit()
-		@{
+        static ObjC.Object ForeignInit()
+        @{
             return [FIRAuth auth];
-		@}
+        @}
 
 
         public static void RegisterAuthProvider(AuthProvider provider)
@@ -221,7 +221,7 @@ namespace Firebase.Authentication
             SignOutCurrentProvider();
             CurrentProvider = newCurrent;
         }
-	}
+    }
 
 
 

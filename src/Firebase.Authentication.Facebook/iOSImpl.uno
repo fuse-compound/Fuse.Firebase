@@ -53,7 +53,7 @@ namespace Firebase.Authentication.Facebook
 
     extern(iOS)
     public class iOSFacebookButton : LeafView
-	{
+    {
         static internal ObjC.Object _iosDelegate;
         static bool _initd = false;
 
@@ -62,10 +62,10 @@ namespace Firebase.Authentication.Facebook
             FacebookService.Init();
         }
 
-		public iOSFacebookButton() : base(Create()) { }
+        public iOSFacebookButton() : base(Create()) { }
 
-		[Foreign(Language.ObjC)]
-		static ObjC.Object Create()
+        [Foreign(Language.ObjC)]
+        static ObjC.Object Create()
         @{
             FireFacebookCallbacks* fireCB;
             if (!@{_initd:Get()})
@@ -85,7 +85,7 @@ namespace Firebase.Authentication.Facebook
                 @{OnFBAuth(ObjC.Object):Call(nil)};
 
             return loginButton;
-		@}
+        @}
 
         [Foreign(Language.ObjC)]
         static void OnFBAuth(ObjC.Object err)
@@ -140,5 +140,5 @@ namespace Firebase.Authentication.Facebook
             var message = Errors.SignInWithCredentialBaseErrorMessage(code);
             AuthService.SignalError(code, message);
         }
-	}
+    }
 }

@@ -23,7 +23,7 @@ namespace Firebase.AdMob
                     "com.google.android.gms.ads.AdView")]
     extern(android)
     public class AndroidGADBannerView : LeafView
-	{
+    {
         static AndroidGADBannerView()
         {
             AdMobService.Init();
@@ -31,12 +31,12 @@ namespace Firebase.AdMob
             // MobileAds.initialize(getApplicationContext(), "ca-app-pub-xxxxxxxxxxxxxxxx/xxxxxxxxxx");
         }
 
-		public AndroidGADBannerView(string adunit) : base(Create(adunit))
+        public AndroidGADBannerView(string adunit) : base(Create(adunit))
         {
         }
 
-		[Foreign(Language.Java)]
-		static Java.Object Create(string adunit)
+        [Foreign(Language.Java)]
+        static Java.Object Create(string adunit)
         @{
             // http://stackoverflow.com/questions/15953075/how-to-create-an-admob-banner-programatically
             AdView adView = new AdView(@(Activity.Package).@(Activity.Name).GetRootActivity());
@@ -52,7 +52,7 @@ namespace Firebase.AdMob
             adView.loadAd(adRequest);
 
             return adView;
-		@}
+        @}
 
-	}
+    }
 }

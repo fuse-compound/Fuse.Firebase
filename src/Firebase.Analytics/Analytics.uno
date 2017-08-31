@@ -60,7 +60,7 @@ namespace Firebase.Analytics
             NSDictionary *param = [NSDictionary dictionaryWithObjects:[vals copyArray] forKeys:[keys copyArray]];
             [FIRAnalytics logEventWithName:name parameters:param];
         @}
-	}
+    }
 
     extern(!mobile)
     internal static class AnalyticsService

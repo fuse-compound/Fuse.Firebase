@@ -11,27 +11,27 @@ using Fuse.Reactive;
 
 namespace Firebase.Authentication.Google.JS
 {
-	/**
-	*/
-	[UXGlobalModule]
-	public sealed class GoogleModule : NativeModule
-	{
-		static readonly GoogleModule _instance;
-		static NativeEvent _onAuth;
+    /**
+    */
+    [UXGlobalModule]
+    public sealed class GoogleModule : NativeModule
+    {
+        static readonly GoogleModule _instance;
+        static NativeEvent _onAuth;
 
-		public GoogleModule()
-		{
-			if(_instance != null) return;
-			Uno.UX.Resource.SetGlobalKey(_instance = this, "Firebase/Authentication/Google");
+        public GoogleModule()
+        {
+            if(_instance != null) return;
+            Uno.UX.Resource.SetGlobalKey(_instance = this, "Firebase/Authentication/Google");
 
-			_onAuth = new NativeEvent("onAuth");
-			AddMember(_onAuth);
-			Firebase.Authentication.Google.GoogleService.Init();
-		}
+            _onAuth = new NativeEvent("onAuth");
+            AddMember(_onAuth);
+            Firebase.Authentication.Google.GoogleService.Init();
+        }
 
-		static void Auth(string idToken, string accessToken)
-		{
-			_onAuth.RaiseAsync(idToken, accessToken);
-		}
-	}
+        static void Auth(string idToken, string accessToken)
+        {
+            _onAuth.RaiseAsync(idToken, accessToken);
+        }
+    }
 }

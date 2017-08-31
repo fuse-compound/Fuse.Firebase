@@ -159,21 +159,21 @@ namespace Firebase.Authentication.Google
     }
 
     public class GoogleButton : Panel
-	{
-		protected override IView CreateNativeView()
-		{
-			if defined(Android)
+    {
+        protected override IView CreateNativeView()
+        {
+            if defined(Android)
             {
                 return new AndroidGoogleButton();
             }
-			else if defined(iOS)
+            else if defined(iOS)
             {
                 return new iOSGoogleButton();
             }
-			else
-			{
-				return base.CreateNativeView();
-			}
-		}
-	}
+            else
+            {
+                return base.CreateNativeView();
+            }
+        }
+    }
 }

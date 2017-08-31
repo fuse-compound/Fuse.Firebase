@@ -1,22 +1,22 @@
 {
-    "Projects": [
-        "../Firebase/Firebase.unoproj",
-        "../Firebase.Authentication/Firebase.Authentication.unoproj"
-    ],
-    "Packages": [
-        "Fuse",
-        "FuseJS",
-        "Fuse.Scripting",
-        "Android.ActivityUtils"
-    ],
-    "Android": {
-        "SDK": {
-            "MinVersion": "15"
-        }
-    },
-    "Includes": [
-        "*",
-        "iOSFacebookCallbacks.h:ObjCHeader:iOS",
-        "iOSFacebookCallbacks.mm:ObjCSource:iOS"
-    ]
+  "Projects": [
+    "../Firebase/Firebase.unoproj",
+    "../Firebase.Authentication/Firebase.Authentication.unoproj"
+  ],
+  "Packages": [
+    "Fuse",
+    "FuseJS",
+    "Fuse.Scripting",
+    "Android.ActivityUtils"
+  ],
+  "Android": {
+    "SDK": {
+      "MinVersion": "15"
+    }
+  },
+  "Includes": [
+    "*",
+    "iOSFacebookCallbacks.h:ObjCHeader:iOS",
+    "iOSFacebookCallbacks.mm:ObjCSource:iOS"
+  ]
 }

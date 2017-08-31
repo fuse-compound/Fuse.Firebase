@@ -27,7 +27,7 @@ namespace Firebase.AdMob
             }
         }
 
-	}
+    }
 
     extern(!mobile)
     internal static class AdMobService
