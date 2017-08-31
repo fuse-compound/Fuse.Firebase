@@ -23,6 +23,14 @@ namespace Firebase.Authentication
         @}
 
         [Foreign(Language.ObjC)]
+        internal static string GetUid(ObjC.Object obj)
+        @{
+            FIRUser* user = [FIRAuth auth].currentUser;
+            NSString* name = user.uid;
+            return name;
+        @}
+
+        [Foreign(Language.ObjC)]
         internal static string GetName(ObjC.Object obj)
         @{
             FIRUser* user = [FIRAuth auth].currentUser;

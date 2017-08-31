@@ -15,13 +15,13 @@ namespace Firebase.Authentication.JS
 	/**
 	*/
 	[UXGlobalModule]
-	public sealed class AuthModule : NativeModule
+	public sealed class AuthModule : NativeEventEmitterModule
 	{
 		static readonly AuthModule _instance;
         static NativeEvent _onSignInChanged;
         static NativeEvent _onError;
 
-		public AuthModule()
+		public AuthModule() : base(true,"error","signedInStateChanged")
 		{
 			if(_instance != null) return;
 
@@ -31,6 +31,7 @@ namespace Firebase.Authentication.JS
 
             // properties
             AddMember(new NativeProperty<bool, bool>("isSignedIn", GetSignedIn));
+            AddMember(new NativeProperty<string, string>("uid", GetUid));
             AddMember(new NativeProperty<string, string>("name", GetName));
             AddMember(new NativeProperty<string, string>("email", GetEmail));
             AddMember(new NativeProperty<string, string>("photoUrl", GetPhotoUrl));
@@ -38,6 +39,10 @@ namespace Firebase.Authentication.JS
             // events
             _onSignInChanged = new NativeEvent("signedInStateChanged");
             _onError = new NativeEvent("onError");
+
+            On("error", _onError);
+            On("signedInStateChanged", _onSignInChanged);
+
             AddMember(_onSignInChanged);
             AddMember(_onError);
 
@@ -58,6 +63,14 @@ namespace Firebase.Authentication.JS
         static bool GetSignedIn()
         {
             return Firebase.Authentication.User.GetCurrent()!=null;
+		}
+
+        static string GetUid()
+        {
+            if (GetSignedIn())
+                return User.GetUid(User.GetCurrent());
+            else
+                return "";
         }
 
         static string GetName()
@@ -87,12 +100,15 @@ namespace Firebase.Authentication.JS
         // events
         static void OnUser()
 		{
-		    _onSignInChanged.RaiseAsync(GetSignedIn());
+            var isSignedIn = GetSignedIn()
+            _onSignInChanged.RaiseAsync(isSignedIn);
+            _instance.Emit("signedInStateChanged", isSignedIn);
 		}
 
         static void OnError(int errorCode, string message)
 		{
-		    _onError.RaiseAsync(message, errorCode);
+            _onError.RaiseAsync(message, errorCode);
+            _instance.Emit("error", message, errorCode);
 		}
 
 

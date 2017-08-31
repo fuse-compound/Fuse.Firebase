@@ -27,6 +27,14 @@ namespace Firebase.Authentication
         @}
 
         [Foreign(Language.Java)]
+        internal static string GetUid(Java.Object obj)
+        @{
+            FirebaseUser user = (FirebaseUser)obj;
+            String r = user.getUid();
+            return r;
+        @}
+
+        [Foreign(Language.Java)]
         internal static string GetName(Java.Object obj)
         @{
             FirebaseUser user = (FirebaseUser)obj;

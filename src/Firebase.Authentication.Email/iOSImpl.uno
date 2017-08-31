@@ -40,7 +40,7 @@ namespace Firebase.Authentication.Email
 
         void Reject(int errorCode)
         {
-            Reject(new Exception(Errors.SignInWithEmailBaseErrorMessage(errorCode)));
+            Reject(new Exception(Errors.CreateUserWithEmailBaseErrorMessage(errorCode)));
         }
     }
 

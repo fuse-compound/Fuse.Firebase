@@ -254,6 +254,7 @@ namespace Firebase.Authentication
     static internal class User
     {
         internal static object GetCurrent() { return null; }
+        internal static string GetUid(object obj) { return null; }
         internal static string GetName(object obj) { return null; }
         internal static string GetEmail(object obj) { return null; }
         internal static string GetPhotoUrl(object obj) { return null; }

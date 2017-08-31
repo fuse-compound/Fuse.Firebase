@@ -134,7 +134,7 @@ namespace Firebase.Authentication.Google
             final Intent data = (Intent)intent;
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
             if (!result.isSuccess()) {
-                @{OnFailure(string):Call("SignIn Failed: GoogleSignIn failed")};
+                @{OnFailure(string):Call("SignIn Failed: GoogleSignIn failed: " + result.getStatus().getStatusCode())};
                 return;
             }
             // kick off next step
