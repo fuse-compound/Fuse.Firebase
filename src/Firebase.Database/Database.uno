@@ -48,7 +48,7 @@ namespace Firebase.Database
         @{
             // XXX: Should be a compile-time option
             [FIRDatabase database].persistenceEnabled = YES;
-        	@{_handle:Set([[FIRDatabase database] reference])};
+            @{_handle:Set([[FIRDatabase database] reference])};
         @}
 
         [Foreign(Language.Java)]
@@ -62,23 +62,23 @@ namespace Firebase.Database
         extern(iOS)
         public static void Listen(string path, Action<string, string> f)
         @{
-    		FIRDatabaseReference *ref = @{DatabaseService._handle:Get()};
-    		[[ref child:path] observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+            FIRDatabaseReference *ref = @{DatabaseService._handle:Get()};
+            [[ref child:path] observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
               if([snapshot.value isEqual:[NSNull null]]) {
                 f(path, nil);
                 return;
               }
 
               NSError *error;
-    		  NSData *jsonData = [NSJSONSerialization dataWithJSONObject:snapshot.value
-    		                                                options:(NSJSONWritingOptions)0
-    		                                                  error:&error];
-    		  NSString *json = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-    		  f(path, json);
-    		} withCancelBlock:^(NSError * _Nonnull error) {
-    			NSString *erstr = [NSString stringWithFormat:@"Firebase Read Error: %@", error.localizedDescription];
-    			f(path, erstr);
-    		}];
+              NSData *jsonData = [NSJSONSerialization dataWithJSONObject:snapshot.value
+                                                            options:(NSJSONWritingOptions)0
+                                                              error:&error];
+              NSString *json = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+              f(path, json);
+            } withCancelBlock:^(NSError * _Nonnull error) {
+                NSString *erstr = [NSString stringWithFormat:@"Firebase Read Error: %@", error.localizedDescription];
+                f(path, erstr);
+            }];
         @}
 
         [Foreign(Language.Java)]
@@ -87,13 +87,15 @@ namespace Firebase.Database
         @{
             ValueEventListener dataListener = new ValueEventListener() {
                 @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
+                public void onDataChange(DataSnapshot dataSnapshot)
+                {
                     JSONObject json = new JSONObject((Map)dataSnapshot.getValue());
                     f.run(path,json.toString());
                 }
 
                 @Override
-                public void onCancelled(DatabaseError databaseError) {
+                public void onCancelled(DatabaseError databaseError)
+                {
                     f.run(path,databaseError.toString());
                 }
             };
@@ -135,7 +137,8 @@ namespace Firebase.Database
         @{
             DatabaseReference ref = (DatabaseReference)@{DatabaseService._handle:Get()};
             Map<String, String> values = new HashMap<String, String>();
-            for (int i = 0; i < len; i++) {
+            for (int i = 0; i < len; i++)
+            {
                 values.put(keys.get(i), vals.get(i));
             }
             ref.child(path).setValue(values);
@@ -146,7 +149,6 @@ namespace Firebase.Database
         public static void Save(string path, ObjC.Object value)
         @{
             FIRDatabaseReference *ref = @{DatabaseService._handle:Get()};
-
             [[ref child:path] setValue:value];
         @}
 
@@ -155,7 +157,6 @@ namespace Firebase.Database
         public static void Save(string path, Java.Object value)
         @{
             DatabaseReference ref = (DatabaseReference)@{DatabaseService._handle:Get()};
-
             ref.child(path).setValue(value);
         @}
 
@@ -223,7 +224,7 @@ namespace Firebase.Database
             ref.child(path).setValue(null);
         @}
 
-	}
+    }
 
     extern(!mobile)
     static class DatabaseService
@@ -258,7 +259,7 @@ namespace Firebase.Database
             Save();
         }
 
-        public static void Listen(string path, Action<string,string> f) 
+        public static void Listen(string path, Action<string,string> f)
         {
             debug_log "Listen not implemented for desktop";
         }
@@ -279,43 +280,45 @@ namespace Firebase.Database
     extern(iOS)
     internal class Read : Promise<string>
     {
-    	[Foreign(Language.ObjC)]
-    	public Read(string path)
-    	@{
-    		FIRDatabaseReference *ref = @{DatabaseService._handle:Get()};
-    		[[ref child:path] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
-    		  NSError *error;
+        [Foreign(Language.ObjC)]
+        public Read(string path)
+        @{
+            FIRDatabaseReference *ref = @{DatabaseService._handle:Get()};
+            [[ref child:path] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+                NSError *error;
 
-              if([snapshot.value isEqual:[NSNull null]]) {
-                @{Read:Of(_this).Resolve(string):Call(nil)};
-                return;
-              }
+                if([snapshot.value isEqual:[NSNull null]])
+                {
+                    @{Read:Of(_this).Resolve(string):Call(nil)};
+                    return;
+                }
 
-              NSData *jsonData;
-              if ([snapshot.value isKindOfClass:[NSString class]]) {
-                NSString *jsonstring = [NSString stringWithFormat:@"\"%@\"", snapshot.value];
-                @{Read:Of(_this).Resolve(string):Call(jsonstring)};
+                NSData *jsonData;
+                if ([snapshot.value isKindOfClass:[NSString class]])
+                {
+                    NSString *jsonstring = [NSString stringWithFormat:@"\"%@\"", snapshot.value];
+                    @{Read:Of(_this).Resolve(string):Call(jsonstring)};
 
-                // NSData *data = [snapshot.value dataUsingEncoding:NSUTF8StringEncoding];
-                // jsonData = [NSJSONSerialization JSONObjectWithData:data
-                //                                              options:(NSJSONWritingOptions)0
-                //                                                error:&error];
-              }
-              else {
-                jsonData = [NSJSONSerialization dataWithJSONObject:snapshot.value
-                                                              options:(NSJSONWritingOptions)0
-                                                                error:&error];
-                NSString *json = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-                @{Read:Of(_this).Resolve(string):Call(json)};
-              }
+                    // NSData *data = [snapshot.value dataUsingEncoding:NSUTF8StringEncoding];
+                    // jsonData = [NSJSONSerialization JSONObjectWithData:data
+                    //                                              options:(NSJSONWritingOptions)0
+                    //                                                error:&error];
+                }
+                else
+                {
+                    jsonData = [NSJSONSerialization dataWithJSONObject:snapshot.value
+                                                                  options:(NSJSONWritingOptions)0
+                                                                    error:&error];
+                    NSString *json = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+                    @{Read:Of(_this).Resolve(string):Call(json)};
+                }
 
-    		} withCancelBlock:^(NSError * _Nonnull error) {
-    			NSString *erstr = [NSString stringWithFormat:@"Firebase Read Error: %@", error.localizedDescription];
-    			@{Read:Of(_this).Reject(string):Call(erstr)};
-
-    		}];
-    	@}
-    	void Reject(string reason) { Reject(new Exception(reason)); }
+              } withCancelBlock:^(NSError * _Nonnull error) {
+                  NSString *erstr = [NSString stringWithFormat:@"Firebase Read Error: %@", error.localizedDescription];
+                  @{Read:Of(_this).Reject(string):Call(erstr)};
+              }];
+        @}
+        void Reject(string reason) { Reject(new Exception(reason)); }
     }
 
     [ForeignInclude(Language.Java,
@@ -334,13 +337,15 @@ namespace Firebase.Database
         @{
             ValueEventListener dataListener = new ValueEventListener() {
                 @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
+                public void onDataChange(DataSnapshot dataSnapshot)
+                {
                     JSONObject json = new JSONObject((Map)dataSnapshot.getValue());
                     @{Read:Of(_this).Resolve(string):Call(json.toString())};
                 }
 
                 @Override
-                public void onCancelled(DatabaseError databaseError) {
+                public void onCancelled(DatabaseError databaseError)
+                {
                     @{Read:Of(_this).Reject(string):Call(databaseError.toString())};
                 }
             };
