@@ -67,7 +67,7 @@ namespace Firebase.Analytics
     {
         public static void Init() {}
         public static void LogEvent(string name, string[] keys, string[] vals, int len) {
-            debug_log "LogEvent: " + name;
+            debug_log "Firebase.Analytics.AnalyticsService.LogEvent: " + name;
         }
     }
 }
