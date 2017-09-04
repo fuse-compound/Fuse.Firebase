@@ -61,6 +61,38 @@ namespace Firebase.Authentication
 
 
     [ForeignInclude(Language.Java, "java.util.ArrayList", "java.util.List", "android.net.Uri",
+                "com.google.android.gms.tasks.OnCompleteListener",
+                "com.google.android.gms.tasks.Task",
+                "com.google.firebase.auth.AuthResult",
+                "com.google.firebase.auth.GetTokenResult",
+                "com.google.firebase.auth.FirebaseAuth",
+                "com.google.firebase.auth.FirebaseUser",
+                "com.google.firebase.auth.UserProfileChangeRequest")]
+    extern(android)
+    internal class GetToken : Promise<string>
+    {
+        [Foreign(Language.Java)]
+        public GetToken()
+        @{
+            final FirebaseUser user = (FirebaseUser)@{User.GetCurrent():Call()};
+            user.getToken(true).addOnCompleteListener(new OnCompleteListener<GetTokenResult>() {
+                    public void onComplete(Task<GetTokenResult> task)
+                    {
+                        if (task.isSuccessful()) {
+                            String token = task.getResult().getToken();
+                            @{UpdateProfile:Of(_this).Resolve(string):Call(token)};
+                        } else {
+                            @{UpdateProfile:Of(_this).Reject(string):Call("failed getting token for user")};
+                        }
+                    }
+            });
+        @}
+
+        void Reject(string reason) { Reject(new Exception(reason)); }
+    }
+
+
+    [ForeignInclude(Language.Java, "java.util.ArrayList", "java.util.List", "android.net.Uri",
                     "com.google.android.gms.tasks.OnCompleteListener",
                     "com.google.android.gms.tasks.Task",
                     "com.google.firebase.auth.AuthResult",
