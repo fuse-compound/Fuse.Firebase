@@ -328,7 +328,9 @@ namespace Firebase.Database
         "com.google.firebase.database.DataSnapshot",
         "com.google.firebase.database.ValueEventListener",
         "org.json.JSONObject",
-        "java.util.Map")]
+        "org.json.JSONArray",
+        "java.util.Map",
+        "java.util.List")]
     extern(Android)
     internal class Read : Promise<string>
     {
@@ -339,8 +341,18 @@ namespace Firebase.Database
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot)
                 {
-                    JSONObject json = new JSONObject((Map)dataSnapshot.getValue());
-                    @{Read:Of(_this).Resolve(string):Call(json.toString())};
+                    Object snapshotValue = dataSnapshot.getValue();
+                    @{Read:Of(_this).Resolve(string):Call((
+                        (snapshotValue == null)
+                            ? null
+                            : (snapshotValue instanceof Map)
+                                ? new JSONObject((Map) snapshotValue).toString()
+                                : (snapshotValue instanceof List)
+                                    ? new JSONArray((List) snapshotValue).toString()
+                                    : (snapshotValue instanceof String)
+                                        ? "\"" + snapshotValue.toString() + "\""
+                                        : snapshotValue.toString()
+                    ))};
                 }
 
                 @Override
