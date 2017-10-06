@@ -287,31 +287,15 @@ namespace Firebase.Database
             [[ref child:path] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
                 NSError *error;
 
-                if([snapshot.value isEqual:[NSNull null]])
-                {
-                    @{Read:Of(_this).Resolve(string):Call(nil)};
-                    return;
-                }
-
-                NSData *jsonData;
-                if ([snapshot.value isKindOfClass:[NSString class]])
-                {
-                    NSString *jsonstring = [NSString stringWithFormat:@"\"%@\"", snapshot.value];
-                    @{Read:Of(_this).Resolve(string):Call(jsonstring)};
-
-                    // NSData *data = [snapshot.value dataUsingEncoding:NSUTF8StringEncoding];
-                    // jsonData = [NSJSONSerialization JSONObjectWithData:data
-                    //                                              options:(NSJSONWritingOptions)0
-                    //                                                error:&error];
-                }
-                else
-                {
-                    jsonData = [NSJSONSerialization dataWithJSONObject:snapshot.value
-                                                                  options:(NSJSONWritingOptions)0
-                                                                    error:&error];
-                    NSString *json = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-                    @{Read:Of(_this).Resolve(string):Call(json)};
-                }
+                @{Read:Of(_this).Resolve(string):Call((
+                    ([snapshot.value isEqual:[NSNull null]])
+                        ? nil
+                        : ([snapshot.value isKindOfClass:[NSString class]])
+                            ? [NSString stringWithFormat:@"\"%@\"", snapshot.value]
+                            : ([snapshot.value isKindOfClass:[NSNumber class]])
+                                ? [NSString stringWithFormat:@"%@", snapshot.value]
+                                : [[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:snapshot.value options:(NSJSONWritingOptions)0 error:&error] encoding:NSUTF8StringEncoding]
+                ))};
 
               } withCancelBlock:^(NSError * _Nonnull error) {
                   NSString *erstr = [NSString stringWithFormat:@"Firebase Read Error: %@", error.localizedDescription];
