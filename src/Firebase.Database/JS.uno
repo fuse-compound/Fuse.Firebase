@@ -58,6 +58,7 @@ namespace Firebase.Database.JS
             AddMember(new NativeFunction("detachListeners", (NativeCallback)DetachListeners));
             AddMember(new NativePromise<string, string>("read", Read, null));
             AddMember(new NativeFunction("push", (NativeCallback)Push));
+            AddMember(new NativeFunction("pushWithTimestamp", (NativeCallback)PushWithTimestamp));
             AddMember(new NativeFunction("save", (NativeCallback)Save));
             AddMember(new NativeFunction("delete", (NativeCallback)Delete));
         }
@@ -137,6 +138,34 @@ namespace Firebase.Database.JS
             else if defined(Android)
             {
                 DatabaseService.Save(
+                    path + "/" + push_path,
+                    JSON.JavaObject.FromJSON(JSON.ScriptingValue.ToJSON(args[1]))
+                );
+            }
+            else
+            {
+                DoSave(
+                    path + "/" + push_path,
+                    args[1]
+                );
+            }
+            return push_path;
+        }
+
+        static object PushWithTimestamp(Fuse.Scripting.Context context, object[] args)
+        {
+            var path = args[0].ToString();
+            var push_path = DatabaseService.NewChildId(path);
+            if defined(iOS)
+            {
+                DatabaseService.SaveWithTimestamp(
+                    path + "/" + push_path,
+                    JSON.ObjCObject.FromJSON(JSON.ScriptingValue.ToJSON(args[1]))
+                );
+            }
+            else if defined(Android)
+            {
+                DatabaseService.SaveWithTimestamp(
                     path + "/" + push_path,
                     JSON.JavaObject.FromJSON(JSON.ScriptingValue.ToJSON(args[1]))
                 );

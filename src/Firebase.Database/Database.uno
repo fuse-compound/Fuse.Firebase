@@ -314,6 +314,24 @@ namespace Firebase.Database
 
         [Foreign(Language.ObjC)]
         extern(iOS)
+        public static void SaveWithTimestamp(string path, ObjC.Object value)
+        @{
+            FIRDatabaseReference *ref = @{DatabaseService._handle:Get()};
+            NSMutableDictionary *messageDic = [[NSMutableDictionary alloc] initWithDictionary:value];
+            [messageDic setValue:[FIRServerValue timestamp] forKey:@"timestamp"];
+            [[ref child:path] setValue:messageDic];
+        @}
+
+        [Foreign(Language.Java)]
+        extern(Android)
+        public static void SaveWithTimestamp(string path, Java.Object value)
+        @{
+            DatabaseReference ref = (DatabaseReference)@{DatabaseService._handle:Get()};
+            ref.child(path).setValue(value);
+        @}
+
+        [Foreign(Language.ObjC)]
+        extern(iOS)
         public static void Save(string path, ObjC.Object value)
         @{
             FIRDatabaseReference *ref = @{DatabaseService._handle:Get()};
@@ -423,6 +441,11 @@ namespace Firebase.Database
             Save();
         }
         public static void SaveNull(string path)
+        {
+            Save();
+        }
+
+        public static void SaveWithTimestamp(string path, Object value) 
         {
             Save();
         }
