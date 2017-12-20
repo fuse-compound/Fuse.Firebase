@@ -60,6 +60,174 @@ namespace Firebase.Database
 
         [Foreign(Language.ObjC)]
         extern(iOS)
+        public static void ListenForChildAdded(string path, int count, Action<string,string> f)
+        @{
+            NSUInteger end = (NSUInteger) count;
+            FIRDatabaseReference *ref = @{DatabaseService._handle:Get()};
+            [[[ref child:path] queryLimitedToLast:count] observeEventType:FIRDataEventTypeChildAdded withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+              if([snapshot.value isEqual:[NSNull null]]) {
+                f(path, nil);
+                return;
+              }
+
+              NSError *error;
+              NSData *jsonData = [NSJSONSerialization dataWithJSONObject:snapshot.value
+                                                            options:(NSJSONWritingOptions)0
+                                                              error:&error];
+              NSString *json = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+              f(path, json);
+            } withCancelBlock:^(NSError * _Nonnull error) {
+                NSString *erstr = [NSString stringWithFormat:@"Firebase Read Error: %@", error.localizedDescription];
+                f(path, erstr);
+            }];
+        @}
+
+        [Foreign(Language.Java)]
+        extern(Android)
+        public static void ListenForChildAdded(string path, int count, Action<string,string> f)
+        @{
+
+        @}
+
+        [Foreign(Language.ObjC)]
+        extern(iOS)
+        public static void ReadByQueryEndingAtValue(string path, string keyName, string lastValue, int count, Action<string,string> f)
+        @{
+            long longLastValue = [lastValue longLongValue];
+            NSNumber * lastChildValue = [NSNumber numberWithLong:longLastValue];
+            FIRDatabaseReference *ref = @{DatabaseService._handle:Get()};
+            [[[[[ref child:path] queryOrderedByChild:keyName] queryEndingAtValue:lastChildValue] queryLimitedToLast:count] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+                if([snapshot.value isEqual:[NSNull null]]) {
+                    f(path, nil);
+                    return;
+                }
+                
+                NSError *error;
+                NSData *jsonData = [NSJSONSerialization dataWithJSONObject:snapshot.value
+                                                                   options:(NSJSONWritingOptions)0
+                                                                     error:&error];
+                NSString *json = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+                f(path, json);
+            } withCancelBlock:^(NSError * _Nonnull error) {
+                NSString *erstr = [NSString stringWithFormat:@"Firebase Read Error: %@", error.localizedDescription];
+                f(path, erstr);
+            }];
+        @}
+
+        [Foreign(Language.Java)]
+        extern(Android)
+        public static void ReadByQueryEndingAtValue(string path, string keyName, string lastValue, int count, Action<string,string> f)
+        @{
+
+        @}
+
+        [Foreign(Language.ObjC)]
+        extern(iOS)
+        public static void ListenForChildChanged(string path, Action<string,string> f)
+        @{
+            FIRDatabaseReference *ref = @{DatabaseService._handle:Get()};
+            [[ref child:path] observeEventType:FIRDataEventTypeChildChanged withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+              if([snapshot.value isEqual:[NSNull null]]) {
+                f(path, nil);
+                return;
+              }
+
+              NSError *error;
+              NSData *jsonData = [NSJSONSerialization dataWithJSONObject:snapshot.value
+                                                            options:(NSJSONWritingOptions)0
+                                                              error:&error];
+              NSString *json = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+              f(path, json);
+            } withCancelBlock:^(NSError * _Nonnull error) {
+                NSString *erstr = [NSString stringWithFormat:@"Firebase Read Error: %@", error.localizedDescription];
+                f(path, erstr);
+            }];
+        @}
+
+        [Foreign(Language.Java)]
+        extern(Android)
+        public static void ListenForChildChanged(string path, Action<string,string> f)
+        @{
+
+        @}
+
+        [Foreign(Language.ObjC)]
+        extern(iOS)
+        public static void ListenForChildRemoved(string path, Action<string,string> f)
+        @{
+            FIRDatabaseReference *ref = @{DatabaseService._handle:Get()};
+            [[ref child:path] observeEventType:FIRDataEventTypeChildRemoved withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+              if([snapshot.value isEqual:[NSNull null]]) {
+                f(path, nil);
+                return;
+              }
+
+              NSError *error;
+              NSData *jsonData = [NSJSONSerialization dataWithJSONObject:snapshot.value
+                                                            options:(NSJSONWritingOptions)0
+                                                              error:&error];
+              NSString *json = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+              f(path, json);
+            } withCancelBlock:^(NSError * _Nonnull error) {
+                NSString *erstr = [NSString stringWithFormat:@"Firebase Read Error: %@", error.localizedDescription];
+                f(path, erstr);
+            }];
+        @}
+
+        [Foreign(Language.Java)]
+        extern(Android)
+        public static void ListenForChildRemoved(string path, Action<string,string> f)
+        @{
+
+        @}
+
+        [Foreign(Language.ObjC)]
+        extern(iOS)
+        public static void ListenForChildMoved(string path, Action<string,string> f)
+        @{
+            FIRDatabaseReference *ref = @{DatabaseService._handle:Get()};
+            [[ref child:path] observeEventType:FIRDataEventTypeChildMoved withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+              if([snapshot.value isEqual:[NSNull null]]) {
+                f(path, nil);
+                return;
+              }
+
+              NSError *error;
+              NSData *jsonData = [NSJSONSerialization dataWithJSONObject:snapshot.value
+                                                            options:(NSJSONWritingOptions)0
+                                                              error:&error];
+              NSString *json = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+              f(path, json);
+            } withCancelBlock:^(NSError * _Nonnull error) {
+                NSString *erstr = [NSString stringWithFormat:@"Firebase Read Error: %@", error.localizedDescription];
+                f(path, erstr);
+            }];
+        @}
+
+        [Foreign(Language.Java)]
+        extern(Android)
+        public static void ListenForChildMoved(string path, Action<string,string> f)
+        @{
+
+        @}
+
+        [Foreign(Language.ObjC)]
+        extern(iOS)
+        public static void DetachListeners(string path)
+        @{
+            FIRDatabaseReference *ref = @{DatabaseService._handle:Get()};
+            [[ref child:path] removeAllObservers];
+        @}
+
+        [Foreign(Language.Java)]
+        extern(Android)
+        public static void DetachListeners(string path)
+        @{
+
+        @}
+
+        [Foreign(Language.ObjC)]
+        extern(iOS)
         public static void Listen(string path, Action<string, string> f)
         @{
             FIRDatabaseReference *ref = @{DatabaseService._handle:Get()};
@@ -262,6 +430,36 @@ namespace Firebase.Database
         public static void Listen(string path, Action<string,string> f)
         {
             debug_log "Listen not implemented for desktop";
+        }
+
+        public static void ReadByQueryEndingAtValue(string path, string keyName, string lastValue, int count, Action<string,string> f)
+        {
+            debug_log "ReadByQueryEndingAtValue not implemented for desktop";
+        }
+
+        public static void ListenForChildAdded(string path, int count, Action<string,string> f)
+        {
+            debug_log "ListenForChildAdded not implemented for desktop";
+        }
+
+        public static void ListenForChildChanged(string path, Action<string,string> f)
+        {
+            debug_log "ListenForChildChanged not implemented for desktop";
+        }
+
+        public static void ListenForChildRemoved(string path, Action<string,string> f)
+        {
+            debug_log "ListenForChildRemoved not implemented for desktop";
+        }
+
+        public static void ListenForChildMoved(string path, Action<string,string> f)
+        {
+            debug_log "ListenForChildMoved not implemented for desktop";
+        }
+
+        public static void DetachListeners(string path)
+        {
+            debug_log "DetachListeners not implemented for desktop";
         }
     }
 

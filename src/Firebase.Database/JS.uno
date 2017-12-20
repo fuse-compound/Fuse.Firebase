@@ -19,7 +19,7 @@ namespace Firebase.Database.JS
     {
         static readonly DatabaseModule _instance;
 
-        public DatabaseModule() : base(false,"data")
+        public DatabaseModule() : base(false,"data", "dataAdded", "dataChanged", "dataRemoved", "dataMoved", "readByQueryEndingAtValue")
         {
             if(_instance != null) return;
             Uno.UX.Resource.SetGlobalKey(_instance = this, "Firebase/Database");
@@ -28,8 +28,34 @@ namespace Firebase.Database.JS
             var onData = new NativeEvent("onData");
             On("data", onData);
 
+            var onDataAdded = new NativeEvent("onDataAdded");
+            On("dataAdded", onDataAdded);
+
+            var onDataChanged = new NativeEvent("onDataChanged");
+            On("dataChanged", onDataChanged);
+
+            var onDataRemoved = new NativeEvent("onDataRemoved");
+            On("dataRemoved", onDataRemoved);
+
+            var onDataMoved = new NativeEvent("onDataMoved");
+            On("dataMoved", onDataMoved);
+
+            var onReadByQueryEndingAtValue = new NativeEvent("onReadByQueryEndingAtValue");
+            On("readByQueryEndingAtValue", onReadByQueryEndingAtValue);
+
             AddMember(onData);
+            AddMember(onDataAdded);
+            AddMember(onDataChanged);
+            AddMember(onDataRemoved);
+            AddMember(onDataMoved);
+            AddMember(onReadByQueryEndingAtValue);
             AddMember(new NativeFunction("listen", (NativeCallback)Listen));
+            AddMember(new NativeFunction("listenOnAdded", (NativeCallback)ListenForChildAdded));
+            AddMember(new NativeFunction("listenOnChanged", (NativeCallback)ListenForChildChanged));
+            AddMember(new NativeFunction("listenOnRemoved", (NativeCallback)ListenForChildRemoved));
+            AddMember(new NativeFunction("listenOnMoved", (NativeCallback)ListenForChildMoved));
+            AddMember(new NativeFunction("readByQueryEndingAtValue", (NativeCallback)ReadByQueryEndingAtValue));
+            AddMember(new NativeFunction("detachListeners", (NativeCallback)DetachListeners));
             AddMember(new NativePromise<string, string>("read", Read, null));
             AddMember(new NativeFunction("push", (NativeCallback)Push));
             AddMember(new NativeFunction("save", (NativeCallback)Save));
@@ -162,11 +188,88 @@ namespace Firebase.Database.JS
             Emit("data", path, msg);
         }
 
+        void ListenAddedCallback (string path, string msg)
+        {
+            Emit("dataAdded", path, msg);
+        }
+
+        void ListenChangedCallback (string path, string msg)
+        {
+            Emit("dataChanged", path, msg);
+        }
+
+        void ListenRemovedCallback (string path, string msg)
+        {
+            Emit("dataRemoved", path, msg);
+        }
+
+        void ListenMovedCallback (string path, string msg)
+        {
+            Emit("dataMoved", path, msg);
+        }
+
+        void ListenReadByQueryEndingAtValueCallback (string path, string msg)
+        {
+            Emit("readByQueryEndingAtValue", path, msg);
+        }
+
         object Listen(Fuse.Scripting.Context context, object[] args)
         {
             debug_log "listen";
             var path = args[0].ToString();
             DatabaseService.Listen(path, ListenCallback);
+            return null;
+        }
+
+        object ListenForChildAdded(Fuse.Scripting.Context context, object[] args)
+        {
+            debug_log "ListenForChildAdded";
+            var path = args[0].ToString();
+            int count = Marshal.ToInt(args[1]);
+            DatabaseService.ListenForChildAdded(path,count, ListenAddedCallback);
+            return null;
+        }
+
+        object ListenForChildChanged(Fuse.Scripting.Context context, object[] args)
+        {
+            debug_log "ListenForChildChanged";
+            var path = args[0].ToString();
+            DatabaseService.ListenForChildChanged(path, ListenChangedCallback);
+            return null;
+        }
+
+        object ListenForChildRemoved(Fuse.Scripting.Context context, object[] args)
+        {
+            debug_log "ListenForChildRemoved";
+            var path = args[0].ToString();
+            DatabaseService.ListenForChildRemoved(path, ListenRemovedCallback);
+            return null;
+        }
+
+        object ListenForChildMoved(Fuse.Scripting.Context context, object[] args)
+        {
+            debug_log "ListenForChildMoved";
+            var path = args[0].ToString();
+            DatabaseService.ListenForChildMoved(path, ListenMovedCallback);
+            return null;
+        }
+
+        object ReadByQueryEndingAtValue(Fuse.Scripting.Context context, object[] args)
+        {
+            debug_log "ReadByQueryEndingAtValue";
+            var path = args[0].ToString();
+            var keyName = args[1].ToString();
+            var lastValue = args[2].ToString();
+            int count = Marshal.ToInt(args[3]);
+            DatabaseService.ReadByQueryEndingAtValue(path,keyName,lastValue, count, ListenReadByQueryEndingAtValueCallback);
+            return null;
+        }
+
+        object DetachListeners(Fuse.Scripting.Context context, object[] args)
+        {
+            debug_log "DetachListeners";
+            var path = args[0].ToString();
+            DatabaseService.DetachListeners(path);
             return null;
         }
     }
