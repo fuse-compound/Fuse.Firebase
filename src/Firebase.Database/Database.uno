@@ -18,6 +18,10 @@ namespace Firebase.Database
         "com.google.firebase.database.DataSnapshot",
         "com.google.firebase.database.FirebaseDatabase",
         "com.google.firebase.database.ValueEventListener",
+        "com.google.firebase.database.ChildEventListener",
+        "com.google.firebase.database.Query",
+        "com.google.firebase.database.ServerValue",
+        "android.util.Log",
         "org.json.JSONObject",
         "java.util.Map",
         "java.util.HashMap")]
@@ -86,7 +90,39 @@ namespace Firebase.Database
         extern(Android)
         public static void ListenForChildAdded(string path, int count, Action<string,string> f)
         @{
+            ChildEventListener childEventListener = new ChildEventListener() {
+                @Override
+                public void onChildAdded(DataSnapshot dataSnapshot, String previousChildName) {
+                    if (dataSnapshot.getValue() == null) {
+                        return;
+                    }
+                    JSONObject json = new JSONObject((Map)dataSnapshot.getValue());
+                    f.run(path,json.toString());
+                }
 
+                @Override
+                public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+                }
+
+                @Override
+                public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+                }
+
+                @Override
+                public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    f.run(path,databaseError.toString());
+                }
+            };
+            DatabaseReference ref = (DatabaseReference)@{DatabaseService._handle:Get()};
+            Query lastAddedQuery = ref.child(path).limitToLast(count);
+            lastAddedQuery.addChildEventListener(childEventListener);
         @}
 
         [Foreign(Language.ObjC)]
@@ -118,7 +154,28 @@ namespace Firebase.Database
         extern(Android)
         public static void ReadByQueryEndingAtValue(string path, string keyName, string lastValue, int count, Action<string,string> f)
         @{
+            ValueEventListener dataListener = new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot)
+                {
+                    if (dataSnapshot.getValue() == null) {
+                        return;
+                    }
+                    JSONObject json = new JSONObject((Map)dataSnapshot.getValue());
+                    f.run(path,json.toString());
+                }
 
+                @Override
+                public void onCancelled(DatabaseError databaseError)
+                {
+                    f.run(path,databaseError.toString());
+                }
+            };
+        
+            long longLastValue = Long.parseLong(lastValue);
+            DatabaseReference ref = (DatabaseReference)@{DatabaseService._handle:Get()};
+            Query readQuery = ref.child(path).orderByChild(keyName).endAt(longLastValue).limitToLast(count);
+            readQuery.addValueEventListener(dataListener);
         @}
 
         [Foreign(Language.ObjC)]
@@ -148,7 +205,38 @@ namespace Firebase.Database
         extern(Android)
         public static void ListenForChildChanged(string path, Action<string,string> f)
         @{
+            ChildEventListener childEventListener = new ChildEventListener() {
+                @Override
+                public void onChildAdded(DataSnapshot dataSnapshot, String previousChildName) {
 
+                }
+
+                @Override
+                public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                    if (dataSnapshot.getValue() == null) {
+                        return;
+                    }
+                    JSONObject json = new JSONObject((Map)dataSnapshot.getValue());
+                    f.run(path,json.toString());
+                }
+
+                @Override
+                public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+                }
+
+                @Override
+                public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    f.run(path,databaseError.toString());
+                }
+            };
+            DatabaseReference ref = (DatabaseReference)@{DatabaseService._handle:Get()};
+            ref.child(path).addChildEventListener(childEventListener);
         @}
 
         [Foreign(Language.ObjC)]
@@ -178,7 +266,38 @@ namespace Firebase.Database
         extern(Android)
         public static void ListenForChildRemoved(string path, Action<string,string> f)
         @{
+            ChildEventListener childEventListener = new ChildEventListener() {
+                @Override
+                public void onChildAdded(DataSnapshot dataSnapshot, String previousChildName) {
 
+                }
+
+                @Override
+                public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+                }
+
+                @Override
+                public void onChildRemoved(DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.getValue() == null) {
+                        return;
+                    }
+                    JSONObject json = new JSONObject((Map)dataSnapshot.getValue());
+                    f.run(path,json.toString());
+                }
+
+                @Override
+                public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    f.run(path,databaseError.toString());
+                }
+            };
+            DatabaseReference ref = (DatabaseReference)@{DatabaseService._handle:Get()};
+            ref.child(path).addChildEventListener(childEventListener);
         @}
 
         [Foreign(Language.ObjC)]
@@ -208,7 +327,38 @@ namespace Firebase.Database
         extern(Android)
         public static void ListenForChildMoved(string path, Action<string,string> f)
         @{
+            ChildEventListener childEventListener = new ChildEventListener() {
+                @Override
+                public void onChildAdded(DataSnapshot dataSnapshot, String previousChildName) {
+                    
+                }
 
+                @Override
+                public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+                }
+
+                @Override
+                public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+                }
+
+                @Override
+                public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+                    if (dataSnapshot.getValue() == null) {
+                        return;
+                    }
+                    JSONObject json = new JSONObject((Map)dataSnapshot.getValue());
+                    f.run(path,json.toString());
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    f.run(path,databaseError.toString());
+                }
+            };
+            DatabaseReference ref = (DatabaseReference)@{DatabaseService._handle:Get()};
+            ref.child(path).addChildEventListener(childEventListener);
         @}
 
         [Foreign(Language.ObjC)]
@@ -327,7 +477,18 @@ namespace Firebase.Database
         public static void SaveWithTimestamp(string path, Java.Object value)
         @{
             DatabaseReference ref = (DatabaseReference)@{DatabaseService._handle:Get()};
-            ref.child(path).setValue(value);
+            try {
+                Map<String, Object> obj = (Map<String, Object>) value;
+                if (obj != null) {
+                    obj.put("timestamp", ServerValue.TIMESTAMP);
+                    ref.child(path).setValue(obj);
+                }
+                else {
+                    ref.child(path).setValue(value);
+                }
+            } catch (Throwable t) {
+                Log.e("Error ", "Could not Save message: \"" + value.toString() + "\"");
+            }
         @}
 
         [Foreign(Language.ObjC)]
