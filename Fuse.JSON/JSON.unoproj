@@ -1,0 +1,13 @@
+{
+  "Packages": [
+    "Fuse",
+    "FuseJS",
+  ],
+  "Includes": [
+    "Value.uno",
+    "ScriptingValue.uno",
+    "ObjCObject.uno",
+    "JavaObject.uno",
+    "Test.uno",
+  ]
+}
