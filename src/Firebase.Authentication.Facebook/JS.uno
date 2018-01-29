@@ -41,7 +41,8 @@ namespace Firebase.Authentication.Facebook.JS
 
         static void OnFailed(string err)
         {
-            _onError.RaiseAsync(err);
+            var worker = _onError.Context == null ? null : _onError.Context.ThreadWorker;
+            _onError.RaiseAsync(worker, err);
         }
 
         object DoFacebookLogin(Context context, object[] args)
