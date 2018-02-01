@@ -33,7 +33,7 @@ I'm an employee at Fuse, however any views, opinions or swearing at apis found i
 
 ### Create new record
 
-```
+```JavaScript
 var firebaseDb = require("Firebase/Database");
 var path = 'users';
 var data = {
@@ -56,7 +56,7 @@ firebaseDb.pushWithTimestamp(path, data);
 
 ### Read Data
 
-```
+```JavaScript
 // firebaseDb.read(path) <Promise>
 
 var firebaseDb = require("Firebase/Database");
@@ -79,7 +79,7 @@ firebaseDb.read(path)
 * create listener
 * subscribe to data event
 
-```
+```JavaScript
 var firebaseDb = require("Firebase/Database");
 var path1 = 'users/pavel';
 var path2 = 'users/mitul';
@@ -110,7 +110,7 @@ firebaseDb.on('data', function (eventPath, msg) {
 
 ### Listen for dataAdded events
 
-```
+```JavaScript
 var firebaseDb = require("Firebase/Database");
 var usersPath = 'users';
 var messagesPath = 'messages';
@@ -157,7 +157,7 @@ firebaseDb.on('dataAdded', function (eventPath, msg) {
 
 ### Listen for dataRemoved events
 
-```
+```JavaScript
 var firebaseDb = require("Firebase/Database");
 var usersPath = 'users';
 var messagesPath = 'messages';
@@ -199,7 +199,7 @@ firebaseDb.on('dataRemoved', function (eventPath, msg) {
 * say you want to get old messages for particular user
 * you want to get messages before particular timestamp
 
-```
+```JavaScript
 var chatMessagesPath = 'users/pavel/messages';
 var oldestMessageTimestamp = 1517459417719;
 var count = 20;
