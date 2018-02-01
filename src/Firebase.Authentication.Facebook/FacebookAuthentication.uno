@@ -51,8 +51,8 @@ namespace Firebase.Authentication.Facebook.JS
 					{	
 						NSString * message = @"Facebook SignIn Failed. Error code: ";
         				NSString *errorMessage = [NSString stringWithFormat:@"%@ %ld", message, error.code];
-						@{OnFailure(string):Call(message)};
-                        @{Firebase.Authentication.Facebook.JS.FacebookModule.OnFailed(string):Call(message)};
+						@{OnFailure(string):Call(errorMessage)};
+                        @{Firebase.Authentication.Facebook.JS.FacebookModule.OnFailed(string):Call(errorMessage)};
 						return;
 					}
 					if (result.isCancelled)
