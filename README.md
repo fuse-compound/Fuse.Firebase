@@ -64,7 +64,8 @@ var path = 'users/pavel';
 firebaseDb.read(path)
             .then(function (json) {
                 // here json is a JSON string
-                console.log(JSON.parse(json));
+                console.log(json);
+                var user = JSON.parse(json);
             })
             .catch(function (reason) {
                 console.log('Unable to read path: ' + path);
