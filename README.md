@@ -200,6 +200,7 @@ firebaseDb.on('dataRemoved', function (eventPath, msg) {
 * you want to get messages before particular timestamp
 
 ```JavaScript
+var firebaseDb = require("Firebase/Database");
 var chatMessagesPath = 'users/pavel/messages';
 var oldestMessageTimestamp = 1517459417719;
 var count = 20;
@@ -225,4 +226,20 @@ firebaseDb.on('readByQueryEndingAtValue', function (eventPath, newMessages) {
         // somebody requested data for other firebase path
     }
 });
+```
+
+### Detach Listeners
+
+* when you don't want to receive events for particular path anymore, you need to detach listener
+
+```
+var firebaseDb = require("Firebase/Database");
+var usersPath = 'users';
+// say you subscribed to some path earlier
+firebaseDb.listenOnRemoved(usersPath, 1);
+// and now you don't want to receive dataRemoved events anymore
+// maybe user was logged out etc.
+
+// do this, however this will also unsubscribe from `dataAdded` and `data` events
+firebaseDb.detachListeners(usersPath);
 ```
