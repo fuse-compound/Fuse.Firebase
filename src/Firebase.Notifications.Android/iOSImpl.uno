@@ -10,7 +10,7 @@ namespace Firebase.Notifications
 {
     [Require("Cocoapods.Podfile.Target", "pod 'Firebase/Messaging'")]
     [extern(iOS) Require("Source.Include", "iOSFirebaseNotificationCallbacks.h")]
-    [Require("Source.Include", "Firebase/Firebase.h")]
+    [extern(iOS) Require("Source.Include", "Firebase/Firebase.h")]
 
     public class iOSImpl
     {

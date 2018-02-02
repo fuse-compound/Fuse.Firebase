@@ -22,6 +22,7 @@
   "Includes": [
     "Common.uno:Source",
     "JS.uno:Source",
+    "Android/Impl.uno:Source",
     "iOSImpl.uno:Source",
     "Android/Impl.cpp.uxl:Extensions",
     "Android/PushNotificationReceiver.java:Java:android",
