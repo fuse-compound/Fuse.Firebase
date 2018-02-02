@@ -22,11 +22,12 @@
   "Includes": [
     "Common.uno:Source",
     "JS.uno:Source",
-
-    "Android/Impl.uno:Source",
+    "iOSImpl.uno:Source",
     "Android/Impl.cpp.uxl:Extensions",
     "Android/PushNotificationReceiver.java:Java:android",
     "Android/PushNotificationIDService.java:Java:android",
+    "iOSFirebaseNotificationCallbacks.h:ObjCHeader:iOS",
+    "iOSFirebaseNotificationCallbacks.mm:ObjCSource:iOS",
     "Android/Assets/DefaultIcon.png:File"
   ]
 }

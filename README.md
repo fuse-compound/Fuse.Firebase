@@ -232,7 +232,7 @@ firebaseDb.on('readByQueryEndingAtValue', function (eventPath, newMessages) {
 
 * when you don't want to receive events for particular path anymore, you need to detach listener
 
-```
+```JavaScript
 var firebaseDb = require("Firebase/Database");
 var usersPath = 'users';
 // say you subscribed to some path earlier

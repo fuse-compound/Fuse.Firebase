@@ -26,6 +26,8 @@ namespace Firebase.Notifications
     public sealed class NotificationModule : NativeEventEmitterModule
     {
         static readonly NotificationModule _instance;
+        readonly iOSImpl _iOSImpl;
+        static NativeEvent _onRegistrationSucceedediOS;
 
         public NotificationModule()
             : base(true,
@@ -34,6 +36,8 @@ namespace Firebase.Notifications
         {
             if (_instance != null) return;
             Resource.SetGlobalKey(_instance = this, "Firebase/Notifications");
+
+            _iOSImpl = new iOSImpl();
 
             // Old-style events for backwards compatibility
             var onReceivedMessage = new NativeEvent("onReceivedMessage");
@@ -55,6 +59,8 @@ namespace Firebase.Notifications
             AddMember(onRegistrationFailed);
             AddMember(new NativeFunction("clearBadgeNumber", ClearBadgeNumber));
             AddMember(new NativeFunction("clearAllNotifications", ClearAllNotifications));
+            _onRegistrationSucceedediOS = new NativeEvent("onRegistrationSucceedediOS");
+            AddMember(_onRegistrationSucceedediOS);
 
             Firebase.Notifications.NotificationService.ReceivedNotification += OnReceivedNotification;
             Firebase.Notifications.NotificationService.RegistrationSucceeded += OnRegistrationSucceeded;
@@ -81,6 +87,10 @@ namespace Firebase.Notifications
         void OnRegistrationSucceeded(object sender, string message)
         {
             Emit("registrationSucceeded", message);
+        }
+
+        static void OnRegistrationSucceedediOS(string message) {
+            _onRegistrationSucceedediOS.RaiseAsync(message);
         }
 
         /**
