@@ -57,6 +57,7 @@ namespace Firebase.Database.JS
             AddMember(new NativeFunction("readByQueryEndingAtValue", (NativeCallback)ReadByQueryEndingAtValue));
             AddMember(new NativeFunction("detachListeners", (NativeCallback)DetachListeners));
             AddMember(new NativePromise<string, string>("read", Read, null));
+            AddMember(new NativePromise<string, string>("readByQueryEqualToValue", ReadByQueryEqualToValue, null));
             AddMember(new NativeFunction("push", (NativeCallback)Push));
             AddMember(new NativeFunction("pushWithTimestamp", (NativeCallback)PushWithTimestamp));
             AddMember(new NativeFunction("save", (NativeCallback)Save));
@@ -67,6 +68,14 @@ namespace Firebase.Database.JS
         {
             var path = args[0].ToString();
             return new Read(path);
+        }
+
+        static Future<string> ReadByQueryEqualToValue(object[] args)
+        {
+            var path = args[0].ToString();
+            var key = args[1].ToString();
+            var val = args[2].ToString();
+            return new ReadByQueryEqualToValue(path,key,val);
         }
 
         static void DoSave(string path, object arg)

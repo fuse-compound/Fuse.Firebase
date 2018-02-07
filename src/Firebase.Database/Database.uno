@@ -137,7 +137,7 @@ namespace Firebase.Database
                     f(path, nil);
                     return;
                 }
-                
+
                 NSError *error;
                 NSData *jsonData = [NSJSONSerialization dataWithJSONObject:snapshot.value
                                                                    options:(NSJSONWritingOptions)0
@@ -171,7 +171,7 @@ namespace Firebase.Database
                     f.run(path,databaseError.toString());
                 }
             };
-        
+
             long longLastValue = Long.parseLong(lastValue);
             DatabaseReference ref = (DatabaseReference)@{DatabaseService._handle:Get()};
             Query readQuery = ref.child(path).orderByChild(keyName).endAt(longLastValue).limitToLast(count);
@@ -330,7 +330,7 @@ namespace Firebase.Database
             ChildEventListener childEventListener = new ChildEventListener() {
                 @Override
                 public void onChildAdded(DataSnapshot dataSnapshot, String previousChildName) {
-                    
+
                 }
 
                 @Override
@@ -606,7 +606,7 @@ namespace Firebase.Database
             Save();
         }
 
-        public static void SaveWithTimestamp(string path, Object value) 
+        public static void SaveWithTimestamp(string path, Object value)
         {
             Save();
         }
@@ -656,6 +656,14 @@ namespace Firebase.Database
         }
     }
 
+    internal class ReadByQueryEqualToValue : Promise<string>
+    {
+        public ReadByQueryEqualToValue(string path, string key, string val)
+        {
+            Reject(new Exception("Not implemented on desktop"));
+        }
+    }
+
     [Require("Entity", "DatabaseService")]
     [Require("Source.Import","FirebaseDatabase/FIRDatabase.h")]
     [Require("Source.Include","@{DatabaseService:Include}")]
@@ -682,6 +690,38 @@ namespace Firebase.Database
               } withCancelBlock:^(NSError * _Nonnull error) {
                   NSString *erstr = [NSString stringWithFormat:@"Firebase Read Error: %@", error.localizedDescription];
                   @{Read:Of(_this).Reject(string):Call(erstr)};
+              }];
+        @}
+        void Reject(string reason) { Reject(new Exception(reason)); }
+    }
+
+    [Require("Entity", "DatabaseService")]
+    [Require("Source.Import","FirebaseDatabase/FIRDatabase.h")]
+    [Require("Source.Include","@{DatabaseService:Include}")]
+    extern(iOS)
+    internal class ReadByQueryEqualToValue : Promise<string>
+    {
+        [Foreign(Language.ObjC)]
+        public ReadByQueryEqualToValue(string path, string key, string val)
+        @{
+            FIRDatabaseReference *ref = @{DatabaseService._handle:Get()};
+
+            [[[[ref child:path] queryOrderedByChild:key] queryEqualToValue:val] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+                NSError *error;
+
+                @{ReadByQueryEqualToValue:Of(_this).Resolve(string):Call((
+                    ([snapshot.value isEqual:[NSNull null]])
+                        ? nil
+                        : ([snapshot.value isKindOfClass:[NSString class]])
+                            ? [NSString stringWithFormat:@"\"%@\"", snapshot.value]
+                            : ([snapshot.value isKindOfClass:[NSNumber class]])
+                                ? [NSString stringWithFormat:@"%@", snapshot.value]
+                                : [[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:snapshot.value options:(NSJSONWritingOptions)0 error:&error] encoding:NSUTF8StringEncoding]
+                ))};
+
+              } withCancelBlock:^(NSError * _Nonnull error) {
+                  NSString *erstr = [NSString stringWithFormat:@"Firebase Read Error: %@", error.localizedDescription];
+                  @{ReadByQueryEqualToValue:Of(_this).Reject(string):Call(erstr)};
               }];
         @}
         void Reject(string reason) { Reject(new Exception(reason)); }
@@ -729,6 +769,52 @@ namespace Firebase.Database
             };
             DatabaseReference ref = (DatabaseReference)@{DatabaseService._handle:Get()};
             ref.child(path).addListenerForSingleValueEvent(dataListener);
+        @}
+        void Reject(string reason) { Reject(new Exception(reason)); }
+    }
+
+    [ForeignInclude(Language.Java,
+        "com.google.firebase.database.DatabaseReference",
+        "com.google.firebase.database.DatabaseError",
+        "com.google.firebase.database.DatabaseReference",
+        "com.google.firebase.database.DataSnapshot",
+        "com.google.firebase.database.ValueEventListener",
+        "org.json.JSONObject",
+        "org.json.JSONArray",
+        "java.util.Map",
+        "java.util.List")]
+    extern(Android)
+    internal class ReadByQueryEqualToValue : Promise<string>
+    {
+        [Foreign(Language.Java)]
+        public ReadByQueryEqualToValue(string path)
+        @{
+            ValueEventListener dataListener = new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot)
+                {
+                    Object snapshotValue = dataSnapshot.getValue();
+                    @{ReadByQueryEqualToValue:Of(_this).Resolve(string):Call((
+                        (snapshotValue == null)
+                            ? null
+                            : (snapshotValue instanceof Map)
+                                ? new JSONObject((Map) snapshotValue).toString()
+                                : (snapshotValue instanceof List)
+                                    ? new JSONArray((List) snapshotValue).toString()
+                                    : (snapshotValue instanceof String)
+                                        ? "\"" + snapshotValue.toString() + "\""
+                                        : snapshotValue.toString()
+                    ))};
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError)
+                {
+                    @{ReadByQueryEqualToValue:Of(_this).Reject(string):Call(databaseError.toString())};
+                }
+            };
+            DatabaseReference ref = (DatabaseReference)@{DatabaseService._handle:Get()};
+            ref.child(path).orderByChild(key).equalTo(val).addListenerForSingleValueEvent(dataListener);
         @}
         void Reject(string reason) { Reject(new Exception(reason)); }
     }

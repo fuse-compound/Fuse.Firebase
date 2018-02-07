@@ -72,6 +72,29 @@ firebaseDb.read(path)
             });
 ```
 
+### Read Data with Query
+
+Sometimes you need to search for a certain value in an object, instead or iterating in the cliente
+use this implementation to let the Firebase do the query for you.
+
+The following example will give you all the objects where the key name is equal to Luis Rodriguez,
+great for searching when you do not know the key and when you use Push to save data.
+
+```JavaScript
+// firebaseDb.readByQueryEqualToValue(path,key,value) <Promise>
+
+var firebaseDb = require("Firebase/Database");
+firebaseDb.readByQueryEqualToValue("users","name","Luis Rodriguez")
+            .then(function (json) {
+                // here json is a JSON string
+                console.log(json);
+                var user = JSON.parse(json);
+            })
+            .catch(function (reason) {
+                console.log('Unable to read path: ' + path);
+            });
+```
+
 ### Listen for data event
 
 * this event is fired when you change particular object.
@@ -132,20 +155,20 @@ firebaseDb.listenOnAdded(messagesPath, 1);
 // function below will be executed for any path
 firebaseDb.on('dataAdded', function (eventPath, msg) {
         // msg here is a JSON string
-        
+
         // track only given path
         if (eventPath === usersPath) {
             // new user record was added, usually by push method
-            // if you created record using not .push method or 
+            // if you created record using not .push method or
             // pushWithTimestamp you will not receive event here
             console.log(eventPath);
             console.log(msg);
             var newUser = JSON.parse(msg);
         }
-        
+
         if (eventPath === messagesPath) {
             // new message record was added, usually by push method
-            // if you created record using not .push method or 
+            // if you created record using not .push method or
             // .pushWithTimestamp you will not receive event here
             console.log(eventPath);
             console.log(msg);
@@ -175,7 +198,7 @@ firebaseDb.listenOnRemoved(messagesPath, 1);
 // function below will be executed for any path
 firebaseDb.on('dataRemoved', function (eventPath, msg) {
     // msg here is a JSON string
-            
+
     // track only given path
     if (eventPath === usersPath) {
         // user record was removed
@@ -183,7 +206,7 @@ firebaseDb.on('dataRemoved', function (eventPath, msg) {
         console.log(msg);
         var newUser = JSON.parse(msg);
     }
-    
+
     if (eventPath === messagesPath) {
         // message record was removed
         console.log(eventPath);
