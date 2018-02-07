@@ -74,7 +74,7 @@ firebaseDb.read(path)
 
 ### Read Data with Query
 
-Sometimes you need to search for a certain value in an object, instead or iterating in the cliente
+Sometimes you need to search for a certain value in an object, instead or iterating in the client
 use this implementation to let the Firebase do the query for you.
 
 The following example will give you all the objects where the key name is equal to Luis Rodriguez,
@@ -91,7 +91,7 @@ firebaseDb.readByQueryEqualToValue("users","name","Luis Rodriguez")
                 var user = JSON.parse(json);
             })
             .catch(function (reason) {
-                console.log('Unable to read path: ' + path);
+                console.log('Unable to read -> ' +reason);
             });
 ```
 
