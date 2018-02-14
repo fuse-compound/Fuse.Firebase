@@ -656,6 +656,7 @@ namespace Firebase.Database
         }
     }
 
+    extern(!mobile)
     internal class ReadByQueryEqualToValue : Promise<string>
     {
         public ReadByQueryEqualToValue(string path, string key, string val)
@@ -787,7 +788,7 @@ namespace Firebase.Database
     internal class ReadByQueryEqualToValue : Promise<string>
     {
         [Foreign(Language.Java)]
-        public ReadByQueryEqualToValue(string path)
+        public ReadByQueryEqualToValue(string path, string key, string val)
         @{
             ValueEventListener dataListener = new ValueEventListener() {
                 @Override
