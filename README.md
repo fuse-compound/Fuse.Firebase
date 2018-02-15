@@ -266,3 +266,28 @@ firebaseDb.listenOnRemoved(usersPath, 1);
 // do this, however this will also unsubscribe from `dataAdded` and `data` events
 firebaseDb.detachListeners(usersPath);
 ```
+
+### Simple Storage
+* For now, this uploads a picture to FirebaseStorage and returns the URL to access it. Part of this code was written by [Bolav](https://github.com/bolav).
+
+* Works great on both iOS and Android.
+
+* Also usable with `CameraRoll` and `ImageTools`
+
+```Javascript
+var Camera = require("FuseJS/Camera");
+var Storage = require("Firebase/Storage");
+var path = "pictures/cats/mycat.jpg"
+
+Camera.takePicture(640,480).then(function(image)
+{
+	Storage.upload(path,image.path) // Make sure you use the path
+	.then(function(url){
+		console.log(url); // Receives the URL as a promise
+	}).catch(function(err){
+		console.log(err)
+	})
+}).catch(function(error) {
+	//Something went wrong, see error for details
+});
+```
