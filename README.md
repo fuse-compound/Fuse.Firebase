@@ -266,3 +266,45 @@ firebaseDb.listenOnRemoved(usersPath, 1);
 // do this, however this will also unsubscribe from `dataAdded` and `data` events
 firebaseDb.detachListeners(usersPath);
 ```
+
+### Upload an Image to Firebase
+
+* Upload an image using Camera
+
+```JavaScript
+var Camera = require('FuseJS/Camera');
+
+var imagePath = "images/test.jpg";
+Camera.takePicture(640,480).then(function(image) {
+
+    Storage.upload(imagePath, image.path) // Make sure you use the path
+    .then(function(url) {
+        console.log('url' + url); // Receives the URL as a promise
+    }).catch(function(err) {
+        console.log('err' + err);
+    })
+}).catch(function(error) {
+    //Something went wrong, see error for details
+    console.log('error ' + error);
+});
+```
+
+* Upload an image using CameraRoll/Gallery
+
+```JavaScript
+var CameraRoll = require("FuseJS/CameraRoll");
+
+var imagePath = "images/test.jpg";
+CameraRoll.getImage()
+.then(function(image) {
+    Storage.upload(imagePath, image.path) // Make sure you use the path
+    .then(function(url) {
+        console.log('url ' + url); // Receives the URL as a promise
+    }).catch(function(err) {
+        console.log('err ' + err);
+    })
+}, function(error) {
+    // Will be called if the user aborted the selection or if an error occurred.
+    console.log('error ' + error);
+});
+```
