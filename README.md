@@ -155,20 +155,20 @@ firebaseDb.listenOnAdded(messagesPath, 1);
 // function below will be executed for any path
 firebaseDb.on('dataAdded', function (eventPath, msg) {
         // msg here is a JSON string
-        
+
         // track only given path
         if (eventPath === usersPath) {
             // new user record was added, usually by push method
-            // if you created record using not .push method or 
+            // if you created record using not .push method or
             // pushWithTimestamp you will not receive event here
             console.log(eventPath);
             console.log(msg);
             var newUser = JSON.parse(msg);
         }
-        
+
         if (eventPath === messagesPath) {
             // new message record was added, usually by push method
-            // if you created record using not .push method or 
+            // if you created record using not .push method or
             // .pushWithTimestamp you will not receive event here
             console.log(eventPath);
             console.log(msg);
@@ -198,7 +198,7 @@ firebaseDb.listenOnRemoved(messagesPath, 1);
 // function below will be executed for any path
 firebaseDb.on('dataRemoved', function (eventPath, msg) {
     // msg here is a JSON string
-            
+
     // track only given path
     if (eventPath === usersPath) {
         // user record was removed
@@ -206,7 +206,7 @@ firebaseDb.on('dataRemoved', function (eventPath, msg) {
         console.log(msg);
         var newUser = JSON.parse(msg);
     }
-    
+
     if (eventPath === messagesPath) {
         // message record was removed
         console.log(eventPath);
@@ -273,6 +273,7 @@ firebaseDb.detachListeners(usersPath);
 
 ```JavaScript
 var Camera = require('FuseJS/Camera');
+var Storage = require('Firebase/Storage');
 
 var imagePath = "images/test.jpg";
 Camera.takePicture(640,480).then(function(image) {
@@ -293,6 +294,7 @@ Camera.takePicture(640,480).then(function(image) {
 
 ```JavaScript
 var CameraRoll = require("FuseJS/CameraRoll");
+var Storage = require('Firebase/Storage');
 
 var imagePath = "images/test.jpg";
 CameraRoll.getImage()
@@ -306,5 +308,28 @@ CameraRoll.getImage()
 }, function(error) {
     // Will be called if the user aborted the selection or if an error occurred.
     console.log('error ' + error);
+
+### Simple Storage
+* For now, this uploads a picture to FirebaseStorage and returns the URL to access it. Part of this code was written by [Bolav](https://github.com/bolav).
+
+* Works great on both iOS and Android.
+
+* Also usable with `CameraRoll` and `ImageTools`
+
+```Javascript
+var Camera = require("FuseJS/Camera");
+var Storage = require("Firebase/Storage");
+var path = "pictures/cats/mycat.jpg"
+
+Camera.takePicture(640,480).then(function(image)
+{
+	Storage.upload(path,image.path) // Make sure you use the path
+	.then(function(url){
+		console.log(url); // Receives the URL as a promise
+	}).catch(function(err){
+		console.log(err)
+	})
+}).catch(function(error) {
+	//Something went wrong, see error for details
 });
 ```
