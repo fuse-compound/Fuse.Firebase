@@ -334,3 +334,23 @@ Camera.takePicture(640,480).then(function(image)
 	//Something went wrong, see error for details
 });
 ```
+
+### Read Data with Query
+
+* Get all the objects where the key name is equal to pavel
+
+```Javascript
+var path = user;
+var key = name;
+var value = ‘pavel’; 
+
+firebaseDb.readByQueryEqualToValue(path, key, value)
+.then(function (json) {
+	// here json is a JSON string
+      console.log('json '+ json);
+      var user = JSON.parse(json);
+})
+.catch(function (reason) {
+	console.log('Unable to read -> ' + reason);
+});
+```
