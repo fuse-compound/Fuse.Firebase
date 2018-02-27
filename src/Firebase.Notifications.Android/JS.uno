@@ -59,6 +59,7 @@ namespace Firebase.Notifications
             AddMember(onRegistrationFailed);
             AddMember(new NativeFunction("clearBadgeNumber", ClearBadgeNumber));
             AddMember(new NativeFunction("clearAllNotifications", ClearAllNotifications));
+            AddMember(new NativeFunction("getFCMToken", GetFCMToken));
             _onRegistrationSucceedediOS = new NativeEvent("onRegistrationSucceedediOS");
             AddMember(_onRegistrationSucceedediOS);
 
@@ -125,6 +126,15 @@ namespace Firebase.Notifications
         public object ClearAllNotifications(Context context, object[] args)
         {
             Firebase.Notifications.NotificationService.ClearAllNotifications();
+            return null;
+        }
+
+        public object GetFCMToken(Context context, object[] args)
+        {
+            var token = Firebase.Notifications.NotificationService.GetFCMToken();
+            if (token != null) {
+                Emit("registrationSucceeded", token);
+            }
             return null;
         }
     }

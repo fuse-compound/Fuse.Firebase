@@ -10,6 +10,9 @@ using Uno.Threading;
 namespace Firebase.Notifications
 {
     [Require("Entity","Firebase.Core.Init()")]
+    [ForeignInclude(Language.Java,
+            "android.util.Log",
+            "com.google.firebase.iid.FirebaseInstanceId")]
     public static class NotificationService
     {
         extern(!Android)
@@ -143,5 +146,25 @@ namespace Firebase.Notifications
         @}
 
         public extern(!iOS && !Android) static void ClearAllNotifications() { }
+
+        [Foreign(Language.ObjC)]
+        public extern(iOS) static String GetFCMToken()
+        @{
+            // [UIApplication sharedApplication].applicationIconBadgeNumber = 1;
+            // [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+            return @"";
+        @}
+
+        [Foreign(Language.Java)]
+        public extern(Android) static String GetFCMToken()
+        @{
+            String refreshedToken = FirebaseInstanceId.getInstance().getToken();
+            Log.d("TOKEN", "Refreshed token: " + refreshedToken);
+            return refreshedToken;
+        @}
+
+        public extern(!iOS && !Android) static String GetFCMToken() { return ""; }
+
+
     }
 }
