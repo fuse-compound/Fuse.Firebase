@@ -659,7 +659,7 @@ namespace Firebase.Database
     extern(!mobile)
     internal class ReadByQueryEqualToValue : Promise<string>
     {
-        public ReadByQueryEqualToValue(string path, string key, string val)
+        public ReadByQueryEqualToValue(string path, string key, object val)
         {
             Reject(new Exception("Not implemented on desktop"));
         }
@@ -703,7 +703,7 @@ namespace Firebase.Database
     internal class ReadByQueryEqualToValue : Promise<string>
     {
         [Foreign(Language.ObjC)]
-        public ReadByQueryEqualToValue(string path, string key, string val)
+        public ReadByQueryEqualToValue(string path, string key, ObjC.Object val)
         @{
             FIRDatabaseReference *ref = @{DatabaseService._handle:Get()};
 
@@ -788,7 +788,7 @@ namespace Firebase.Database
     internal class ReadByQueryEqualToValue : Promise<string>
     {
         [Foreign(Language.Java)]
-        public ReadByQueryEqualToValue(string path, string key, string val)
+        public ReadByQueryEqualToValue(string path, string key, Java.Object val)
         @{
             ValueEventListener dataListener = new ValueEventListener() {
                 @Override
@@ -815,7 +815,16 @@ namespace Firebase.Database
                 }
             };
             DatabaseReference ref = (DatabaseReference)@{DatabaseService._handle:Get()};
-            ref.child(path).orderByChild(key).equalTo(val).addListenerForSingleValueEvent(dataListener);
+            if(val instanceof String){
+                String obj = (String) val;
+                ref.child(path).orderByChild(key).equalTo(obj).addListenerForSingleValueEvent(dataListener);
+            } else if (val instanceof Double){
+                Double obj = (Double) val;
+                ref.child(path).orderByChild(key).equalTo(obj).addListenerForSingleValueEvent(dataListener);
+            } else if( val instanceof Boolean  ){
+                Boolean obj = (Boolean) val;
+                ref.child(path).orderByChild(key).equalTo(obj).addListenerForSingleValueEvent(dataListener);
+            }
         @}
         void Reject(string reason) { Reject(new Exception(reason)); }
     }
