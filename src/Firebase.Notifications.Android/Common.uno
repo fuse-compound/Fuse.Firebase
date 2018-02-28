@@ -13,6 +13,7 @@ namespace Firebase.Notifications
     [ForeignInclude(Language.Java,
             "android.util.Log",
             "com.google.firebase.iid.FirebaseInstanceId")]
+    [extern(iOS) Require("Source.Include", "Firebase/Firebase.h")]
     public static class NotificationService
     {
         extern(!Android)
@@ -150,9 +151,8 @@ namespace Firebase.Notifications
         [Foreign(Language.ObjC)]
         public extern(iOS) static String GetFCMToken()
         @{
-            // [UIApplication sharedApplication].applicationIconBadgeNumber = 1;
-            // [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
-            return @"";
+            NSString *fcmToken = [[FIRInstanceID instanceID] token];
+            return fcmToken;
         @}
 
         [Foreign(Language.Java)]

@@ -91,7 +91,8 @@ namespace Firebase.Notifications
         }
 
         static void OnRegistrationSucceedediOS(string message) {
-            _onRegistrationSucceedediOS.RaiseAsync(message);
+               //_onRegistrationSucceedediOS.RaiseAsync(message);
+               // App is getting crash sometimes at this function and now we are getting FCM token via GetFCMToken(), so we can put it in comment
         }
 
         /**
