@@ -74,8 +74,26 @@ namespace Firebase.Database.JS
         {
             var path = args[0].ToString();
             var key = args[1].ToString();
-            var val = args[2].ToString();
-            return new ReadByQueryEqualToValue(path,key,val);
+            var val = args[2];
+
+            if defined(iOS)
+            {
+                return new ReadByQueryEqualToValue(
+                    path, key,
+                    JSON.ObjCObject.FromJSON(JSON.ScriptingValue.ToJSON(val))
+                );
+            }
+            else if defined(Android)
+            {
+                return new ReadByQueryEqualToValue(
+                    path, key,
+                    JSON.JavaObject.FromJSON(JSON.ScriptingValue.ToJSON(val))
+                );
+            }
+            else
+            {
+                return new ReadByQueryEqualToValue(path,key,val);
+            }
         }
 
         static void DoSave(string path, object arg)
