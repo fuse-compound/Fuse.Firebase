@@ -31,7 +31,8 @@ namespace Firebase.Authentication.Google.JS
 
         static void Auth(string idToken, string accessToken)
         {
-            _onAuth.RaiseAsync(idToken, accessToken);
+            var worker = _onAuth.Context == null ? null : _onAuth.Context.ThreadWorker;
+            _onAuth.RaiseAsync(worker, idToken, accessToken);
         }
     }
 }

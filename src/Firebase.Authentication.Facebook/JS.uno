@@ -31,7 +31,8 @@ namespace Firebase.Authentication.Facebook.JS
 
         static void Auth(string token)
         {
-            _onAuth.RaiseAsync(token);
+            var worker = _onAuth.Context == null ? null : _onAuth.Context.ThreadWorker;
+            _onAuth.RaiseAsync(worker, token);
         }
     }
 
