@@ -39,7 +39,7 @@ namespace Firebase.Database
         {
             if (!_initialized)
             {
-                // Firebase.Core.Init();
+                Firebase.Core.Init();
                 if defined(android) AndroidInit();
                 if defined(ios) iOSInit();
                 _initialized = true;
