@@ -1,0 +1,18 @@
+{
+	"Packages": [
+		"Fuse",
+		"FuseJS",
+		"Fuse.BasicTheme"
+	],
+	"Projects": [
+		"../src/Firebase/Firebase.unoproj",
+		"../src/Firebase.Database/Firebase.Database.unoproj"
+	],
+	"Android" : {
+		"Package": "com.your.app",
+	},
+	"Includes": [
+		"*",
+		"GoogleService-Info.plist:ObjCSource:iOS"
+	]
+}
