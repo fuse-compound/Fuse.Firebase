@@ -1,0 +1,14 @@
+<App Background="#eee">
+	<ClientPanel>
+		<JavaScript File="MainView.js"/>
+		<StackPanel Padding="20">
+			<Basic.TextInput Value="{input}" PlaceholderText="Search..." PlaceholderColor="#bbb">
+				<Tapped>
+					<Set data.Value="-" />
+				</Tapped>
+			</Basic.TextInput>
+			<Basic.Button Text="Search" Clicked="{search}" />
+			<Text ux:Name="data" Value="{data}" TextWrapping="Wrap" Margin="0,50,0,0" />
+		</StackPanel>
+	</ClientPanel>
+</App>
