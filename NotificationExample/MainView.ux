@@ -5,16 +5,13 @@
             <StatusBarBackground/>
             <Fuse.iOS.StatusBarConfig Style="Light"/>
         </StackPanel>
-        <StackPanel Width="92%" Height="460" Padding="20">
+        <DockPanel Width="92%" Height="88%" Padding="10,33">
             <Rectangle Layer="Background" CornerRadius="10" Color="#fff"/>
-            <Text Value="Notifications Test" Alignment="Center" FontSize="35" TextColor="#2586EC"/>
-
-            <Text Value="Nothing"/>
-            <Text Value="{status}"/>
-            <Button Clicked="{clearBadgeNumber}" Text="clearBadgeNumber"/>
-            <Button Clicked="{clearAllNotifications}" Text="clearAllNotifications"/>
-            <Text Value="{message}"/>
-        </StackPanel>
+            <Text TextAlignment="Center" Dock="Top" Value="Notifications Test" Alignment="Center" FontSize="35" TextColor="#2586EC"/>
+            <Text TextAlignment="Center" Alignment="Center" TextWrapping="Wrap" Value="{message}"/>
+            <Text TextAlignment="Center" Dock="Bottom" Value="{status}"/>
+            <Button Dock="Bottom" Text="getToken" Clicked="{getToken}"/>
+        </DockPanel>
         <BottomBarBackground Dock="Bottom" />
     </DockPanel>
 </App>

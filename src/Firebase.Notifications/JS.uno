@@ -26,8 +26,6 @@ namespace Firebase.Notifications
     public sealed class NotificationModule : NativeEventEmitterModule
     {
         static readonly NotificationModule _instance;
-        readonly iOSImpl _iOSImpl;
-        static NativeEvent _onRegistrationSucceedediOS;
 
         public NotificationModule()
             : base(true,
@@ -35,9 +33,7 @@ namespace Firebase.Notifications
                    "registrationSucceeded")
         {
             if (_instance != null) return;
-            Resource.SetGlobalKey(_instance = this, "Firebase/Notifications");
-
-            _iOSImpl = new iOSImpl();
+            Uno.UX.Resource.SetGlobalKey(_instance = this, "Firebase/Notifications");
 
             // Old-style events for backwards compatibility
             var onReceivedMessage = new NativeEvent("onReceivedMessage");
@@ -59,9 +55,6 @@ namespace Firebase.Notifications
             AddMember(onRegistrationFailed);
             AddMember(new NativeFunction("clearBadgeNumber", ClearBadgeNumber));
             AddMember(new NativeFunction("clearAllNotifications", ClearAllNotifications));
-            AddMember(new NativeFunction("getFCMToken", GetFCMToken));
-            _onRegistrationSucceedediOS = new NativeEvent("onRegistrationSucceedediOS");
-            AddMember(_onRegistrationSucceedediOS);
 
             Firebase.Notifications.NotificationService.ReceivedNotification += OnReceivedNotification;
             Firebase.Notifications.NotificationService.RegistrationSucceeded += OnRegistrationSucceeded;
@@ -88,11 +81,6 @@ namespace Firebase.Notifications
         void OnRegistrationSucceeded(object sender, string message)
         {
             Emit("registrationSucceeded", message);
-        }
-
-        static void OnRegistrationSucceedediOS(string message) {
-               //_onRegistrationSucceedediOS.RaiseAsync(message);
-               // App is getting crash sometimes at this function and now we are getting FCM token via GetFCMToken(), so we can put it in comment
         }
 
         /**
@@ -127,15 +115,6 @@ namespace Firebase.Notifications
         public object ClearAllNotifications(Context context, object[] args)
         {
             Firebase.Notifications.NotificationService.ClearAllNotifications();
-            return null;
-        }
-
-        public object GetFCMToken(Context context, object[] args)
-        {
-            var token = Firebase.Notifications.NotificationService.GetFCMToken();
-            if (token != null) {
-                Emit("registrationSucceeded", token);
-            }
             return null;
         }
     }

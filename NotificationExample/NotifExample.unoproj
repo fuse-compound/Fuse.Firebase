@@ -1,25 +1,34 @@
 {
-  "Packages": [
-    "Fuse",
-    "FuseJS",
-    "Fuse.BasicTheme"
-  ],
-  "Projects": [
-    "../src/Firebase.Notifications.Android/Firebase.Notifications.Android.unoproj",
-  ],
-  "Android": {
-    "NotificationIcon": {
+    "Packages": [
+        "Fuse",
+        "FuseJS",
+        "Fuse.PushNotifications",
+        "Fuse.BasicTheme"
+    ],
+    "Projects": [
+        "../src/Firebase/Firebase.unoproj",
+        "../src/Firebase.Database/Firebase.Database.unoproj",
+        "../src/Firebase.Notifications/Firebase.Notifications.unoproj",
+    ],
+    "Android": {
+        "NotificationIcon": {
       "Color": "FF00FF",
       "LDPI": "Foo.png",
       "MDPI": "Foo.png",
       "HDPI": "Foo.png",
       "XHDPI": "Foo.png",
       "XXHDPI": "Foo.png",
-      "XXXHDPI": "Foo.png"
+            "XXXHDPI": "Foo.png"
+        },
     },
-  },
-  "Includes": [
-    "*",
-    "assets/thing.png:Bundle"
-  ]
+    "iOS": {
+      "SystemCapabilities": {
+        "Push": true
+      }
+    },
+    "Includes": [
+        "*",
+        "assets/thing.png:Bundle",
+        "GoogleService-Info.plist:ObjCSource:iOS"
+    ]
 }

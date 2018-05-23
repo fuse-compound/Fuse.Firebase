@@ -1,12 +1,26 @@
-var Push = require("Firebase/Notifications");
+var Environment = require("FuseJS/Environment");
+var PushiOS = require("FuseJS/Push");
+var PushAndroid = require("Firebase/Notifications");
 var Observable = require("FuseJS/Observable");
+var Nots = require("TokenModule");
+
+var Push;
+if(Environment.ios){
+    Push = PushiOS;
+} else {
+    Push = PushAndroid;
+}
 
 var status = Observable("-");
 var message = Observable("-no message yet-");
 
 Push.onRegistrationSucceeded = function(regID) {
     console.log ("Reg Succeeded: " + regID);
-    status.value = "onRegistrationSucceeded: " + regID;
+    Nots.GetFBToken()
+        .then(function(response) {
+            console.log("Firebase Token: " + response)
+            status.value = "Success! Check your console";
+        });
 };
 
 Push.onRegistrationFailed = function(reason) {
@@ -19,17 +33,16 @@ Push.onReceivedMessage = function(payload, fromNotificationBar) {
     message.value = payload;
 };
 
-var clearBadgeNumber = function() {
-    Push.clearBadgeNumber();
-}
-
-var clearAllNotifications = function() {
-    Push.clearAllNotifications();
+function getToken(){
+    Nots.GetFBToken()
+        .then(function(response) {
+            console.log("Firebase Token: " + response)
+            status.value = "Success! Check your console";
+        });
 }
 
 module.exports = {
-    clearBadgeNumber: clearBadgeNumber,
-    clearAllNotifications: clearAllNotifications,
     message: message,
-    status: status
+    status: status,
+    getToken
 };
