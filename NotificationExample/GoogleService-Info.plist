@@ -3,6 +3,6 @@
 <plist version="1.0">
 <dict>
 	<key>DUMMY_FILE</key>
-	<string>REPLACE THIS FILE WITH YOUR google-services.json FILE</string>
+	<string>REPLACE THIS FILE WITH YOUR GoogleService-Info.plist FILE</string>
 </dict>
 </plist>
