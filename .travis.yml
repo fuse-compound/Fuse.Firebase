@@ -2,7 +2,7 @@ os:
   - osx
 
 before_script:
-  - wget https://www.fusetools.com/downloads/latest/beta/osx -O fuse-installer.pkg &&
+  - wget https://github.com/fusetools/fuse-releases/releases/download/1.8.2.15696/fuse_osx_1_8_2_15696.pkg -O fuse-installer.pkg &&
     sudo installer -pkg fuse-installer.pkg -target /
 
 script:

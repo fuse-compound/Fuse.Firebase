@@ -1,6 +1,6 @@
 # Fuse.Firebase
 [![license](https://img.shields.io/github/license/cbaggers/Fuse.Firebase.svg?maxAge=2592000)](https://github.com/cbaggers/Fuse.Firebase/blob/master/LICENSE)
-[![Build Status](https://travis-ci.org/cbaggers/Fuse.Firebase.svg?branch=master)](https://travis-ci.org/cbaggers/Fuse.Firebase)
+[![Build Status](https://travis-ci.org/fuse-compound/Fuse.Firebase.svg?branch=master)](https://travis-ci.org/fuse-compound/Fuse.Firebase)
 
 This project's goal to make full Firebase bindings for Fuse. Currently we have:
 
@@ -324,14 +324,14 @@ var path = "pictures/cats/mycat.jpg"
 
 Camera.takePicture(640,480).then(function(image)
 {
-	Storage.upload(path,image.path) // Make sure you use the path
-	.then(function(url){
-		console.log(url); // Receives the URL as a promise
-	}).catch(function(err){
-		console.log(err)
-	})
+    Storage.upload(path,image.path) // Make sure you use the path
+    .then(function(url){
+        console.log(url); // Receives the URL as a promise
+    }).catch(function(err){
+        console.log(err)
+    })
 }).catch(function(error) {
-	//Something went wrong, see error for details
+    //Something went wrong, see error for details
 });
 ```
 
@@ -342,15 +342,15 @@ Camera.takePicture(640,480).then(function(image)
 ```Javascript
 var path = user;
 var key = name;
-var value = ‘pavel’; 
+var value = ‘pavel’;
 
 firebaseDb.readByQueryEqualToValue(path, key, value)
 .then(function (json) {
-	// here json is a JSON string
+    // here json is a JSON string
       console.log('json '+ json);
       var user = JSON.parse(json);
 })
 .catch(function (reason) {
-	console.log('Unable to read -> ' + reason);
+    console.log('Unable to read -> ' + reason);
 });
 ```
