@@ -31,19 +31,19 @@ All three callbacks mentioned are available in JavaScript and Uno.
 Integrating with notifications from JavaScript is simple. Here is an example that just logs when the callbacks fire:
 
     <JavaScript>
-        var push = require("FuseJS/Push");
+        var Push = require("Firebase/Notifications");
 
-        push.on("registrationSucceeded", function(regID) {
-            console.log("Reg Succeeded: " + regID);
-        });
+        Push.onRegistrationSucceeded = function(regID) {
+            console.log ("Reg Succeeded: " + regID);
+        };
 
-        push.on("error", function(reason) {
-            console.log("Reg Failed: " + reason);
-        });
+        Push.onRegistrationFailed = function(reason) {
+            console.log ("Reg Failed: " + reason);
+        };
 
-        push.on("receivedMessage", function(payload) {
-            console.log("Recieved Push Notification: " + payload);
-        });
+        Push.onReceivedMessage = function(payload, fromNotificationBar) {
+            console.log ("Recieved Push Notification: " + payload);
+        };
     </JavaScript>
 
 Here we're using the @EventEmitter `on` method to register our functions with the different events.
