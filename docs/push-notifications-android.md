@@ -1,18 +1,35 @@
+# Push Notifications on Android
+
 ## Setting up the client side
 
 ### Step 1.
 
+Include the Firebase libraries in your `.unoproj`
+
+```json
+"Projects": [
+    "../src/Firebase/Firebase.unoproj",
+    "../src/Firebase.Database/Firebase.Database.unoproj"
+]
+```
+
+### Step 2.
+
 Include the Fuse push notification library by adding the following to your `.unoproj` file
 
-    "Projects": [
-      "../src/Firebase.Notifications.Android/Firebase.Notifications.Android.unoproj",
-    ],
+```json
+"Projects": [
+    "../src/Firebase.Notifications.Android/Firebase.Notifications.Android.unoproj"
+]
+```
 
 Also add the following to a file called `AndroidImpl.uxl` in the same directory as your `unoproj`
 
-    <Extensions Backend="CPlusPlus" Condition="Android">
-        <CopyFile Condition="Android" Name="google-services.json" TargetName="app/google-services.json" />
-    </Extensions>
+```xml
+<Extensions Backend="CPlusPlus" Condition="Android">
+    <CopyFile Condition="Android" Name="google-services.json" TargetName="app/google-services.json" />
+</Extensions>
+```
 
 Finally add you `google-services.json` file from firebase to the same directory as your `unoproj`
 
@@ -30,21 +47,23 @@ All three callbacks mentioned are available in JavaScript and Uno.
 
 Integrating with notifications from JavaScript is simple. Here is an example that just logs when the callbacks fire:
 
-    <JavaScript>
-        var push = require("FuseJS/Push");
+```js
+<JavaScript>
+    var push = require("FuseJS/Push");
 
-        push.on("registrationSucceeded", function(regID) {
-            console.log("Reg Succeeded: " + regID);
-        });
+    push.on("registrationSucceeded", function(regID) {
+        console.log("Reg Succeeded: " + regID);
+    });
 
-        push.on("error", function(reason) {
-            console.log("Reg Failed: " + reason);
-        });
+    push.on("error", function(reason) {
+        console.log("Reg Failed: " + reason);
+    });
 
-        push.on("receivedMessage", function(payload) {
-            console.log("Recieved Push Notification: " + payload);
-        });
-    </JavaScript>
+    push.on("receivedMessage", function(payload) {
+        console.log("Recieved Push Notification: " + payload);
+    });
+</JavaScript>
+```
 
 Here we're using the @EventEmitter `on` method to register our functions with the different events.
 In a real app we should send our `registration ID` to our server when `registrationSucceeded` is triggered.
@@ -61,13 +80,13 @@ To enable Firebase Cloud Messaging, you need to register an Android app with you
 If you haven't already registered an Android app, follow these steps:
 
 - From the settings page, click the button to add a new Android app to the project
-- A dialog will pop up, prompting you for a package name (the other fields are optional).
-  By default, this will be `com.apps.<yourappnameinlowercase>`.
-  However, it is recommended to set your own:
+- A dialog will pop up, prompting you for a package name (the other fields are optional). By default, this will be `com.apps.<yourappnameinlowercase>`. However, it is recommended to set your own:
 
-        "Android": {
-            "Package": "com.mycompany.myapp",
-        }
+```json
+"Android": {
+    "Package": "com.mycompany.myapp",
+}
+```
 
 - After adding the Android app, you will be prompted to download a `google-services.json` file.
     This can be ignored, as it's not needed for push notifications and can always be downloaded later if needed.
@@ -87,32 +106,34 @@ Your server key can be found under the "Cloud Messaging" tab of the Project Sett
 
 Here some example Fuse code for sending your app a notification.
 
-    <JavaScript>
-        var API_ACCESS_KEY = '----HARDCODED API KEY----';
-        var regID = '----HARDCODED REG ID FROM THE APP YOU ARE SENDING TO----';
+```js
+<JavaScript>
+    var API_ACCESS_KEY = '----HARDCODED API KEY----';
+    var regID = '----HARDCODED REG ID FROM THE APP YOU ARE SENDING TO----';
 
-        module.exports.send = function() {
-            fetch('https://android.googleapis.com/gcm/send', {
-                method: 'post',
-                headers: {
-                    'Authorization': 'key=' + API_ACCESS_KEY,
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    registration_ids: [regID],
-                    data: {
-                        title: 'Well would ya look at that!',
-                        body: 'Hello from some other app',
-                        whatever: 'anything you like'
-                    }
-                })
-            }).then(function(response) {
-                console.log(JSON.stringify(response));
-            }, function(error) {
-                console.log(error);
-            });
-        }
-    </JavaScript>
+    module.exports.send = function() {
+        fetch('https://android.googleapis.com/gcm/send', {
+            method: 'post',
+            headers: {
+                'Authorization': 'key=' + API_ACCESS_KEY,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                registration_ids: [regID],
+                data: {
+                    title: 'Well would ya look at that!',
+                    body: 'Hello from some other app',
+                    whatever: 'anything you like'
+                }
+            })
+        }).then(function(response) {
+            console.log(JSON.stringify(response));
+        }, function(error) {
+            console.log(error);
+        });
+    }
+</JavaScript>
+```
 
 Whilst hardcoding the RegID is clearly not a good idea, it serves the purpose for this simple test.
 
@@ -122,53 +143,51 @@ Firebase has [two kinds of messages](https://firebase.google.com/docs/cloud-mess
 
 `notification` messages have this structure:
 
-```
+```json
 {
-  ..
-  "notification" : {
-    "body" : "great match!",
-    "title" : "Portugal vs. Denmark",
-    "icon" : "myicon"
-  }
+    "notification" : {
+        "body" : "great match!",
+        "title" : "Portugal vs. Denmark",
+        "icon" : "myicon"
+    }
 }
 ```
 
 `data` messages have this structure:
 
-```
+```json
 {
-  ..
-  "data" : {
-     "title": "Well would ya look at!",
-     "body": "Hello from some app",
-     "icon": "assets/thing.png"
-  },
+    "data" : {
+        "title": "Well would ya look at!",
+        "body": "Hello from some app",
+        "icon": "assets/thing.png"
+    }
 }
 ```
 
 ### Data Messages
 
-Fuse.Firebase provides the following behaviour:
+Fuse.Firebase provides the following behavior:
 
 - if the app is in the background or closed we make a notification in the notification tray. We use data in the message to customize your notification (sound, title, body, etc)
-- if the app is in the foreground we deliver the message striaght to JS with nothing in the tray
+- if the app is in the foreground we deliver the message straight to JS with nothing in the tray
 
-This gives us behaviour on Android that matches [Fuse.APNS](https://github.com/fuse-compound/Fuse.APNS), which we feel is valuable for app similicity.
+This gives us behavior on Android that matches [Fuse.APNS](https://github.com/fuse-compound/Fuse.APNS), which we feel is valuable for app similicity.
 
 ### 'Notification' Messages
 
-Fuse.Firebase provides the following behaviour:
+Fuse.Firebase provides the following behavior:
 
-- if the app is in the foreground we deliver the message striaght to JS with nothing in the tray
+- if the app is in the foreground we deliver the message straight to JS with nothing in the tray
 - if the app is in the background or closed we don't get informed by Android. Android will make the notification and we will get informed when the app is next opened.
 
 If you send a notification message you must set the `click_action` to `"fuseFirebaseBackgroundNotify"`. The `click_action` is mandatory and not currently configurable. It is needed to tell Fuse which internal system needed the intent.
 
 Here is an example message using the click action
 
-```
+```json
 {
-    "registration_ids": [:reg-id],
+    "registration_ids": ["reg-id"],
     "notification" : {
         "body" : "great match!",
         "title" : "Portugal vs. Denmark",
@@ -186,37 +205,42 @@ Google limits the message size to 4096 bytes.
 
 On android you have a few extra options around customizing your notifications. Below we can see how they are set in the `unoproj`
 
-    ...
-    "Android": {
-        "NotificationIcon": {
-            "LDPI": "NotifIcon.png",
-            "MDPI": "NotifIcon.png",
-            "HDPI": "NotifIcon.png",
-            "XHDPI": "NotifIcon.png",
-            "XXHDPI": "NotifIcon.png",
-            "XXXHDPI": "NotifIcon.png"
-            "Color": "FF00FF",
-        }
-    ...
+```json
+"Android": {
+    "NotificationIcon": {
+        "LDPI": "NotifIcon.png",
+        "MDPI": "NotifIcon.png",
+        "HDPI": "NotifIcon.png",
+        "XHDPI": "NotifIcon.png",
+        "XXHDPI": "NotifIcon.png",
+        "XXXHDPI": "NotifIcon.png",
+        "Color": "FF00FF"
+    }
+}
+```
 
 Under `NotificationIcon` you can specify the primary icon to use in the notification bar. It [must be monochrome](https://material.io/guidelines/patterns/notifications.html#guidelines) otherwise android will draw it as a large white square. However you are then allowed to control the color using the `Color` parameter above. It must be specified as hex and must not start with `0x` or similar.
 
 Besides this you are also allowed to specify a 'Large Icon' which `reinforce[s] the notification in a meaningful way`. This icon can be in color and is specified by the notification itself. For example:
 
-    data: {
-        notification: {
-            alert: {
-                title: 'Well would ya look at that!',
-                body: 'Hello from some other app',
-                icon: 'assets/largeIcon0.png:Bundle'
-            }
-        },
-        payload: 'anything you like'
-    }
+```json
+"data": {
+    "notification": {
+        "alert": {
+            "title": "Well would ya look at that!",
+            "body": "Hello from some other app",
+            "icon": "assets/largeIcon0.png:Bundle"
+        }
+    },
+    "payload": "anything you like"
+}
+```
 
 On receiving this message, `Firebase.Notifications.Android` will attempt to load the icon from the android [R](https://developer.android.com/reference/android/R.html) class or as a `BundledFile`. If this fails it will log the issue but will not throw an exception, this is so that your user won't get a spurious error message when your app isn't running. To include an icon for the above message you add something like the following to your `unoproj`:
 
-    "Includes": [
-        "*",
-        "assets/largeIcon0.png:Bundle"
-    ],
+```json
+"Includes": [
+    "*",
+    "assets/largeIcon0.png:Bundle"
+]
+```

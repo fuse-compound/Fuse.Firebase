@@ -1,8 +1,8 @@
-# Firebase API
+# Firebase Auth API
 
 As a community we will fill this out but for now it's just the Authentication module.
 
-We are trying to keep things as seperate as possible so we
+We are trying to keep things as separate as possible so we
 
 ## Project - Firebase
 
@@ -26,7 +26,7 @@ Email authentication is provided by Firebase themselves and as such there is no 
 
 To get started we need to require the library
 
-```
+```js
 var FirebaseUser = require("Firebase/Authentication/User");
 ```
 
@@ -37,7 +37,7 @@ We can now use the following on `FirebaseUser`
 This returns a boolean indicating whether the User is currently Authenticated with a provider or not.
 
 #### Example
-```
+```js
 var logUserIfAuthenticated = function() {
     if (FirebaseUser.isSignedIn) {
         console.log(FirebaseUser.name);
@@ -54,10 +54,10 @@ This event is called any time the state of whether the user is signed-in or not 
 To clarify, this event will be called if:
 
 - The User was not authenticated but now is
-- The User was authenticated but now isnt
+- The User was authenticated but now isn't
 
 #### Example
-```
+```js
 FirebaseUser.signedInStateChanged = function() {
     if (FirebaseUser.isSignedIn)
         console.log("I'm signed-in now!");
@@ -74,7 +74,7 @@ If the user is signed in then we sign them out from:
 - The provider (unless the provider was 'Email' which is provided by firebase)
 
 #### Example
-```
+```js
 var signOutNow = function() {
     FirebaseUser.signOut();
 };
@@ -94,7 +94,7 @@ To do this from JS is simple but varies slightly if you logged in using the `Ema
 `reauthenticate` returns a promise of a `string`
 
 #### Examples
-```
+```js
 // For Google/Facebook
 //
 FirebaseUser.reauthenticate().then(function(message) {
@@ -123,7 +123,7 @@ Usually we would prefer to use a `promise` to an `event` but as the login for Fa
 Please see [Issue #1](https://github.com/cbaggers/Fuse.Firebase/issues/1) for a potential fix for this.
 
 #### Example
-```
+```js
 FirebaseUser.onError = function(errorMsg) {
     console.log("ERROR(" + errorCode + "): " + errorMsg);
     statusText.value = "Error: " + errorMsg;
@@ -136,7 +136,7 @@ FirebaseUser.onError = function(errorMsg) {
 This property returns the Firebase name of the authenticated user
 
 #### Example
-```
+```js
 console.log(FirebaseUser.name);
 ```
 
@@ -146,7 +146,7 @@ console.log(FirebaseUser.name);
 This property returns the Firebase email address of the authenticated user
 
 #### Example
-```
+```js
 console.log(FirebaseUser.email);
 ```
 
@@ -156,7 +156,7 @@ console.log(FirebaseUser.email);
 This property returns the url on the photo Firebase associates with the authenticated user
 
 #### Example
-```
+```js
 console.log(FirebaseUser.photoUrl);
 ```
 
@@ -168,7 +168,7 @@ This function attempts to update the `displayName` and `photoUrl` of the authent
 It returns a promise of a `string`
 
 #### Example
-```
+```js
 FirebaseUser.updateProfile(FirebaseUser.name, newPhotoUrl);
 ```
 
@@ -180,19 +180,19 @@ This function attempts to update the primary email address that Firebase associa
 It returns a promise of a `string`
 
 #### Example
-```
-FirebaseUser.updateEmail(newEmailAddressString);
+```js
+FirebaseUser.updateProfile(newEmailAddress);
 ```
 
 
-### Function - delete()
+### Function - updateEmail(newEmailAddressString)
 
 This function attempts to delete the currently authenticated user from Firebase.
 
 It returns a promise of a `string`
 
 #### Example
-```
+```js
 FirebaseUser.delete();
 ```
 
@@ -203,7 +203,7 @@ This project initializes the Email provider and registers it with `Firebase.Auth
 
 It can be required from JS with:
 
-```
+```js
 var EmailAuth = require("Firebase/Authentication/Email");
 ```
 
@@ -218,7 +218,7 @@ It returns a promise of a `string`
 If it succeeds it will also sign-in that user.
 
 #### Example
-```
+```js
 var createUser = function() {
     var email = userEmailInput.value;
     var password = userPasswordInput.value;
@@ -238,7 +238,7 @@ This function attempts to sign-in the firebase user with the given email address
 It returns a promise of a `string`
 
 #### Example
-```
+```js
 var signInWithEmail = function() {
     var email = userEmailInput.value;
     var password = userPasswordInput.value;
