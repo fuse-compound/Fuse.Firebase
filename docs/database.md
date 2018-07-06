@@ -44,7 +44,6 @@ This will insert new object to given path, it will have `timestamp` property set
 * `child` - JSON to add
 
 #### Example
-
 ```js
 Database.pushWithTimestamp(path, data);
 ```
