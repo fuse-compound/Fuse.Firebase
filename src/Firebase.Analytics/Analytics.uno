@@ -20,15 +20,6 @@ namespace Firebase.Analytics
         static bool _initialized;
         extern(android) static Java.Object _handle;
 
-        public static void Init()
-        {
-            if (!_initialized)
-            {
-                Firebase.Core.Init();
-                if defined(android) AndroidInit();
-                _initialized = true;
-            }
-        }
 
         [Foreign(Language.Java)]
         extern(android)
