@@ -42,8 +42,8 @@ namespace Firebase.Analytics
         @}
 
 
-        [Require("Source.Import","FirebaseAnalytics/FIRApp.h")]
         [Require("Source.Import","FirebaseAnalytics/FirebaseAnalytics.h")]
+        [Require("Xcode.Framework", "AdSupport.framework")]
         [Foreign(Language.ObjC)]
         extern(iOS)
         public static void LogEvent(string name, string[] keys, string[] vals, int len)
