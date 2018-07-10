@@ -1,0 +1,23 @@
+{
+  "Packages": [
+    "Fuse",
+    "FuseJS",
+    "Fuse.BasicTheme",
+    "Fuse.CameraRoll"
+  ],
+  "Projects": [
+    "../src/Firebase/Firebase.unoproj",
+    "../src/Firebase.Database/Firebase.Database.unoproj",
+    "../src/Firebase.Storage/Firebase.Storage.unoproj"
+  ],
+  "Android": {
+    "Package": "com.your.app"
+  },
+  "iOS" : {
+    "BundleIdentifier": "com.medicahg.app"
+  },
+  "Includes": [
+    "*",
+    "GoogleService-Info.plist:ObjCSource:iOS"
+  ]
+}

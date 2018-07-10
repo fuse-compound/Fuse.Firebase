@@ -1,0 +1,9 @@
+<App Background="#eee">
+	<ClientPanel>
+		<JavaScript File="MainView.js"/>
+		<StackPanel Padding="20">
+			<Basic.Button Text="Upload Picture" Clicked="{upload}" />
+			<Text Value="{url}" TextWrapping="Wrap" Margin="0,50,0,0" />
+		</StackPanel>
+	</ClientPanel>
+</App>
