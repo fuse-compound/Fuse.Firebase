@@ -69,7 +69,7 @@ namespace Firebase.Storage
     }
 
     [Require("Entity", "StorageService")]
-	[Require("Source.Include","@{StorageService:Include}")]
+    [Require("Source.Include","@{StorageService:Include}")]
     [extern(iOS) Require("Source.Import","FirebaseStorage/FirebaseStorage.h")]
     extern(iOS)
     internal class Upload : Promise<string>
@@ -78,16 +78,26 @@ namespace Firebase.Storage
         public Upload(string storagepath, string filepath)
         @{
             FIRStorageReference *ref = @{StorageService._handle:Get()};
+            FIRStorageReference *refChild = [ref child:storagepath];
             NSURL *localFile = [NSURL fileURLWithPath:filepath];
-            FIRStorageUploadTask *uploadTask = [[ref child:storagepath] putFile:localFile metadata:nil completion:^(FIRStorageMetadata *metadata, NSError *error) {
-                if (error != nil) {
-                    NSString *erstr = [NSString stringWithFormat:@"Firebase Storage Upload Error: %@", error.localizedDescription];
-                    @{Upload:Of(_this).Reject(string):Call(erstr)};
-                } else {
-                    NSURL *downloadURL = metadata.downloadURL;
-                    @{Upload:Of(_this).Resolve(string):Call([downloadURL absoluteString])};
-                }
-            }];
+            dispatch_async(dispatch_get_main_queue(), ^(void){
+                FIRStorageUploadTask *uploadTask = [refChild putFile:localFile metadata:nil completion:^(FIRStorageMetadata *metadata, NSError *errorUploading) {
+                    if (errorUploading != nil) {
+                        NSString *erstrupload = [NSString stringWithFormat:@"Firebase Storage Upload Error: %@", errorUploading.localizedDescription];
+                        @{Upload:Of(_this).Reject(string):Call(erstrupload)};
+                    } else {
+                        [refChild downloadURLWithCompletion:^(NSURL * _Nullable URL, NSError * _Nullable error) {
+                            if (error != nil) {
+                                NSString *erstr = [NSString stringWithFormat:@"Firebase Storage URL Error: %@", error.localizedDescription];
+                                @{Upload:Of(_this).Reject(string):Call(erstr)};
+                            } else {
+                                NSURL *downloadURL = URL;
+                                @{Upload:Of(_this).Resolve(string):Call([downloadURL absoluteString])};
+                            }
+                        }];
+                    }
+                }];
+            });
         @}
         void Reject(string reason) { Reject(new Exception(reason)); }
     }
