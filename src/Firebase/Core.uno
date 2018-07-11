@@ -10,40 +10,41 @@ using Fuse.Controls.Native.Android;
 
 namespace Firebase
 {
-    [ForeignInclude(Language.Java, "java.util.ArrayList", "java.util.List", "android.graphics.Color")]
-    [Require("Gradle.Dependency.ClassPath", "com.google.gms:google-services:3.0.0")]
-    [Require("Gradle.Dependency.Compile", "com.google.firebase:firebase-core:9.2.0")]
-    [Require("Gradle.BuildFile.End", "apply plugin: 'com.google.gms.google-services'")]
-
-    [Require("Cocoapods.Podfile.Target", "pod 'Firebase/Core'")]
-    [Require("Cocoapods.Podfile.Target", "pod 'FirebaseAnalytics'")]
-    [extern(iOS) Require("Source.Include", "Firebase/Firebase.h")]
+    extern(!mobile)
     public class Core
     {
-        static bool _initialized;
+        static public void Init() {}
+    }
 
-        public static void Init()
-        {
-            if (!_initialized)
-            {
-                InitImpl();
-                _initialized = true;
-            }
-        }
-        extern(!mobile)
-        static public void InitImpl() { }
-
+    [Require("Cocoapods.Podfile.Target", "pod 'Firebase/Core'")]
+    [Require("Cocoapods.Podfile.Target", "pod 'Firebase/Messaging'")]
+    [Require("Source.Include", "Firebase/Firebase.h")]
+    extern(iOS)
+    public class Core
+    {
         [Foreign(Language.ObjC)]
-        extern(iOS)
-        static public void InitImpl()
-        @{
-            [FIRApp configure];
-        @}
+        static public void Init()
+        {
+                @{
+                    NSLog(@"Firebase Configuring...");
+                    [FIRApp configure];
+                    NSLog(@"Firebase Configure Ready!");
+                @}
+        }
+    }
 
+    [ForeignInclude(Language.Java, "java.util.ArrayList", "java.util.List", "android.graphics.Color")]
+    [Require("Gradle.Dependency.ClassPath", "com.google.gms:google-services:3.0.0")]
+    [Require("Gradle.AllProjects.Repository", "maven {url 'https://maven.google.com'}")]
+    [Require("Gradle.Dependency.Compile", "com.google.firebase:firebase-core:11.8.0")]
+    [Require("Gradle.BuildFile.End", "apply plugin: 'com.google.gms.google-services'")]
+    extern(Android)
+    public class Core
+    {
         [Foreign(Language.Java)]
-        extern(Android)
-        static public void InitImpl()
+        static public void Init()
         @{
+
         @}
     }
 }

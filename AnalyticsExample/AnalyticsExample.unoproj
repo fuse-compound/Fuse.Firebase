@@ -5,7 +5,8 @@
   ],
   "Projects": [
     "../src/Firebase/Firebase.unoproj",
-    "../src/Firebase.Analytics/Firebase.Analytics.unoproj",
+    "../src/Firebase.Database/Firebase.Database.unoproj",
+    "../src/Firebase.Analytics/Firebase.Analytics.unoproj"
   ],
   "Includes": [
     "*",

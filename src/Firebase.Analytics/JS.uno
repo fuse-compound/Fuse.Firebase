@@ -24,7 +24,6 @@ namespace Firebase.Analytics.JS
             if(_instance != null) return;
             Uno.UX.Resource.SetGlobalKey(_instance = this, "Firebase/Analytics");
 
-            AnalyticsService.Init();
             AddMember(new NativeFunction("logEvent", LogEvent));
         }
 
