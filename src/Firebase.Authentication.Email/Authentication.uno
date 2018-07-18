@@ -63,4 +63,11 @@ namespace Firebase.Authentication.Email
         public UpdatePassword(string password) {}
         void Reject(string reason) { Reject(new Exception(reason)); }
     }
+
+    extern(!mobile)
+    internal class SendVerificationEmail : Promise<string>
+    {
+        public SendVerificationEmail() {}
+        void Reject(string reason) { Reject(new Exception(reason)); }
+    }
 }

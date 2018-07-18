@@ -167,4 +167,26 @@ namespace Firebase.Authentication.Email
 
         void Reject(string reason) { Reject(new Exception(reason)); }
     }
+
+    extern(android)
+    internal class SendVerificationEmail : Promise<string>
+    {
+        [Foreign(Language.Java)]
+        public SendVerificationEmail()
+        @{
+            final FirebaseUser user = (FirebaseUser)@{User.GetCurrent():Call()};
+
+            user.sendEmailVerification()
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful())
+                                @{SendVerificationEmail:Of(_this).Resolve(string):Call("Success")};
+                            else
+                                @{SendVerificationEmail:Of(_this).Reject(string):Call("Firebase failed to send verification email")};
+                        }
+                    });
+        @}
+
+        void Reject(string reason) { Reject(new Exception(reason)); }
+    }
 }

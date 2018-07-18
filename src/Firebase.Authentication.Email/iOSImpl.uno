@@ -117,18 +117,16 @@ namespace Firebase.Authentication.Email
         }
     }
 
+    [Require("Source.Include", "Firebase/Firebase.h")]
+    [Require("Source.Include", "FirebaseAuth/FirebaseAuth.h")]
+    [Require("Cocoapods.Podfile.Target", "pod 'Firebase/Auth'")]
+    [Require("Source.Include", "@{Firebase.Authentication.User:Include}")]
     extern(iOS)
     internal class UpdatePassword : Promise<string>
     {
         [Foreign(Language.ObjC)]
         public UpdatePassword(string password)
         @{
-            if (password == null)
-            {
-                @{UpdatePassword:Of(_this).Reject(string):Call("UpdatePassword requires that a password is provided")};
-                return;
-            }
-
             [[FIRAuth auth].currentUser updatePassword:password completion:^(NSError *_Nullable error) {
                 if (error)
                     @{UpdatePassword:Of(_this).Reject(int):Call(error.code)};
@@ -137,6 +135,43 @@ namespace Firebase.Authentication.Email
             }];
         @}
 
-        void Reject(string reason) { Reject(new Exception(reason)); }
+        void Reject(string reason)
+        {
+            Reject(new Exception(reason));
+    }
+
+        void Reject(int errorCode)
+        {
+            Reject(new Exception(Errors.SignInWithEmailBaseErrorMessage(errorCode)));
+        }
+    }
+
+    [Require("Source.Include", "Firebase/Firebase.h")]
+    [Require("Source.Include", "FirebaseAuth/FirebaseAuth.h")]
+    [Require("Cocoapods.Podfile.Target", "pod 'Firebase/Auth'")]
+    [Require("Source.Include", "@{Firebase.Authentication.User:Include}")]
+    extern(iOS)
+    internal class SendVerificationEmail : Promise<string>
+    {
+        [Foreign(Language.ObjC)]
+        public SendVerificationEmail()
+        @{
+            [[FIRAuth auth].currentUser sendEmailVerificationWithCompletion:^(NSError *_Nullable error) {
+                if (error)
+                    @{SendVerificationEmail:Of(_this).Reject(int):Call(error.code)};
+                else
+                    @{SendVerificationEmail:Of(_this).Resolve(string):Call(@"Success")};
+            }];
+        @}
+
+        void Reject(string reason)
+        {
+            Reject(new Exception(reason));
+        }
+
+        void Reject(int errorCode)
+        {
+            Reject(new Exception(Errors.SignInWithEmailBaseErrorMessage(errorCode)));
+        }
     }
 }
