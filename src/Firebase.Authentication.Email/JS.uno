@@ -28,7 +28,7 @@ namespace Firebase.Authentication.Email.JS
 
             AddMember(new NativePromise<string, string>("createWithEmailAndPassword", CreateWithEmailAndPassword));
             AddMember(new NativePromise<string, string>("signInWithEmailAndPassword", SignInWithEmailAndPassword));
-            // AddMember(new NativePromise<string, string>("updatePassword", UpdatePassword));
+            AddMember(new NativePromise<string, string>("updatePassword", UpdatePassword));
         }
 
         Future<string> CreateWithEmailAndPassword(object[] args)
@@ -45,10 +45,10 @@ namespace Firebase.Authentication.Email.JS
             return new Firebase.Authentication.Email.SignInUser(email, password);
         }
 
-        // Future<string> UpdatePassword(object[] args)
-        // {
-        //     var password = (string)args[0];
-        //     return new Firebase.Authentication.Email.UpdatePassword(password);
-        // }
+        Future<string> UpdatePassword(object[] args)
+        {
+            var password = (string)args[0];
+            return new Firebase.Authentication.Email.UpdatePassword(password);
+        }
     }
 }

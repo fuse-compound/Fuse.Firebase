@@ -116,4 +116,27 @@ namespace Firebase.Authentication.Email
             Reject(new Exception(Errors.SignInWithEmailBaseErrorMessage(errorCode)));
         }
     }
+
+    extern(iOS)
+    internal class UpdatePassword : Promise<string>
+    {
+        [Foreign(Language.ObjC)]
+        public UpdatePassword(string password)
+        @{
+            if (password == null)
+            {
+                @{UpdatePassword:Of(_this).Reject(string):Call("UpdatePassword requires that a password is provided")};
+                return;
+            }
+
+            [[FIRAuth auth].currentUser updatePassword:password completion:^(NSError *_Nullable error) {
+                if (error)
+                    @{UpdatePassword:Of(_this).Reject(int):Call(error.code)};
+                else
+                    @{UpdatePassword:Of(_this).Resolve(string):Call(@"Success")};
+            }];
+        @}
+
+        void Reject(string reason) { Reject(new Exception(reason)); }
+    }
 }
