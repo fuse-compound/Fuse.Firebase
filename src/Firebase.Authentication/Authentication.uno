@@ -46,7 +46,6 @@ namespace Firebase.Authentication
             if (Inst == null)
             {
                 CurrentProvider = AuthProviderName.None;
-                Firebase.Core.Init();
                 Inst = ForeignInit();
                 _listener = MakeListener();
                 StartListener(_listener);
