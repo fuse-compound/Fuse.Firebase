@@ -106,14 +106,19 @@ var signOutNow = function() {
 };
 
 var sendVerificationEmail = function() {
-    EAuth.sendVerificationEmail();
+    EAuth.sendVerificationEmail()
+    .then(function(response){
+        console.log("Success! "+response)
+    }).catch(function(error){
+        console.log("There has been an error: "+error)
+    });
 };
 
 var newPassword = Observable("");
 var changePassword = function() {
     EAuth.updatePassword(newPassword.value)
     .then(function(response){
-        console.log("Success!")
+        console.log("Success! "+response)
     }).catch(function(error){
         console.log("There has been an error: "+error)
     });

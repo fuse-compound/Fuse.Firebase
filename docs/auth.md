@@ -275,7 +275,12 @@ This function sends the current signed in user an email to verify the account.
 #### Example
 ```js
 var sendVerificationEmail = function() {
-    EmailAuth.sendVerificationEmail();
+    EmailAuth.sendVerificationEmail()
+    .then(function(res) {
+        console.log("Success! " +res)
+    }).catch(function(e) {
+        console.log("Error: " + e);
+    });
 };
 ```
 
