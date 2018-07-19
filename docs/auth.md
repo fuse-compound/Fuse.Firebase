@@ -250,6 +250,34 @@ var signInWithEmail = function() {
     });
 };
 ```
+### Function - updatePassword(newPassword)
+
+This function updates the currently signed in user's password
+
+> Important. To set a user's password, the user must have signed in recently.
+
+#### Example
+```js
+var updatePassword = function() {
+    EmailAuth.updatePassword(newPassword)
+    .then(function() {
+        console.log("Success!")
+    }).catch(function(e) {
+        console.log("Error: " + e);
+    });
+};
+```
+
+### Function - sendVerificationEmail()
+
+This function sends the current signed in user an email to verify the account.
+
+#### Example
+```js
+var sendVerificationEmail = function() {
+    EmailAuth.sendVerificationEmail();
+};
+```
 
 ## Project - Firebase.Authentication.Google
 
