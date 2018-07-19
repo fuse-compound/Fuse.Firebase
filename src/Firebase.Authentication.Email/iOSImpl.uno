@@ -24,7 +24,7 @@ namespace Firebase.Authentication.Email
            [[FIRAuth auth]
             createUserWithEmail:email
             password:password
-            completion:^(FIRUser* user, NSError* error) {
+            completion:^(FIRAuthDataResult * _Nullable authResult, NSError * _Nullable error) {
                 if (error)
                     @{CreateUser:Of(_this).Reject(int):Call(error.code)};
                 else
@@ -56,7 +56,7 @@ namespace Firebase.Authentication.Email
            [[FIRAuth auth]
             signInWithEmail:email
             password:password
-            completion:^(FIRUser* user, NSError* error) {
+            completion:^(FIRAuthDataResult * _Nullable authResult, NSError * _Nullable error) {
                 if (error)
                     @{SignInUser:Of(_this).Reject(int):Call(error.code)};
                 else
@@ -138,7 +138,7 @@ namespace Firebase.Authentication.Email
         void Reject(string reason)
         {
             Reject(new Exception(reason));
-    }
+        }
 
         void Reject(int errorCode)
         {
