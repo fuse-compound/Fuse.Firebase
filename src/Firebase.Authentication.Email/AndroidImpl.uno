@@ -168,6 +168,12 @@ namespace Firebase.Authentication.Email
         void Reject(string reason) { Reject(new Exception(reason)); }
     }
 
+    [ForeignInclude(Language.Java, "java.util.ArrayList", "java.util.List", "android.net.Uri",
+                    "com.google.android.gms.tasks.OnCompleteListener",
+                    "com.google.android.gms.tasks.Task",
+                    "com.google.firebase.auth.AuthResult",
+                    "com.google.firebase.auth.FirebaseAuth",
+                    "com.google.firebase.auth.FirebaseUser")]
     extern(android)
     internal class SendVerificationEmail : Promise<string>
     {
