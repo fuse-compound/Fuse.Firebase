@@ -173,7 +173,8 @@ namespace Firebase.Authentication.Email
                     "com.google.android.gms.tasks.Task",
                     "com.google.firebase.auth.AuthResult",
                     "com.google.firebase.auth.FirebaseAuth",
-                    "com.google.firebase.auth.FirebaseUser")]
+                    "com.google.firebase.auth.FirebaseUser",
+                    "android.support.annotation.NonNull")]
     extern(android)
     internal class SendVerificationEmail : Promise<string>
     {
