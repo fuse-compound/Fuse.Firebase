@@ -18,7 +18,7 @@ namespace Firebase.Authentication.Email
                     "com.google.firebase.auth.AuthResult",
                     "com.google.firebase.auth.FirebaseAuth",
                     "com.google.firebase.auth.FirebaseUser")]
-    [Require("Gradle.Dependency.Compile", "com.google.firebase:firebase-auth:9.2.0")]
+    [Require("Gradle.Dependency.Compile", "com.google.firebase:firebase-auth:11.8.0")]
     extern(android)
     internal class CreateUser : Promise<string>
     {
@@ -60,7 +60,7 @@ namespace Firebase.Authentication.Email
                     "com.google.firebase.auth.AuthResult",
                     "com.google.firebase.auth.FirebaseAuth",
                     "com.google.firebase.auth.FirebaseUser")]
-    [Require("Gradle.Dependency.Compile", "com.google.firebase:firebase-auth:9.2.0")]
+    [Require("Gradle.Dependency.Compile", "com.google.firebase:firebase-auth:11.8.0")]
     extern(android)
     internal class SignInUser : Promise<string>
     {
@@ -103,7 +103,7 @@ namespace Firebase.Authentication.Email
                     "com.google.firebase.auth.EmailAuthProvider",
                     "com.google.firebase.auth.AuthCredential",
                     "com.google.firebase.auth.UserProfileChangeRequest")]
-    [Require("Gradle.Dependency.Compile", "com.google.firebase:firebase-auth:9.2.0")]
+    [Require("Gradle.Dependency.Compile", "com.google.firebase:firebase-auth:11.8.0")]
     extern(android)
     internal class ReAuthenticate : Promise<string>
     {
@@ -161,6 +161,35 @@ namespace Firebase.Authentication.Email
                                 @{UpdatePassword:Of(_this).Resolve(string):Call("success")};
                             else
                                 @{UpdatePassword:Of(_this).Reject(string):Call("Firebase failed to update user's password")};
+                        }
+                    });
+        @}
+
+        void Reject(string reason) { Reject(new Exception(reason)); }
+    }
+
+    [ForeignInclude(Language.Java, "java.util.ArrayList", "java.util.List", "android.net.Uri",
+                    "com.google.android.gms.tasks.OnCompleteListener",
+                    "com.google.android.gms.tasks.Task",
+                    "com.google.firebase.auth.AuthResult",
+                    "com.google.firebase.auth.FirebaseAuth",
+                    "com.google.firebase.auth.FirebaseUser",
+                    "android.support.annotation.NonNull")]
+    extern(android)
+    internal class SendVerificationEmail : Promise<string>
+    {
+        [Foreign(Language.Java)]
+        public SendVerificationEmail()
+        @{
+            final FirebaseUser user = (FirebaseUser)@{User.GetCurrent():Call()};
+
+            user.sendEmailVerification()
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful())
+                                @{SendVerificationEmail:Of(_this).Resolve(string):Call("Success")};
+                            else
+                                @{SendVerificationEmail:Of(_this).Reject(string):Call("Firebase failed to send verification email")};
                         }
                     });
         @}

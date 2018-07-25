@@ -34,7 +34,7 @@ namespace Firebase
     }
 
     [ForeignInclude(Language.Java, "java.util.ArrayList", "java.util.List", "android.graphics.Color")]
-    [Require("Gradle.Dependency.ClassPath", "com.google.gms:google-services:3.0.0")]
+    [Require("Gradle.Dependency.ClassPath", "com.google.gms:google-services:4.0.0")]
     [Require("Gradle.AllProjects.Repository", "maven {url 'https://maven.google.com'}")]
     [Require("Gradle.Dependency.Compile", "com.google.firebase:firebase-core:11.8.0")]
     [Require("Gradle.BuildFile.End", "apply plugin: 'com.google.gms.google-services'")]

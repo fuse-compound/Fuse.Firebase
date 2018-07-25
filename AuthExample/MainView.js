@@ -105,6 +105,25 @@ var signOutNow = function() {
     FirebaseUser.signOut();
 };
 
+var sendVerificationEmail = function() {
+    EAuth.sendVerificationEmail()
+    .then(function(response){
+        console.log("Success! "+response)
+    }).catch(function(error){
+        console.log("There has been an error: "+error)
+    });
+};
+
+var newPassword = Observable("");
+var changePassword = function() {
+    EAuth.updatePassword(newPassword.value)
+    .then(function(response){
+        console.log("Success! "+response)
+    }).catch(function(error){
+        console.log("There has been an error: "+error)
+    });
+};
+
 
 module.exports = {
     currentPage: currentPage,
@@ -122,5 +141,8 @@ module.exports = {
     userEmail: userEmail,
     userPhotoUrl: userPhotoUrl,
     reauthenticate: reauthenticate,
-    signOutNow: signOutNow
+    signOutNow: signOutNow,
+    sendVerificationEmail: sendVerificationEmail,
+    newPassword: newPassword,
+    changePassword: changePassword
 };

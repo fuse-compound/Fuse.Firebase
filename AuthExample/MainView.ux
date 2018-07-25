@@ -1,59 +1,58 @@
 <App Background="#2586EC">
-	<DockPanel>
-		<JavaScript File="MainView.js"/>
-		<StackPanel Dock="Top" Background="#2586EC">
-			<StatusBarBackground/>
-			<Fuse.iOS.StatusBarConfig Style="Light"/>
-		</StackPanel>
-		<BottomBarBackground Dock="Bottom" />
+    <DockPanel>
+        <JavaScript File="MainView.js"/>
+        <StackPanel Dock="Top" Background="#2586EC">
+            <StatusBarBackground/>
+            <Fuse.iOS.StatusBarConfig Style="Light"/>
+        </StackPanel>
+        <BottomBarBackground Dock="Bottom" />
 
-		<DirectNavigation Active="{currentPageHandle}"/>
+        <DirectNavigation Active="{currentPageHandle}"/>
 
-		<Page Name="lobbyPage">
-				<StackPanel Width="92%" Height="460" Padding="20">
-					<Rectangle Layer="Background" CornerRadius="10" Color="#fff"/>
-					<Text Value="{currentPageTitle}" Alignment="Center" FontSize="35" TextColor="#2586EC"/>
-                    <Text Value="{lobbyStatusText}" Alignment="Center" Margin="0,0,0,20"/>
-					<Basic.TextInput Width="100%" Value="{userEmailInput}" ux:Name="userName" Alignment="Center" PlaceholderText="Email Address" PlaceholderColor="#bbb" />
-					<Basic.TextInput Width="100%" Value="{userPasswordInput}" IsPassword="true" Alignment="Center" PlaceholderText="Password" PlaceholderColor="#bbb" />
-					
-					<Basic.Button Text="Sign In With Email" Clicked="{signInWithEmail}" />
-					<Basic.Button Text="Create User With Email" Clicked="{createUser}" />
-		            <NativeViewHost >
-        	            <Firebase.Authentication.Google.GoogleButton Margin="0,20,0,0"/>
-             	    </NativeViewHost>
-		            <NativeViewHost >
-	                    <Firebase.Authentication.Facebook.FacebookButton Margin="0,20,0,0"/>
-             	    </NativeViewHost>
-				</StackPanel>
+        <Page Name="lobbyPage">
+            <StackPanel Width="92%" Height="460" Padding="20">
+                <Rectangle Layer="Background" CornerRadius="10" Color="#fff"/>
+                <Text Value="{currentPageTitle}" Alignment="Center" FontSize="35" TextColor="#2586EC"/>
+                <Text Value="{lobbyStatusText}" Alignment="Center" Margin="0,0,0,20"/>
+                <Basic.TextInput Width="100%" Value="{userEmailInput}" ux:Name="userName" Alignment="Center" PlaceholderText="Email Address" PlaceholderColor="#bbb" />
+                <Basic.TextInput Width="100%" Value="{userPasswordInput}" IsPassword="true" Alignment="Center" PlaceholderText="Password" PlaceholderColor="#bbb" />
 
-			<ExitingAnimation>
-				<Move X="-1" RelativeTo="Size"
-					  Duration="0.3" Easing="CircularInOut"/>
-			</ExitingAnimation>
-		</Page>
+                <Basic.Button Text="Sign In With Email" Clicked="{signInWithEmail}" />
+                <Basic.Button Text="Create User With Email" Clicked="{createUser}" />
+                <NativeViewHost >
+                    <Firebase.Authentication.Google.GoogleButton Margin="0,20,0,0"/>
+                </NativeViewHost>
+                <NativeViewHost >
+                    <Firebase.Authentication.Facebook.FacebookButton Margin="0,20,0,0"/>
+                </NativeViewHost>
+            </StackPanel>
 
-		<Page Name="loggedInPage">
-				<StackPanel Width="92%" Height="360" Padding="20">
+            <ExitingAnimation>
+                <Move X="-1" RelativeTo="Size" Duration="0.3" Easing="CircularInOut"/>
+            </ExitingAnimation>
+        </Page>
 
-					<Rectangle Layer="Background" CornerRadius="10" Color="#fff"/>
-					<Text Value="{currentPageTitle}" Alignment="Center" FontSize="35" TextColor="#2586EC"/>
- 					<Text Value="Signed In" Alignment="Center" TextColor="#222"/>
+        <Page Name="loggedInPage">
+            <StackPanel Width="92%" Height="460" Padding="20">
+                <Rectangle Layer="Background" CornerRadius="10" Color="#fff"/>
+                <Text Value="{currentPageTitle}" Alignment="Center" FontSize="35" TextColor="#2586EC"/>
+                <Text Value="Signed In" Alignment="Center" TextColor="#222"/>
 
-                    <Text Value="{userName}" Margin="0,5" />
-                    <Text Value="{userEmail}" Margin="0,5"/>
-                    <Text Value="{userPhotoUrl}" Margin="0,5"/>
-                    <Text Value="{signedInStatusText}" Alignment="Center" FontSize="10" TextColor="#222" Margin="0,0,0,20"/>
+                <Text Value="{userName}" Margin="0,5" />
+                <Text Value="{userEmail}" Margin="0,5"/>
+                <Text Value="{userPhotoUrl}" Margin="0,5"/>
+                <Text Value="{signedInStatusText}" Alignment="Center" FontSize="10" TextColor="#222" Margin="0,0,0,20"/>
 
-                    <Basic.Button Text="ReAuthenticate" Clicked="{reauthenticate}"/>
-                    <Basic.Button Text="Sign Out" Clicked="{signOutNow}" />
-				</StackPanel>
+                <Basic.Button Text="ReAuthenticate" Clicked="{reauthenticate}"/>
+                <Basic.Button Text="Send Verification Email" Clicked="{sendVerificationEmail}"/>
+                <Basic.Button Text="Sign Out" Clicked="{signOutNow}" />
+                <Basic.TextInput Width="100%" Value="{newPassword}" Alignment="Center" PlaceholderText="New Password" PlaceholderColor="#bbb" Margin="0,20,0,0" />
+                <Basic.Button Text="Change Password" Clicked="{changePassword}" />
+            </StackPanel>
 
-			<ExitingAnimation>
-				<Move X="1" RelativeTo="Size"
-					  Duration="0.3" Easing="CircularInOut"/>
-			</ExitingAnimation>
-		</Page>
-
-	</DockPanel>
+            <ExitingAnimation>
+                <Move X="1" RelativeTo="Size" Duration="0.3" Easing="CircularInOut"/>
+            </ExitingAnimation>
+        </Page>
+    </DockPanel>
 </App>
