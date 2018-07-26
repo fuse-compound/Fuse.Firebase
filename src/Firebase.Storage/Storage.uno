@@ -17,7 +17,7 @@ namespace Firebase.Storage
         "com.google.firebase.storage.StorageReference",
         "com.google.firebase.storage.UploadTask")]
     [Require("Cocoapods.Podfile.Target", "pod 'Firebase/Storage'")]
-    [Require("Gradle.Dependency.Compile", "com.google.firebase:firebase-storage:9.2.0")]
+    [Require("Gradle.Dependency.Compile", "com.google.firebase:firebase-storage:12.0.1")]
     [extern(iOS) Require("Source.Import","FirebaseStorage/FirebaseStorage.h")]
     extern(mobile)
     static class StorageService

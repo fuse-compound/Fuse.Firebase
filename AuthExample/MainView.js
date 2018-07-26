@@ -114,6 +114,16 @@ var sendVerificationEmail = function() {
     });
 };
 
+var newEmail = Observable("");
+var changeEmail = function() {
+    EAuth.updateEmail(newEmail.value)
+    .then(function(response){
+        console.log("Success! "+response)
+    }).catch(function(error){
+        console.log("There has been an error: "+error)
+    });
+};
+
 var newPassword = Observable("");
 var changePassword = function() {
     EAuth.updatePassword(newPassword.value)
@@ -143,6 +153,8 @@ module.exports = {
     reauthenticate: reauthenticate,
     signOutNow: signOutNow,
     sendVerificationEmail: sendVerificationEmail,
+    newEmail: newEmail,
+    changeEmail: changeEmail,
     newPassword: newPassword,
     changePassword: changePassword
 };

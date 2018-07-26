@@ -18,7 +18,7 @@ namespace Firebase.Authentication.Email
                     "com.google.firebase.auth.AuthResult",
                     "com.google.firebase.auth.FirebaseAuth",
                     "com.google.firebase.auth.FirebaseUser")]
-    [Require("Gradle.Dependency.Compile", "com.google.firebase:firebase-auth:11.8.0")]
+    [Require("Gradle.Dependency.Compile", "com.google.firebase:firebase-auth:12.0.1")]
     extern(android)
     internal class CreateUser : Promise<string>
     {
@@ -60,7 +60,7 @@ namespace Firebase.Authentication.Email
                     "com.google.firebase.auth.AuthResult",
                     "com.google.firebase.auth.FirebaseAuth",
                     "com.google.firebase.auth.FirebaseUser")]
-    [Require("Gradle.Dependency.Compile", "com.google.firebase:firebase-auth:11.8.0")]
+    [Require("Gradle.Dependency.Compile", "com.google.firebase:firebase-auth:12.0.1")]
     extern(android)
     internal class SignInUser : Promise<string>
     {
@@ -103,7 +103,7 @@ namespace Firebase.Authentication.Email
                     "com.google.firebase.auth.EmailAuthProvider",
                     "com.google.firebase.auth.AuthCredential",
                     "com.google.firebase.auth.UserProfileChangeRequest")]
-    [Require("Gradle.Dependency.Compile", "com.google.firebase:firebase-auth:11.8.0")]
+    [Require("Gradle.Dependency.Compile", "com.google.firebase:firebase-auth:12.0.1")]
     extern(android)
     internal class ReAuthenticate : Promise<string>
     {
@@ -127,6 +127,40 @@ namespace Firebase.Authentication.Email
                                 @{ReAuthenticate:Of(_this).Resolve(string):Call("success")};
                             else
                                 @{ReAuthenticate:Of(_this).Reject(string):Call("Firebase failed to reautheticate user")};
+                        }
+                    });
+        @}
+
+        void Reject(string reason) { Reject(new Exception(reason)); }
+    }
+
+    [ForeignInclude(Language.Java, "java.util.ArrayList", "java.util.List", "android.net.Uri",
+                    "com.google.android.gms.tasks.OnCompleteListener",
+                    "com.google.android.gms.tasks.Task",
+                    "com.google.firebase.auth.AuthResult",
+                    "com.google.firebase.auth.FirebaseAuth",
+                    "com.google.firebase.auth.FirebaseUser")]
+    extern(android)
+    internal class UpdateEmail : Promise<string>
+    {
+        [Foreign(Language.Java)]
+        public UpdateEmail(string email)
+        @{
+            if (email == null)
+            {
+                @{UpdateEmail:Of(_this).Reject(string):Call("UpdateEmail requires that an email is provided")};
+                return;
+            }
+
+            final FirebaseUser user = (FirebaseUser)@{User.GetCurrent():Call()};
+
+            user.updateEmail(email)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                        public void onComplete(Task<Void> task) {
+                            if (task.isSuccessful())
+                                @{UpdateEmail:Of(_this).Resolve(string):Call("success")};
+                            else
+                                @{UpdateEmail:Of(_this).Reject(string):Call("Firebase failed to update user's email")};
                         }
                     });
         @}

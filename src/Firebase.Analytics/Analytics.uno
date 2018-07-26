@@ -20,19 +20,11 @@ namespace Firebase.Analytics
         static bool _initialized;
         extern(android) static Java.Object _handle;
 
-
-        [Foreign(Language.Java)]
-        extern(android)
-        public static void AndroidInit()
-        @{
-            @{_handle:Set(FirebaseAnalytics.getInstance(com.fuse.Activity.getRootActivity()))};
-        @}
-
-
         [Foreign(Language.Java)]
         extern(android)
         public static void LogEvent(string name, string[] keys, string[] vals, int len)
         @{
+            @{_handle:Set(FirebaseAnalytics.getInstance(com.fuse.Activity.getRootActivity()))};
             Bundle bundle = new Bundle();
 
             for (int i = 0; i < len; i++) {

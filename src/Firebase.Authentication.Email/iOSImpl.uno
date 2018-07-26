@@ -24,7 +24,7 @@ namespace Firebase.Authentication.Email
            [[FIRAuth auth]
             createUserWithEmail:email
             password:password
-            completion:^(FIRAuthDataResult * _Nullable authResult, NSError * _Nullable error) {
+            completion:^(FIRAuthDataResult * _Nullable authResult, NSError* error) {
                 if (error)
                     @{CreateUser:Of(_this).Reject(int):Call(error.code)};
                 else
@@ -56,7 +56,7 @@ namespace Firebase.Authentication.Email
            [[FIRAuth auth]
             signInWithEmail:email
             password:password
-            completion:^(FIRAuthDataResult * _Nullable authResult, NSError * _Nullable error) {
+            completion:^(FIRAuthDataResult * _Nullable authResult, NSError* error) {
                 if (error)
                     @{SignInUser:Of(_this).Reject(int):Call(error.code)};
                 else
@@ -104,6 +104,35 @@ namespace Firebase.Authentication.Email
                   @{ReAuthenticate:Of(_this).Resolve(string):Call(@"success")};
             }];
 
+        @}
+
+        void Reject(string reason)
+        {
+            Reject(new Exception(reason));
+        }
+
+        void Reject(int errorCode)
+        {
+            Reject(new Exception(Errors.SignInWithEmailBaseErrorMessage(errorCode)));
+        }
+    }
+
+    [Require("Source.Include", "Firebase/Firebase.h")]
+    [Require("Source.Include", "FirebaseAuth/FirebaseAuth.h")]
+    [Require("Cocoapods.Podfile.Target", "pod 'Firebase/Auth'")]
+    [Require("Source.Include", "@{Firebase.Authentication.User:Include}")]
+    extern(iOS)
+    internal class UpdateEmail : Promise<string>
+    {
+        [Foreign(Language.ObjC)]
+        public UpdateEmail(string email)
+        @{
+            [[FIRAuth auth].currentUser updateEmail:email completion:^(NSError *_Nullable error) {
+                if (error)
+                    @{UpdateEmail:Of(_this).Reject(int):Call(error.code)};
+                else
+                    @{UpdateEmail:Of(_this).Resolve(string):Call(@"Success")};
+            }];
         @}
 
         void Reject(string reason)
