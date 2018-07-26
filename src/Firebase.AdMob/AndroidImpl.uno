@@ -16,7 +16,7 @@ using Firebase.AdMob;
 namespace Firebase.AdMob
 {
 
-    [Require("Gradle.Dependency.Compile", "com.google.firebase:firebase-ads:11.8.0")]
+    [Require("Gradle.Dependency.Compile", "com.google.firebase:firebase-ads:12.0.1")]
     [ForeignInclude(Language.Java,
                     "com.google.android.gms.ads.AdRequest",
                     "com.google.android.gms.ads.AdSize",
