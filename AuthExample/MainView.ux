@@ -33,7 +33,7 @@
         </Page>
 
         <Page Name="loggedInPage">
-            <StackPanel Width="92%" Height="460" Padding="20">
+            <StackPanel Width="92%" Height="88%" Padding="20">
                 <Rectangle Layer="Background" CornerRadius="10" Color="#fff"/>
                 <Text Value="{currentPageTitle}" Alignment="Center" FontSize="35" TextColor="#2586EC"/>
                 <Text Value="Signed In" Alignment="Center" TextColor="#222"/>
@@ -43,11 +43,18 @@
                 <Text Value="{userPhotoUrl}" Margin="0,5"/>
                 <Text Value="{signedInStatusText}" Alignment="Center" FontSize="10" TextColor="#222" Margin="0,0,0,20"/>
 
+                <Grid Columns="2*,1*">
+                    <Basic.TextInput Width="100%" Value="{newPassword}" Alignment="Center" PlaceholderText="New Password" PlaceholderColor="#bbb" />
+                    <Basic.Button Text="Change Password" Clicked="{changePassword}" />
+                </Grid>
+                <Grid Columns="2*,1*">
+                    <Basic.TextInput Width="100%" Value="{newEmail}" Alignment="Center" PlaceholderText="New Email" PlaceholderColor="#bbb" />
+                    <Basic.Button Text="Change Email" Clicked="{changeEmail}" />
+                </Grid>
+
                 <Basic.Button Text="ReAuthenticate" Clicked="{reauthenticate}"/>
                 <Basic.Button Text="Send Verification Email" Clicked="{sendVerificationEmail}"/>
                 <Basic.Button Text="Sign Out" Clicked="{signOutNow}" />
-                <Basic.TextInput Width="100%" Value="{newPassword}" Alignment="Center" PlaceholderText="New Password" PlaceholderColor="#bbb" Margin="0,20,0,0" />
-                <Basic.Button Text="Change Password" Clicked="{changePassword}" />
             </StackPanel>
 
             <ExitingAnimation>
