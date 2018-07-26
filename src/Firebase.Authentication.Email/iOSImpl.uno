@@ -122,6 +122,35 @@ namespace Firebase.Authentication.Email
     [Require("Cocoapods.Podfile.Target", "pod 'Firebase/Auth'")]
     [Require("Source.Include", "@{Firebase.Authentication.User:Include}")]
     extern(iOS)
+    internal class UpdateEmail : Promise<string>
+    {
+        [Foreign(Language.ObjC)]
+        public UpdateEmail(string email)
+        @{
+            [[FIRAuth auth].currentUser updateEmail:email completion:^(NSError *_Nullable error) {
+                if (error)
+                    @{UpdateEmail:Of(_this).Reject(int):Call(error.code)};
+                else
+                    @{UpdateEmail:Of(_this).Resolve(string):Call(@"Success")};
+            }];
+        @}
+
+        void Reject(string reason)
+        {
+            Reject(new Exception(reason));
+        }
+
+        void Reject(int errorCode)
+        {
+            Reject(new Exception(Errors.SignInWithEmailBaseErrorMessage(errorCode)));
+        }
+    }
+
+    [Require("Source.Include", "Firebase/Firebase.h")]
+    [Require("Source.Include", "FirebaseAuth/FirebaseAuth.h")]
+    [Require("Cocoapods.Podfile.Target", "pod 'Firebase/Auth'")]
+    [Require("Source.Include", "@{Firebase.Authentication.User:Include}")]
+    extern(iOS)
     internal class UpdatePassword : Promise<string>
     {
         [Foreign(Language.ObjC)]

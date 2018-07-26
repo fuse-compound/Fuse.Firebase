@@ -58,6 +58,13 @@ namespace Firebase.Authentication.Email
     }
 
     extern(!mobile)
+    internal class UpdateEmail : Promise<string>
+    {
+        public UpdateEmail(string email) {}
+        void Reject(string reason) { Reject(new Exception(reason)); }
+    }
+
+    extern(!mobile)
     internal class UpdatePassword : Promise<string>
     {
         public UpdatePassword(string password) {}

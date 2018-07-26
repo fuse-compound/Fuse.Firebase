@@ -141,6 +141,40 @@ namespace Firebase.Authentication.Email
                     "com.google.firebase.auth.FirebaseAuth",
                     "com.google.firebase.auth.FirebaseUser")]
     extern(android)
+    internal class UpdateEmail : Promise<string>
+    {
+        [Foreign(Language.Java)]
+        public UpdateEmail(string email)
+        @{
+            if (email == null)
+            {
+                @{UpdateEmail:Of(_this).Reject(string):Call("UpdateEmail requires that an email is provided")};
+                return;
+            }
+
+            final FirebaseUser user = (FirebaseUser)@{User.GetCurrent():Call()};
+
+            user.updateEmail(email)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                        public void onComplete(Task<Void> task) {
+                            if (task.isSuccessful())
+                                @{UpdateEmail:Of(_this).Resolve(string):Call("success")};
+                            else
+                                @{UpdateEmail:Of(_this).Reject(string):Call("Firebase failed to update user's email")};
+                        }
+                    });
+        @}
+
+        void Reject(string reason) { Reject(new Exception(reason)); }
+    }
+
+    [ForeignInclude(Language.Java, "java.util.ArrayList", "java.util.List", "android.net.Uri",
+                    "com.google.android.gms.tasks.OnCompleteListener",
+                    "com.google.android.gms.tasks.Task",
+                    "com.google.firebase.auth.AuthResult",
+                    "com.google.firebase.auth.FirebaseAuth",
+                    "com.google.firebase.auth.FirebaseUser")]
+    extern(android)
     internal class UpdatePassword : Promise<string>
     {
         [Foreign(Language.Java)]
