@@ -1,0 +1,3 @@
+<Extensions Backend="CPlusPlus" Condition="Android">
+    <CopyFile Condition="Android" Name="google-services.json" TargetName="app/google-services.json" />
+</Extensions>

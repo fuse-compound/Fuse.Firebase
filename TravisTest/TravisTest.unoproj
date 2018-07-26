@@ -1,0 +1,43 @@
+{
+  "Packages": [
+    "Fuse",
+    "FuseJS",
+    "Fuse.BasicTheme"
+  ],
+  "iOS": {
+    "BundleIdentifier": "com.fuse.firebase"
+  },
+  "Android": {
+    "Package": "com.fuse.firebase",
+    "NotificationIcon": {
+      "Color": "FF00FF",
+      "LDPI": "Foo.png",
+      "MDPI": "Foo.png",
+      "HDPI": "Foo.png",
+      "XHDPI": "Foo.png",
+      "XXHDPI": "Foo.png",
+      "XXXHDPI": "Foo.png"
+    }
+  },
+  "Projects": [
+    "../src/Firebase/Firebase.unoproj",
+    "../src/Firebase.Database/Firebase.Database.unoproj",
+    "../src/Firebase.AdMob/Firebase.AdMob.unoproj",
+    "../src/Firebase.Storage/Firebase.Storage.unoproj",
+    "../src/Firebase.Analytics/Firebase.Analytics.unoproj",
+    "../src/Firebase.Authentication/Firebase.Authentication.unoproj",
+    "../src/Firebase.Authentication.Email/Firebase.Authentication.Email.unoproj",
+    "../src/Firebase.Authentication.Google/Firebase.Authentication.Google.unoproj",
+    "../src/Firebase.Authentication.Facebook/Firebase.Authentication.Facebook.unoproj",
+    "../src/Firebase.Notifications.Android/Firebase.Notifications.Android.unoproj"
+  ],
+  "Includes": [
+    "*",
+    "GoogleService-Info.plist:ObjCSource:iOS"
+  ],
+  "AdMob": {
+    "TestDevices": [
+      "648F2582C7B37F0EBEB4DA80843A5583"
+    ]
+  }
+}

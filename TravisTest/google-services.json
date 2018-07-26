@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "491177269986",
+    "firebase_url": "https://fuse-firebase-project.firebaseio.com",
+    "project_id": "fuse-firebase-project",
+    "storage_bucket": "fuse-firebase-project.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:491177269986:android:8d64734ead73aaef",
+        "android_client_info": {
+          "package_name": "com.fuse.firebase"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "491177269986-2s2ufc45nndl512f41bo30g1o6loq6gc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAJUwrNX_e1NOn_ZqPgrjIA6ZL-HLqouMg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
