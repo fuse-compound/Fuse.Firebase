@@ -250,6 +250,25 @@ var signInWithEmail = function() {
     });
 };
 ```
+
+### Function - updateEmail(newEmail)
+
+This function updates the currently signed in user's email
+
+> Important. To set a user's email, the user must have signed in recently.
+
+#### Example
+```js
+var updateEmail = function() {
+    EmailAuth.updateEmail(newEmail)
+    .then(function() {
+        console.log("Success!")
+    }).catch(function(e) {
+        console.log("Error: " + e);
+    });
+};
+```
+
 ### Function - updatePassword(newPassword)
 
 This function updates the currently signed in user's password
