@@ -25,7 +25,7 @@ namespace Firebase.Notifications
         extern(Android)
         static NotificationService()
         {
-            Firebase.Core.Init();
+            // Firebase.Core.Init();
             AndroidImpl.ReceivedNotification += OnReceived;
             AndroidImpl.RegistrationFailed += OnRegistrationFailed;
             AndroidImpl.RegistrationSucceeded += OnRegistrationSucceeded;

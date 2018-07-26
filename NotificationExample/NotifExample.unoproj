@@ -5,7 +5,9 @@
     "Fuse.BasicTheme"
   ],
   "Projects": [
-    "../src/Firebase.Notifications.Android/Firebase.Notifications.Android.unoproj",
+    "../src/Firebase/Firebase.unoproj",
+    "../src/Firebase.Database/Firebase.Database.unoproj",
+    "../src/Firebase.Notifications.Android/Firebase.Notifications.Android.unoproj"
   ],
   "Android": {
     "NotificationIcon": {
