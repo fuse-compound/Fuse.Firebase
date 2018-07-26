@@ -1,0 +1,9 @@
+<App>
+    <DockPanel>
+        <StackPanel>
+            <NativeViewHost>
+                <Firebase.AdMob.GADBannerView Height="90" AdUnitId="ca-app-pub-3940256099942544~3347511713" />
+            </NativeViewHost>
+        </StackPanel>
+    </DockPanel>
+</App>
