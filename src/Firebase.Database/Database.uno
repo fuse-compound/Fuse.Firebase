@@ -26,7 +26,7 @@ namespace Firebase.Database
         "java.util.Map",
         "java.util.HashMap")]
     [Require("Cocoapods.Podfile.Target", "pod 'Firebase/Database'")]
-    [Require("Gradle.Dependency.Compile", "com.google.firebase:firebase-database:11.8.0")]
+    [Require("Gradle.Dependency.Compile", "com.google.firebase:firebase-database:12.0.1")]
     [extern(iOS) Require("Source.Import","FirebaseDatabase/FIRDatabase.h")]
     extern(mobile)
     static class DatabaseService

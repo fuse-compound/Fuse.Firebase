@@ -18,7 +18,7 @@ namespace Firebase.Authentication.Email
                     "com.google.firebase.auth.AuthResult",
                     "com.google.firebase.auth.FirebaseAuth",
                     "com.google.firebase.auth.FirebaseUser")]
-    [Require("Gradle.Dependency.Compile", "com.google.firebase:firebase-auth:11.8.0")]
+    [Require("Gradle.Dependency.Compile", "com.google.firebase:firebase-auth:12.0.1")]
     extern(android)
     internal class CreateUser : Promise<string>
     {
@@ -60,7 +60,7 @@ namespace Firebase.Authentication.Email
                     "com.google.firebase.auth.AuthResult",
                     "com.google.firebase.auth.FirebaseAuth",
                     "com.google.firebase.auth.FirebaseUser")]
-    [Require("Gradle.Dependency.Compile", "com.google.firebase:firebase-auth:11.8.0")]
+    [Require("Gradle.Dependency.Compile", "com.google.firebase:firebase-auth:12.0.1")]
     extern(android)
     internal class SignInUser : Promise<string>
     {
@@ -103,7 +103,7 @@ namespace Firebase.Authentication.Email
                     "com.google.firebase.auth.EmailAuthProvider",
                     "com.google.firebase.auth.AuthCredential",
                     "com.google.firebase.auth.UserProfileChangeRequest")]
-    [Require("Gradle.Dependency.Compile", "com.google.firebase:firebase-auth:11.8.0")]
+    [Require("Gradle.Dependency.Compile", "com.google.firebase:firebase-auth:12.0.1")]
     extern(android)
     internal class ReAuthenticate : Promise<string>
     {
