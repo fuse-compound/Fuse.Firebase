@@ -57,6 +57,13 @@ namespace Firebase.Authentication
             Uri uri = user.getPhotoUrl();
             return (uri==null) ? null : uri.toString();
         @}
+
+        [Foreign(Language.Java)]
+        internal static bool IsEmailVerified(Java.Object obj)
+        @{
+            FirebaseUser user = (FirebaseUser)obj;
+            return user.isEmailVerified();
+        @}
     }
 
 
