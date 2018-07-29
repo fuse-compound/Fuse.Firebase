@@ -58,7 +58,8 @@ namespace Firebase.Authentication
         internal static bool IsEmailVerified(ObjC.Object obj)
         @{
             FIRUser* user = [FIRAuth auth].currentUser;
-            return user.isEmailVerified();
+            BOOL isEmailVerified = user.emailVerified;
+            return isEmailVerified;
         @}
     }
 
