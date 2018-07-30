@@ -22,7 +22,7 @@ namespace Firebase.AdMob
         {
             if (!_initialized)
             {
-                // Firebase.Core.Init();
+                Firebase.Core.Init();
                 _initialized = true;
             }
         }
