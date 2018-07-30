@@ -1,6 +1,6 @@
 os: osx
 
-before_script:
+install:
   - wget -q https://github.com/fuse-open/fuse-studio/releases/download/1.9.0/fuse_osx_1_9_0.pkg -O fuse-installer.pkg && sudo installer -pkg fuse-installer.pkg -target /
 
 jobs:
@@ -11,14 +11,15 @@ jobs:
 
     - stage: build 
       name: "Building Android"
-      script:
+      before_script:
         - printf '\ny' | fuse install android;
+      script:
         - uno build TravisTest -tAndroid -n=-quiet
 
     - stage: build
       name: "Building iOS"
       osx_image: xcode9.4
-      script: 
+      before_script:
         - export KEYCHAIN=build.keychain;
         - export CER=ios_development.cer;
         - export CER_P12=Certificate.p12;
@@ -36,5 +37,5 @@ jobs:
 
         - mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles;
         - mv "./Travis_CI.mobileprovision" ~/Library/MobileDevice/Provisioning\ Profiles/;
-
+      script:
         - uno build TravisTest -tios -DCOCOAPODS --set:Project.iOS.DevelopmentTeam="A2D29CXQL7" -n=-sdk -n=iphonesimulator -n=-quiet
