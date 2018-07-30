@@ -6,7 +6,6 @@
   ],
   "Projects": [
     "../src/Firebase/Firebase.unoproj",
-    "../src/Firebase.Database/Firebase.Database.unoproj",
     "../src/Firebase.Authentication/Firebase.Authentication.unoproj",
     "../src/Firebase.Authentication.Email/Firebase.Authentication.Email.unoproj",
     "../src/Firebase.Authentication.Google/Firebase.Authentication.Google.unoproj",
