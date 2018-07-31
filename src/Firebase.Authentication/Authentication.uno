@@ -258,6 +258,7 @@ namespace Firebase.Authentication
         internal static string GetEmail(object obj) { return null; }
         internal static string GetPhotoUrl(object obj) { return null; }
         internal static void GetToken(object obj, Action<string> gotToken) { gotToken(null); }
+        internal static bool IsEmailVerified(object obj) { return false; }
     }
 
     extern(!mobile)

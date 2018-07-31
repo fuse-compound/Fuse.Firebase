@@ -12,6 +12,7 @@ var lobbyStatusText = Observable(defaultStatusMessage);
 var userName = Observable("-");
 var userEmail = Observable("-");
 var userPhotoUrl = Observable("-");
+var isEmailVerified = Observable(false);
 
 //---
 
@@ -45,10 +46,12 @@ var updateUserDetailsUI = function() {
         userName.value = FirebaseUser.name;
         userEmail.value = FirebaseUser.email;
         userPhotoUrl.value = FirebaseUser.photoUrl;
+        isEmailVerified.value = FirebaseUser.isEmailVerified;
     } else {
         userName.value = "-";
         userEmail.value = "-";
         userPhotoUrl.value = "-";
+        isEmailVerified.value = false;
     }
 };
 
@@ -134,6 +137,12 @@ var changePassword = function() {
     });
 };
 
+var checkEmailVerification = function() {
+    reauthenticate();
+    console.log(FirebaseUser.isEmailVerified);
+    isEmailVerified.value = FirebaseUser.isEmailVerified;
+};
+
 
 module.exports = {
     currentPage: currentPage,
@@ -156,5 +165,7 @@ module.exports = {
     newEmail: newEmail,
     changeEmail: changeEmail,
     newPassword: newPassword,
-    changePassword: changePassword
+    changePassword: changePassword,
+    isEmailVerified: isEmailVerified,
+    checkEmailVerification: checkEmailVerification
 };

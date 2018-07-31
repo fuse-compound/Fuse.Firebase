@@ -42,6 +42,8 @@
                 <Text Value="{userEmail}" Margin="0,5"/>
                 <Text Value="{userPhotoUrl}" Margin="0,5"/>
                 <Text Value="{signedInStatusText}" Alignment="Center" FontSize="10" TextColor="#222" Margin="0,0,0,20"/>
+                <Text Value="{isEmailVerified}" Alignment="Center" FontSize="10" TextColor="#222" Margin="0,0,0,20"/>
+
 
                 <Grid Columns="2*,1*">
                     <Basic.TextInput Width="100%" Value="{newPassword}" Alignment="Center" PlaceholderText="New Password" PlaceholderColor="#bbb" />
@@ -54,6 +56,7 @@
 
                 <Basic.Button Text="ReAuthenticate" Clicked="{reauthenticate}"/>
                 <Basic.Button Text="Send Verification Email" Clicked="{sendVerificationEmail}"/>
+                <Basic.Button Text="Check Email Verification" Clicked="{checkEmailVerification}" />
                 <Basic.Button Text="Sign Out" Clicked="{signOutNow}" />
             </StackPanel>
 
