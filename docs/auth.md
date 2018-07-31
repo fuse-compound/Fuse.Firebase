@@ -307,6 +307,8 @@ var sendVerificationEmail = function() {
 
 This property returns a boolean representing whether the user has verified their email or not by following the link sent by `sendVerificationEmail()`
 
+> Important. The user must be reauthenticated before trying to access this property to have the latest values.
+
 #### Example
 ```js
 console.log(FirebaseUser.isEmailVerified);
