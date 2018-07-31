@@ -19,23 +19,5 @@ jobs:
     - stage: build
       name: "Building iOS"
       osx_image: xcode9.4
-      before_script:
-        - export KEYCHAIN=build.keychain;
-        - export CER=ios_development.cer;
-        - export CER_P12=Certificate.p12;
-
-        - echo $CERTIFICATE_CER | base64 --decode > $CER;
-        - echo $CERTIFICATE_P12 | base64 --decode > $CER_P12;
-        - echo $PROVISIONING_PROFILE | base64 --decode > Travis_CI.mobileprovision;
-
-        - security create-keychain -p mysecretpassword $KEYCHAIN;
-        - security default-keychain -s $KEYCHAIN;
-        - security unlock-keychain -p mysecretpassword $KEYCHAIN;
-
-        - security import $CER -k $KEYCHAIN -T /usr/bin/codesign;
-        - security import $CER_P12 -k $KEYCHAIN -P $PASSWORD -T /usr/bin/codesign;
-
-        - mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles;
-        - mv "./Travis_CI.mobileprovision" ~/Library/MobileDevice/Provisioning\ Profiles/;
       script:
-        - uno build TravisTest -tios -DCOCOAPODS --set:Project.iOS.DevelopmentTeam="A2D29CXQL7" -n=-sdk -n=iphonesimulator -n=-quiet
+        - uno build TravisTest -tios -DCOCOAPODS -n=-sdk -n=iphonesimulator -n=-quiet -n=CODE_SIGN_IDENTITY="" -n=CODE_SIGNING_REQUIRED=NO
