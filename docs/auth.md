@@ -303,6 +303,15 @@ var sendVerificationEmail = function() {
 };
 ```
 
+### Property - isEmailVerified
+
+This property returns a boolean representing whether the user has verified their email or not by following the link sent by `sendVerificationEmail()`
+
+#### Example
+```js
+console.log(FirebaseUser.isEmailVerified);
+```
+
 ## Project - Firebase.Authentication.Google
 
 This project exists to initialize the Google provider and register it with `Firebase.Authentication`.
