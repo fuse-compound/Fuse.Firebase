@@ -5,7 +5,6 @@
   ],
   "Projects": [
     "../src/Firebase/Firebase.unoproj",
-    "../src/Firebase.Database/Firebase.Database.unoproj",
     "../src/Firebase.AdMob/Firebase.AdMob.unoproj"
   ],
   "AdMob": {
