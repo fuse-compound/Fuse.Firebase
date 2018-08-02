@@ -34,7 +34,6 @@ namespace Firebase.Authentication
         static Dictionary<AuthProviderName, AuthProvider> AuthProviders = new Dictionary<AuthProviderName, AuthProvider>();
         static AuthProviderName CurrentProvider { public get; private set; }
 
-        static Firebase.Core _core;
         static object Inst { internal get; private set; }
         static bool _isSignedIn;
 
@@ -45,6 +44,7 @@ namespace Firebase.Authentication
         {
             if (Inst == null)
             {
+                Firebase.Core.Init();
                 CurrentProvider = AuthProviderName.None;
                 Inst = ForeignInit();
                 _listener = MakeListener();
@@ -258,6 +258,7 @@ namespace Firebase.Authentication
         internal static string GetEmail(object obj) { return null; }
         internal static string GetPhotoUrl(object obj) { return null; }
         internal static void GetToken(object obj, Action<string> gotToken) { gotToken(null); }
+        internal static bool IsEmailVerified(object obj) { return false; }
     }
 
     extern(!mobile)

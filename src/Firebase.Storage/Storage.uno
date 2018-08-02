@@ -30,6 +30,7 @@ namespace Firebase.Storage
         {
             if (!_initialized)
             {
+                Firebase.Core.Init();
                 if defined(android) AndroidInit();
                 if defined(ios) iOSInit();
                 _initialized = true;

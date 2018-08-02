@@ -53,6 +53,14 @@ namespace Firebase.Authentication
             NSURL* photoUrl = user.photoURL;
             return (photoUrl==NULL) ? NULL : photoUrl.absoluteString;
         @}
+
+        [Foreign(Language.ObjC)]
+        internal static bool IsEmailVerified(ObjC.Object obj)
+        @{
+            FIRUser* user = [FIRAuth auth].currentUser;
+            BOOL isEmailVerified = user.emailVerified;
+            return isEmailVerified;
+        @}
     }
 
 

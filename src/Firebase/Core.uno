@@ -13,11 +13,13 @@ namespace Firebase
     extern(!mobile)
     public class Core
     {
-        static public void Init() {}
+        static public void Init()
+        {
+
+        }
     }
 
     [Require("Cocoapods.Podfile.Target", "pod 'Firebase/Core'")]
-    [Require("Cocoapods.Podfile.Target", "pod 'Firebase/Messaging'")]
     [Require("Source.Include", "Firebase/Firebase.h")]
     extern(iOS)
     public class Core
@@ -25,11 +27,13 @@ namespace Firebase
         [Foreign(Language.ObjC)]
         static public void Init()
         {
-                @{
+            @{
+                if ([FIRApp defaultApp] == nil) {
                     NSLog(@"Firebase Configuring...");
                     [FIRApp configure];
                     NSLog(@"Firebase Configure Ready!");
-                @}
+                }
+            @}
         }
     }
 

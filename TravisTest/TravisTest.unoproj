@@ -21,9 +21,9 @@
   },
   "Projects": [
     "../src/Firebase/Firebase.unoproj",
-    "../src/Firebase.Database/Firebase.Database.unoproj",
     "../src/Firebase.AdMob/Firebase.AdMob.unoproj",
     "../src/Firebase.Storage/Firebase.Storage.unoproj",
+    "../src/Firebase.Database/Firebase.Database.unoproj",
     "../src/Firebase.Analytics/Firebase.Analytics.unoproj",
     "../src/Firebase.Authentication/Firebase.Authentication.unoproj",
     "../src/Firebase.Authentication.Email/Firebase.Authentication.Email.unoproj",
