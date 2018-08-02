@@ -81,7 +81,7 @@ namespace Firebase.Authentication.Email
     extern(!mobile)
     internal class SendPasswordResetEmail : Promise<string>
     {
-        public SendPasswordResetEmail() {}
+        public SendPasswordResetEmail(string email) {}
         void Reject(string reason) { Reject(new Exception(reason)); }
     }
 }
