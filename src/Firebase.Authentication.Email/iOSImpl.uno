@@ -203,4 +203,33 @@ namespace Firebase.Authentication.Email
             Reject(new Exception(Errors.SignInWithEmailBaseErrorMessage(errorCode)));
         }
     }
+
+    [Require("Source.Include", "Firebase/Firebase.h")]
+    [Require("Source.Include", "FirebaseAuth/FirebaseAuth.h")]
+    [Require("Cocoapods.Podfile.Target", "pod 'Firebase/Auth'")]
+    [Require("Source.Include", "@{Firebase.Authentication.User:Include}")]
+    extern(iOS)
+    internal class SendPasswordResetEmail : Promise<string>
+    {
+        [Foreign(Language.ObjC)]
+        public SendPasswordResetEmail(string email)
+        @{
+            [[FIRAuth auth] sendPasswordResetWithEmail:email completion:^(NSError *_Nullable error) {
+                if(error)
+                    @{SendPasswordResetEmail:Of(_this).Reject(int):Call(error.code)};
+                else
+                    @{SendPasswordResetEmail:Of(_this).Resolve(string):Call(@"Success")};
+            }];
+        @}
+
+        void Reject(string reason)
+        {
+            Reject(new Exception(reason));
+        }
+
+        void Reject(int errorCode)
+        {
+            Reject(new Exception(Errors.SignInWithEmailBaseErrorMessage(errorCode)));
+        }
+    }
 }

@@ -230,4 +230,34 @@ namespace Firebase.Authentication.Email
 
         void Reject(string reason) { Reject(new Exception(reason)); }
     }
+
+    [ForeignInclude(Language.Java, "java.util.ArrayList", "java.util.List", "android.net.Uri",
+                    "com.google.android.gms.tasks.OnCompleteListener",
+                    "com.google.android.gms.tasks.Task",
+                    "com.google.firebase.auth.AuthResult",
+                    "com.google.firebase.auth.FirebaseAuth",
+                    "com.google.firebase.auth.FirebaseUser",
+                    "android.support.annotation.NonNull")]
+    extern(android)
+    internal class SendPasswordResetEmail : Promise<string>
+    {
+        [Foreign(Language.Java)]
+        public SendPasswordResetEmail(string email)
+        @{
+            FirebaseAuth auth = FirebaseAuth.getInstance();
+
+            auth.sendPasswordResetEmail(email)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isSuccessful())
+                            @{SendPasswordResetEmail:Of(_this).Resolve(string):Call("Success")};
+                        else 
+                            @{SendPasswordResetEmail:Of(_this).Reject(string):Call("Firebase failed to send password reset email.")};
+                    }
+                });
+        @}
+
+        void Reject(string reason) { Reject(new Exception(reason)); }
+    }
+
 }
