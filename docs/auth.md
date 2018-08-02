@@ -303,6 +303,22 @@ var sendVerificationEmail = function() {
 };
 ```
 
+### Function - sendPasswordResetEmail(email)
+
+This function sends an email to allow the user to reset their password if they've forgotton it.
+
+#### Example
+```js
+var sendPasswordResetEmail = function() {
+    EmailAuth.sendPasswordResetEmail(email)
+    .then(function(res) {
+        console.log("Succes! " + res);
+    }).catch(function(e) {
+        console.log("Error: " + e);
+    });
+}
+```
+
 ### Property - isEmailVerified
 
 This property returns a boolean representing whether the user has verified their email or not by following the link sent by `sendVerificationEmail()`
