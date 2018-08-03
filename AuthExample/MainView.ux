@@ -10,7 +10,7 @@
         <DirectNavigation Active="{currentPageHandle}"/>
 
         <Page Name="lobbyPage">
-            <StackPanel Width="92%" Height="460" Padding="20">
+            <StackPanel Width="92%" Height="480" Padding="20">
                 <Rectangle Layer="Background" CornerRadius="10" Color="#fff"/>
                 <Text Value="{currentPageTitle}" Alignment="Center" FontSize="35" TextColor="#2586EC"/>
                 <Text Value="{lobbyStatusText}" Alignment="Center" Margin="0,0,0,20"/>
@@ -19,12 +19,13 @@
 
                 <Basic.Button Text="Sign In With Email" Clicked="{signInWithEmail}" />
                 <Basic.Button Text="Create User With Email" Clicked="{createUser}" />
+                <Basic.Button Text="Send Password Reset Email" Clicked="{sendPasswordResetEmail}" />
                 <NativeViewHost >
                     <Firebase.Authentication.Google.GoogleButton Margin="0,20,0,0"/>
                 </NativeViewHost>
                 <NativeViewHost >
                     <Firebase.Authentication.Facebook.FacebookButton Margin="0,20,0,0"/>
-                </NativeViewHost>
+                </NativeViewHost>                
             </StackPanel>
 
             <ExitingAnimation>

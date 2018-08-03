@@ -60,3 +60,4 @@ AuthExample/FirebaseAuthenticationExample.unoproj
 AnalyticsExample/build/
 AuthExample/build/
 Test/*
+*.plist

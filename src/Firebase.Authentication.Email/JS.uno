@@ -31,6 +31,8 @@ namespace Firebase.Authentication.Email.JS
             AddMember(new NativePromise<string, string>("updateEmail", UpdateEmail));
             AddMember(new NativePromise<string, string>("updatePassword", UpdatePassword));
             AddMember(new NativePromise<string, string>("sendVerificationEmail", SendVerificationEmail));
+            AddMember(new NativePromise<string, string>("sendPasswordResetEmail", SendPasswordResetEmail));
+            
         }
 
         Future<string> CreateWithEmailAndPassword(object[] args)
@@ -63,5 +65,12 @@ namespace Firebase.Authentication.Email.JS
         {
             return new Firebase.Authentication.Email.SendVerificationEmail();
         }
+
+        Future<string> SendPasswordResetEmail(object[] args)
+        {
+            var email = (string)args[0];
+            return new Firebase.Authentication.Email.SendPasswordResetEmail(email);
+        }
+        
     }
 }

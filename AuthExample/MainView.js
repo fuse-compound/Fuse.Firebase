@@ -143,6 +143,14 @@ var checkEmailVerification = function() {
     isEmailVerified.value = FirebaseUser.isEmailVerified;
 };
 
+var sendPasswordResetEmail = function() {
+    EAuth.sendPasswordResetEmail(userEmail.value)
+    .then(function(response) {
+        console.log("Success! " + response);
+    }).catch(function(error) {
+        console.log("Error: " + error);
+    });
+}
 
 module.exports = {
     currentPage: currentPage,
@@ -167,5 +175,6 @@ module.exports = {
     newPassword: newPassword,
     changePassword: changePassword,
     isEmailVerified: isEmailVerified,
-    checkEmailVerification: checkEmailVerification
+    checkEmailVerification: checkEmailVerification,
+    sendPasswordResetEmail: sendPasswordResetEmail
 };
