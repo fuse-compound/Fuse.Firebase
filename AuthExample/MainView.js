@@ -152,7 +152,6 @@ var sendPasswordResetEmail = function() {
     });
 }
 
-
 module.exports = {
     currentPage: currentPage,
     currentPageHandle: currentPageHandle,

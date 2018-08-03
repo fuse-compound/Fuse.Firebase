@@ -17,7 +17,6 @@
                 <Basic.TextInput Width="100%" Value="{userEmailInput}" ux:Name="userName" Alignment="Center" PlaceholderText="Email Address" PlaceholderColor="#bbb" />
                 <Basic.TextInput Width="100%" Value="{userPasswordInput}" IsPassword="true" Alignment="Center" PlaceholderText="Password" PlaceholderColor="#bbb" />
 
-
                 <Basic.Button Text="Sign In With Email" Clicked="{signInWithEmail}" />
                 <Basic.Button Text="Create User With Email" Clicked="{createUser}" />
                 <Basic.Button Text="Send Password Reset Email" Clicked="{sendPasswordResetEmail}" />
@@ -26,10 +25,7 @@
                 </NativeViewHost>
                 <NativeViewHost >
                     <Firebase.Authentication.Facebook.FacebookButton Margin="0,20,0,0"/>
-                </NativeViewHost>
-
-                
-                
+                </NativeViewHost>                
             </StackPanel>
 
             <ExitingAnimation>
