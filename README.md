@@ -1,6 +1,7 @@
 # Fuse.Firebase
 [![license](https://img.shields.io/github/license/cbaggers/Fuse.Firebase.svg?maxAge=2592000)](https://github.com/cbaggers/Fuse.Firebase/blob/master/LICENSE)
 [![Build Status](https://travis-ci.org/fuse-compound/Fuse.Firebase.svg?branch=master)](https://travis-ci.org/fuse-compound/Fuse.Firebase)
+[![slack](https://img.shields.io/badge/chat-on%20Slack-red.svg?maxAge=2592000)](https://slackcommunity.fusetools.com)
 
 This project's goal to make Firebase bindings for Fuse. Currently we have:
 
@@ -22,3 +23,11 @@ If you are using Facebook for authentication you will also need a Facebook devel
 ## Docs
 
 See [here for our documentation](docs/index.md)
+
+## Issues and Feature requests
+
+We welcome issues and feature requests just please make sure you fill the template.
+
+## Need help?
+
+We have a Slack channel ready for you. Come [join us](https://slackcommunity.fusetools.com).
