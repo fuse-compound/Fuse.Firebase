@@ -1,0 +1,37 @@
+{
+  "Copyright": "Copyright (c) Fusetools AS 2018",
+  "Description": "Support for Firebase Notifications On Mobile",
+  "Publisher": "Fusetools AS",
+  "Version": "1.0.0-rc2",
+  "Package": {
+    "ProjectUrl": "https://fusetools.com"
+  },
+  "Packages": [
+    "Uno.Collections",
+    "Uno.Threading",
+    "Fuse.Controls",
+    "Fuse.Elements",
+    "Fuse.Reactive",
+    "Fuse.Scripting",
+    "Fuse.Common",
+    "Fuse.Platform"
+  ],
+  "Projects": [
+    "../Firebase/Firebase.unoproj"
+  ],
+  "Includes": [
+    "Common.uno:Source",
+    "JS.uno:Source",
+    "Android/Impl.uno:Source",
+    "Android/Assets/DefaultIcon.png:File",
+    "Android/Impl.cpp.uxl:Extensions",
+    "Android/PushNotificationReceiver.java:Java:android",
+    "Android/PushNotificationIDService.java:Java:android",
+    "iOS/iOSFirebaseNotificationCallbacks.h:ObjCHeader:iOS",
+    "iOS/iOSFirebaseNotificationCallbacks.mm:ObjCSource:iOS",
+    "iOS/AppDelegateFirebaseNotify.h:ObjCHeader:iOS",
+    "iOS/AppDelegateFirebaseNotify.mm:ObjCSource:iOS",
+    "iOS/iOSImpl.uno:Source",
+    "iOS/Impl.uxl:Extensions"
+  ]
+}
