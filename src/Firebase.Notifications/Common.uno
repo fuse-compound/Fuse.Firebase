@@ -12,7 +12,8 @@ namespace Firebase.Notifications
     [Require("Entity","Firebase.Core.Init()")]
     [ForeignInclude(Language.Java,
             "android.util.Log",
-            "com.google.firebase.iid.FirebaseInstanceId")]
+            "com.google.firebase.iid.FirebaseInstanceId",
+            "com.google.firebase.messaging.FirebaseMessaging")]
     [extern(iOS) Require("Source.Include", "Firebase/Firebase.h")]
     public static class NotificationService
     {
@@ -164,6 +165,32 @@ namespace Firebase.Notifications
 
         public extern(!iOS && !Android) static String GetFCMToken() { return ""; }
 
+        [Foreign(Language.ObjC)]
+        public extern(iOS) static void SubscribeToTopic(string topicName)
+        @{
+            [[FIRMessaging messaging] subscribeToTopic:topicName];
+        @}
 
+        [Foreign(Language.Java)]
+        public extern(Android) static void SubscribeToTopic(string topicName)
+        @{
+            FirebaseMessaging.getInstance().subscribeToTopic(topicName);
+        @}
+
+        public extern(!iOS && !Android) static void SubscribeToTopic(string topicName) {}
+
+        [Foreign(Language.ObjC)]
+        public extern(iOS) static void UnsubscribeFromTopic(string topicName)
+        @{
+            [[FIRMessaging messaging] unsubscribeFromTopic:topicName];
+        @}
+
+        [Foreign(Language.Java)]
+        public extern(Android) static void UnsubscribeFromTopic(string topicName)
+        @{
+            FirebaseMessaging.getInstance().unsubscribeFromTopic(topicName);
+        @}
+
+        public extern(!iOS && !Android) static void UnsubscribeFromTopic(string topicName) {}
     }
 }
