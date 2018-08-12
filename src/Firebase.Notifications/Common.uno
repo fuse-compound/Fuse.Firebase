@@ -18,7 +18,7 @@ namespace Firebase.Notifications
     public static class NotificationService
     {
         extern(Android)
-        static NotificationService()
+        public static void Init()
         {
             Firebase.Core.Init();
             AndroidImpl.ReceivedNotification += OnReceived;
@@ -28,13 +28,18 @@ namespace Firebase.Notifications
         }
 
         extern(iOS)
-        static NotificationService()
+        public static void Init()
         {
             Firebase.Core.Init();
             iOSImpl.ReceivedNotification += OnReceived;
             iOSImpl.NotificationRegistrationFailed += OnRegistrationFailed;
             iOSImpl.NotificationRegistrationSucceeded += OnRegistrationSucceeded;
             iOSImpl.Init();
+        }
+
+        extern(!MOBILE)
+        public static void Init()
+        {
         }
 
         public static void OnReceived(object sender, KeyValuePair<string,bool> notification)

@@ -21,17 +21,17 @@ namespace Firebase.Notifications
     [Require("Entity", "Firebase.Notifications.iOSImpl.OnReceivedNotification(string,bool)")]
 
     extern(iOS)
-    public class iOSImpl
+    public static class iOSImpl
     {
 
         public static event EventHandler<KeyValuePair<string,bool>> ReceivedNotification;
         public static event EventHandler<string> NotificationRegistrationFailed;
         public static event EventHandler<string> NotificationRegistrationSucceeded;
         static List<KeyValuePair<string,bool>> DelayedNotifications = new List<KeyValuePair<string,bool>>();
-    
+
         static bool _init = false;
         extern(ios) static internal ObjC.Object _iosDelegate;
-    
+
         public static void Init()
         {
             if (!_init)
@@ -43,7 +43,7 @@ namespace Firebase.Notifications
                 }
             }
         }
-      
+
         [Foreign(Language.ObjC)]
         extern(iOS)
         public static void iOSInit()

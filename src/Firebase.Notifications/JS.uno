@@ -29,7 +29,7 @@ namespace Firebase.Notifications
         static readonly NotificationModule _instance;
         extern(iOS) readonly iOSImpl _iOSImpl;
         static NativeEvent _onRegistrationSucceedediOS;
-      
+
         static NativeEvent onReceivedMessage;
         static NativeEvent onRegistrationFailed;
         static NativeEvent onRegistrationSucceeded;
@@ -42,9 +42,8 @@ namespace Firebase.Notifications
             if (_instance != null) return;
             Resource.SetGlobalKey(_instance = this, "Firebase/Notifications");
 
-            if defined(iOS)
-              _iOSImpl = new iOSImpl();
-      
+            NotificationService.Init();
+
             onReceivedMessage = new NativeEvent("onReceivedMessage");
             onRegistrationFailed = new NativeEvent("onRegistrationFailed");
             onRegistrationSucceeded = new NativeEvent("onRegistrationSucceeded");
