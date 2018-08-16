@@ -35,6 +35,7 @@ namespace Firebase.Authentication.JS
             AddMember(new NativeProperty<string, string>("name", GetName));
             AddMember(new NativeProperty<string, string>("email", GetEmail));
             AddMember(new NativeProperty<string, string>("photoUrl", GetPhotoUrl));
+            AddMember(new NativeProperty<string, string>("providerData", GetProviderData));
             AddMember(new NativeProperty<bool, bool>("isEmailVerified", IsEmailVerified));
 
             // events
@@ -96,6 +97,14 @@ namespace Firebase.Authentication.JS
         {
             if (GetSignedIn())
                 return User.GetPhotoUrl(User.GetCurrent());
+            else
+                return "";
+        }
+
+        static string GetProviderData()
+        {
+            if (GetSignedIn())
+                return User.GetProviderData(User.GetCurrent());
             else
                 return "";
         }
