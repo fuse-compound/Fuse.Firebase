@@ -19,7 +19,8 @@ namespace Firebase.Authentication
                     "com.google.firebase.auth.FirebaseUser",
                     "com.google.firebase.auth.UserInfo",
                     "org.json.JSONArray",
-                    "org.json.JSONObject")]
+                    "org.json.JSONObject",
+                    "org.json.JSONException")]
     extern(android)
     internal static class User
     {
@@ -65,8 +66,20 @@ namespace Firebase.Authentication
         internal static string GetProviderData(Java.Object obj)
         @{
             FirebaseUser user = (FirebaseUser)obj;
-            JSONArray JSONArray = new JSONArray(user.getProviderData());
-            return JSONArray.toString();
+            JSONArray providers = new JSONArray();
+            for (UserInfo profile : user.getProviderData()) {
+                JSONObject provider = new JSONObject();
+                try {
+                    provider.put("getProviderId", profile.getProviderId());
+                    provider.put("getDisplayName", profile.getDisplayName());
+                    provider.put("getEmail", profile.getEmail());
+                    provider.put("getUid", profile.getUid());
+                    providers.put(provider);
+                } catch (JSONException e) {
+                    //
+                }
+            }
+            return providers.toString();
         @}
 
         [Foreign(Language.Java)]
