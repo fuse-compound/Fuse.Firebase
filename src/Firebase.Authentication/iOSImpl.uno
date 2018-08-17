@@ -55,6 +55,22 @@ namespace Firebase.Authentication
         @}
 
         [Foreign(Language.ObjC)]
+        internal static string GetProviderData(ObjC.Object obj)
+        @{
+            FIRUser* user = [FIRAuth auth].currentUser;
+            NSMutableArray *providers = [[NSMutableArray alloc] init];
+
+            NSArray<id<FIRUserInfo>> *providerData = user.providerData;
+            for (id<FIRUserInfo> userInfo in providerData) {
+                NSDictionary *dict = @{ @"providerID" : userInfo.providerID, @"displayName" : userInfo.displayName, @"email" : userInfo.email, @"uid" : userInfo.uid};
+                [providers addObject:dict];
+            }
+
+            NSData *jsonData = [NSJSONSerialization dataWithJSONObject:providers options:0 error:nil];
+            return [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+        @}
+
+        [Foreign(Language.ObjC)]
         internal static bool IsEmailVerified(ObjC.Object obj)
         @{
             FIRUser* user = [FIRAuth auth].currentUser;

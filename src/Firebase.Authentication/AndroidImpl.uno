@@ -16,7 +16,11 @@ namespace Firebase.Authentication
                     "com.google.android.gms.tasks.Task",
                     "com.google.firebase.auth.AuthResult",
                     "com.google.firebase.auth.FirebaseAuth",
-                    "com.google.firebase.auth.FirebaseUser")]
+                    "com.google.firebase.auth.FirebaseUser",
+                    "com.google.firebase.auth.UserInfo",
+                    "org.json.JSONArray",
+                    "org.json.JSONObject",
+                    "org.json.JSONException")]
     extern(android)
     internal static class User
     {
@@ -56,6 +60,26 @@ namespace Firebase.Authentication
             FirebaseUser user = (FirebaseUser)obj;
             Uri uri = user.getPhotoUrl();
             return (uri==null) ? null : uri.toString();
+        @}
+
+        [Foreign(Language.Java)]
+        internal static string GetProviderData(Java.Object obj)
+        @{
+            FirebaseUser user = (FirebaseUser)obj;
+            JSONArray providers = new JSONArray();
+            for (UserInfo profile : user.getProviderData()) {
+                JSONObject provider = new JSONObject();
+                try {
+                    provider.put("getProviderId", profile.getProviderId());
+                    provider.put("getDisplayName", profile.getDisplayName());
+                    provider.put("getEmail", profile.getEmail());
+                    provider.put("getUid", profile.getUid());
+                    providers.put(provider);
+                } catch (JSONException e) {
+                    //
+                }
+            }
+            return providers.toString();
         @}
 
         [Foreign(Language.Java)]

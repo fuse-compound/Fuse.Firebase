@@ -161,6 +161,16 @@ console.log(FirebaseUser.photoUrl);
 ```
 
 
+### Property - providerData
+
+This property returns the provider data associated with the authenticated user
+
+#### Example
+```js
+console.log(FirebaseUser.providerData);
+```
+
+
 ### Function - updateProfile(newDisplayNameString, newPhotoUrlString)
 
 This function attempts to update the `displayName` and `photoUrl` of the authenticated user.
